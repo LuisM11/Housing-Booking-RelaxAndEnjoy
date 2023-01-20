@@ -10,7 +10,7 @@ function CategorysContainer() {
         <h2 className="text-xl text-secundaryColor font-bold mb-2">Buscar por tipo de alojamiento</h2>
         <div className="w-full flex flex-col gap-5">
           {Categorys.map((item) => {
-            return <CategoryCard item={item} />;
+            return <CategoryCard key={item.id} item={item} />;
           })}
         </div>
       </article>

@@ -10,7 +10,7 @@ function RecommendationsContainer() {
         <h2 className="text-xl text-secundaryColor font-bold mb-2">Recomendaciones</h2>
         <div className="w-full flex flex-col gap-5">
           {Recommendations.map((item) => {
-            return <RecommendationsCard item={item} />;
+            return <RecommendationsCard key={item.id} item={item} />;
           })}
         </div>
       </article>

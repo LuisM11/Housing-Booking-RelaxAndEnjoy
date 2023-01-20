@@ -8,10 +8,10 @@ function Footer() {
           <h2>2021 Digital Booking</h2>
         </div>
         <div className="hidden">
-          <i class="uil uil-facebook"></i>
-          <i class="uil uil-linkedin"></i>
-          <i class="uil uil-twitter"></i>
-          <i class="uil uil-instagram"></i>
+          <i className="uil uil-facebook"></i>
+          <i className="uil uil-linkedin"></i>
+          <i className="uil uil-twitter"></i>
+          <i className="uil uil-instagram"></i>
         </div>
       </article>
     </footer>

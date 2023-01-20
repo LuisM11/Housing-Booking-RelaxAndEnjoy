@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
-import Seeker from "./components/Seeker";
-import CategorysContainer from "./components/CategorysContainer";
-import RecommendationsContainer from "./components/RecommendationsContainer";
 import Footer from "./components/Footer";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/home");
+    }
+  });
   return (
-    <div>
+    <>
       <Header />
-      <body>
-        <Seeker />
-        <CategorysContainer />
-        <RecommendationsContainer />
-      </body>
+      <main>
+        <Outlet />
+      </main>
       <Footer/>
-    </div>
+    </>
   );
 }
 

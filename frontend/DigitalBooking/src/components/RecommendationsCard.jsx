@@ -15,11 +15,11 @@ function RecommendationsCard({ item }) {
               {item.category}{" "}
             </span>
             <span className="text-sm text-mainColor">
-                <i class="uil uil-favorite"></i>
-                <i class="uil uil-favorite"></i>
-                <i class="uil uil-favorite"></i>
-                <i class="uil uil-favorite"></i>
-                <i class="uil uil-favorite"></i>
+                <i className="uil uil-favorite"></i>
+                <i className="uil uil-favorite"></i>
+                <i className="uil uil-favorite"></i>
+                <i className="uil uil-favorite"></i>
+                <i className="uil uil-favorite"></i>
               </span>
             <h2 className="text-xl text-secundaryColor font-bold">{item.title}</h2>
           </aside>
@@ -29,7 +29,7 @@ function RecommendationsCard({ item }) {
           </aside>
         </div>
         <div className="h-6 flex gap-5">
-          <span className="text-secundaryColor text-sm font-medium"><i class="uil uil-map-marker"></i> {item.location}</span>
+          <span className="text-secundaryColor text-sm font-medium"><i className="uil uil-map-marker"></i> {item.location}</span>
           <a href="" className="text-mainColor text-sm">MOSTRAR EN EL MAPA</a>
         </div>
         <p className="h-24 font-medium text-sm">{item.description}</p>
