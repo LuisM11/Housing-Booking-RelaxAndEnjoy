@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo1.png";
+import Lema from "../assets/lema.png";
 
 function Header() {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [selectMenu, setSelectMenu] = useState(0);
 
   return (
-    <header className="p-3 shadow">
+    <header className="p-3 desktop:px-10 shadow">
       <nav className="flex justify-between items-center">
-        <Link to="/home">
+        <Link to="/home" className="flex gap-2 items-end">
           <img src={Logo} alt="" />
+          <img src={Lema} alt="" className="hidden h-4 desktop:grid" />
         </Link>
         <article
           className={
@@ -66,7 +68,19 @@ function Header() {
           </div>
         </article>
         <div onClick={() => setToggleMenu(!toggleMenu)}>
-          <i className="uil uil-bars text-2xl text-mainColor"></i>
+          <i className="uil uil-bars text-2xl text-mainColor tablet:hidden"></i>
+        </div>
+        <div className="hidden tablet:flex gap-2">
+          <Link to="/Signin">
+            <button className="h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl">
+              Crear cuenta
+            </button>
+          </Link>
+          <Link to="/Login">
+            <button className="h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl">
+              Inciar sesión
+            </button>
+          </Link>
         </div>
       </nav>
     </header>

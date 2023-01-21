@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function LogIn({ setSelectMenu }) {
+function LogIn() {
   return (
     <section className="w-full h-full flex justify-center items-center">
-      <article className="w-11/12 h-[540px] flex flex-col justify-center items-center gap-5 my-[80px]">
+      <article className="w-11/12 tablet:w-3/4 desktop:w-4/12 h-[540px] flex flex-col justify-center items-center gap-5 my-[80px] desktop:my-[129px]">
         <h2 className="text-mainColor text-xl text-center">Iniciar sesión</h2>
         <form action="" className="w-4/5 flex flex-col justify-center gap-10">
           <div className="flex flex-col gap-3">
-          <label htmlFor="email" className="text-xs text-secundaryColor">
+            <label htmlFor="email" className="text-xs text-secundaryColor">
               Correo electrónico
             </label>
             <input
@@ -36,7 +36,7 @@ function LogIn({ setSelectMenu }) {
             </button>
             <p className="text-xs text-center">
               ¿Aún no tenes cuenta?{" "}
-              <Link to="/Signin" className="text-mainColor" >
+              <Link to="/Signin" className="text-mainColor">
                 Registrate
               </Link>
             </p>

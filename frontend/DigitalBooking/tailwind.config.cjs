@@ -11,6 +11,13 @@ module.exports = {
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
     },
+    screens: {
+      tablet: "415px",
+      // => @media (min-width: 640px) { ... }
+
+      desktop: "1367px",
+      // => @media (min-width: 1280px) { ... }
+    },
     extend: {
       spacing: {
         128: "31rem",

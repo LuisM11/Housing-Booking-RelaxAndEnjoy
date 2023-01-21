@@ -12,13 +12,13 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Signin" element={<SignIn />} />
-          <Route path="/Login" element={<LogIn />} />
-        </Route>
-      </Routes>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Signin" element={<SignIn />} />
+            <Route path="/Login" element={<LogIn />} />
+          </Route>
+        </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );

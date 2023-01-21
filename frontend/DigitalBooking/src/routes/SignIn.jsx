@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SignIn({ setSelectMenu }) {
+function SignIn() {
   return (
     <section className="w-full h-full flex justify-center items-center">
-      <article className="w-11/12 flex flex-col justify-center items-center gap-5 my-[80px]">
+      <article className="w-11/12 tablet:w-3/4 desktop:w-4/12 flex flex-col justify-center items-center gap-5 my-[85px] desktop:my-[129px]">
         <h2 className="text-mainColor text-xl text-center">Crear cuenta</h2>
         <form action="" className="w-4/5 flex flex-col justify-center gap-10">
           <div className="flex flex-col gap-3">
