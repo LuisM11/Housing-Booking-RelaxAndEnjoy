@@ -8,10 +8,18 @@ function Footer() {
           <h2 className="text-fourthColor text-mb">2021 Digital Booking</h2>
         </div>
         <div className="hidden gap-10 text-2xl text-fourthColor tablet:grid tablet:grid-cols-4">
-          <i className="uil uil-facebook"></i>
-          <i className="uil uil-linkedin"></i>
-          <i className="uil uil-twitter"></i>
-          <i className="uil uil-instagram"></i>
+          <a href="https://www.facebook.com" target="_blank">
+            <i className="uil uil-facebook"></i>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank">
+            <i className="uil uil-linkedin"></i>
+          </a>
+          <a href="https://www.twitter.com" target="_blank">
+            <i className="uil uil-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank">
+            <i className="uil uil-instagram"></i>
+          </a>
         </div>
       </article>
     </footer>

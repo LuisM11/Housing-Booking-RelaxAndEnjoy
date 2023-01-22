@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useGlobalContext } from "../context/GlobalContext";
+
 function SignIn() {
+  const { setSelectMenu } = useGlobalContext();
   return (
     <section className="w-full h-full flex justify-center items-center">
-      <article className="w-11/12 tablet:w-3/4 desktop:w-4/12 flex flex-col justify-center items-center gap-5 my-[85px] desktop:my-[129px]">
+      <article className="w-11/12 tablet:w-3/4 flex flex-col justify-center items-center gap-5 my-[86px]">
         <h2 className="text-mainColor text-xl text-center">Crear cuenta</h2>
         <form action="" className="w-4/5 flex flex-col justify-center gap-10">
           <div className="flex flex-col gap-3">
@@ -66,7 +69,11 @@ function SignIn() {
             </button>
             <p className="text-xs text-center">
               ¿Ya tienes una cuenta?{" "}
-              <Link to="/Login" className="text-mainColor">
+              <Link
+                to="/Login"
+                className="text-mainColor"
+                onClick={() => setSelectMenu(2)}
+              >
                 Iniciar sesión
               </Link>
             </p>

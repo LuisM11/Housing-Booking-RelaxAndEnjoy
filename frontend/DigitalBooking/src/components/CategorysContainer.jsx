@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 import CategoryCard from "./CategoryCard";
 
-/* import Categorys from "../data/Categorys.json"; */
+import { useGlobalContext } from "../context/GlobalContext";
 
 function CategorysContainer() {
-  const [CategorysList, setCategorysList] = useState([]);
-
-  useEffect(() => {
-    getCategorysList();
-  }, []);
-
-  const getCategorysList = async () => {
-    return await axios
-      .get("http://localhost:8080/Categorys")
-      .then((resp) => setCategorysList(resp.data));
-  };
+  const { CategorysList } = useGlobalContext();
 
   return (
     <section className="h-full w-full">

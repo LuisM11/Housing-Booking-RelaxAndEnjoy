@@ -3,14 +3,20 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo1.png";
 import Lema from "../assets/lema.png";
 
+import { useGlobalContext } from "../context/GlobalContext";
+
 function Header() {
+  const { selectMenu, setSelectMenu } = useGlobalContext();
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [selectMenu, setSelectMenu] = useState(0);
 
   return (
     <header className="p-3 desktop:px-10 shadow">
       <nav className="flex justify-between items-center">
-        <Link to="/home" className="flex gap-2 items-end">
+        <Link
+          to="/home"
+          className="flex gap-2 items-end"
+          onClick={() => setSelectMenu(0)}
+        >
           <img src={Logo} alt="" />
           <img src={Lema} alt="" className="hidden h-4 desktop:grid" />
         </Link>
@@ -37,7 +43,10 @@ function Header() {
                 className={
                   selectMenu == 1 ? "hidden" : "text-base text-secundaryColor"
                 }
-                onClick={() => setSelectMenu(1)}
+                onClick={() => {
+                  setSelectMenu(1);
+                  setToggleMenu(false);
+                }}
               >
                 Crear cuenta
               </Link>
@@ -46,22 +55,25 @@ function Header() {
                 className={
                   selectMenu == 2 ? "hidden" : "text-base text-secundaryColor"
                 }
-                onClick={() => setSelectMenu(2)}
+                onClick={() => {
+                  setSelectMenu(2);
+                  setToggleMenu(false);
+                }}
               >
                 Inciar sesión
               </Link>
             </div>
             <div className="text-2xl text-thirdColor flex gap-5 p-5">
-              <a href="">
+              <a href="https://www.facebook.com" target="_blank">
                 <i className="uil uil-facebook"></i>
               </a>
-              <a href="">
+              <a href="https://www.linkedin.com" target="_blank">
                 <i className="uil uil-linkedin"></i>
               </a>
-              <a href="">
+              <a href="https://www.twitter.com" target="_blank">
                 <i className="uil uil-twitter"></i>
               </a>
-              <a href="">
+              <a href="https://www.instagram.com" target="_blank">
                 <i className="uil uil-instagram"></i>
               </a>
             </div>
@@ -71,15 +83,23 @@ function Header() {
           <i className="uil uil-bars text-2xl text-mainColor tablet:hidden"></i>
         </div>
         <div className="hidden tablet:flex gap-2">
-          <Link to="/Signin">
-            <button className="h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl">
-              Crear cuenta
-            </button>
+          <Link
+            to="/Signin"
+            className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+              selectMenu == 1 ? "hidden" : "flex justify-center items-center"
+            }`}
+            onClick={() => setSelectMenu(1)}
+          >
+            Crear cuenta
           </Link>
-          <Link to="/Login">
-            <button className="h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl">
-              Inciar sesión
-            </button>
+          <Link
+            to="/Login"
+            className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+              selectMenu == 2 ? "hidden" : "flex justify-center items-center"
+            }`}
+            onClick={() => setSelectMenu(2)}
+          >
+            Inciar sesión
           </Link>
         </div>
       </nav>
