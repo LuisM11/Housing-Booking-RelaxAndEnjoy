@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/logo1.png";
+import Logo from "../assets/r&dlogo.png";
 import Lema from "../assets/lema.png";
 
 import { useGlobalContext } from "../context/GlobalContext";
@@ -17,8 +17,9 @@ function Header() {
           className="flex gap-2 items-end"
           onClick={() => setSelectMenu(0)}
         >
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="Relájese y Disfrute" title="Relájese y Disfrute" />
           <img src={Lema} alt="" className="hidden h-4 desktop:grid" />
+          <span text-base text-secundaryColor>El lugar para tu descanso y vacaciones</span>
         </Link>
         <article
           className={

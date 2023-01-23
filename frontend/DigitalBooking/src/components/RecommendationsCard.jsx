@@ -6,6 +6,7 @@ function RecommendationsCard({ item }) {
       <img
         src={item.crimg}
         alt={item.title}
+        title={item.title}
         className="h-60 w-full rounded-b-lg tablet:rounded-l-none tablet:rounded-r-lg"
       />
       <div className="w-full h-64 flex flex-col p-2">
