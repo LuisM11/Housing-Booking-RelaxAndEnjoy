@@ -10,6 +10,7 @@ export const useGlobalContext = () => {
 const ContextProvider = ({ children }) => {
   const [CategorysList, setCategorysList] = useState([]);
   const [selectMenu, setSelectMenu] = useState(0);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     getCategorysList();
@@ -17,13 +18,13 @@ const ContextProvider = ({ children }) => {
 
   const getCategorysList = async () => {
     return await axios
-      .get("http://localhost:8080/Categorys")
+      .get("http://localhost:8080/Categories")
       .then((resp) => setCategorysList(resp.data));
   };
 
   return (
     <GlobalContext.Provider
-      value={{ CategorysList, selectMenu, setSelectMenu }}
+      value={{ CategorysList, selectMenu, setSelectMenu, user, setUser }}
     >
       <div>{children}</div>
     </GlobalContext.Provider>

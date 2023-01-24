@@ -1,22 +1,36 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useGlobalContext } from "../context/GlobalContext";
 
+import User from "../data/User.json";
+
 function LogIn() {
-  const { setSelectMenu } = useGlobalContext();
+  const { setSelectMenu, setUser } = useGlobalContext();
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
+    User.map((usr) => {
+      if (usr.email === data.email) {
+        if (usr.password === data.password) {
+          setUser(usr);
+          navigate("/home");
+        }
+      }
+    });
   };
 
   return (
     <section className="w-full h-full flex justify-center items-center">
       <article className="w-11/12 tablet:w-3/4 h-[540px] flex flex-col justify-center items-center gap-5 my-[86px]">
         <h2 className="text-mainColor text-xl text-center">Iniciar sesión</h2>
-        <form action="" className="w-4/5 flex flex-col justify-center gap-10" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          action=""
+          className="w-4/5 flex flex-col justify-center gap-10"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="flex flex-col gap-3">
             <label htmlFor="email" className="text-xs text-secundaryColor">
               Correo electrónico

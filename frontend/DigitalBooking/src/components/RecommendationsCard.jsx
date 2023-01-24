@@ -14,12 +14,9 @@ function RecommendationsCard({ item }) {
             <span className="text-xs text-secundaryColor opacity-50">
               {item.category}{" "}
             </span>
-            <span className="text-sm text-mainColor">
+            <span className={item.popularity < 3 ? "text-md text-[#b23b3b]" : "text-md text-[#10771A]"}>
               <i className="uil uil-favorite"></i>
-              <i className="uil uil-favorite"></i>
-              <i className="uil uil-favorite"></i>
-              <i className="uil uil-favorite"></i>
-              <i className="uil uil-favorite"></i>
+              {item.popularity}
             </span>
             <h2 className="text-xl text-secundaryColor font-bold">
               {item.title}

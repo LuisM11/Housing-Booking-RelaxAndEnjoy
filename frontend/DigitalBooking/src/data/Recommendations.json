@@ -5,7 +5,8 @@
     "category": "Bed and breakfast",
     "title": "Cabaña en Cartagena",
     "location": "Cartagena",
-    "description": "ver catipsum.com"
+    "description": "ver catipsum.com",
+    "popularity": "5.0"
   },
   {
     "id": "2",
@@ -13,7 +14,8 @@
     "category": "Hoteles",
     "title": "Hilton Hotel",
     "location": "Medellin",
-    "description": "ver catipsum.com"
+    "description": "ver catipsum.com",
+    "popularity": "4.0"
   },
   {
     "id": "3",
@@ -21,7 +23,8 @@
     "category": "Departamentos",
     "title": "Soledad Apartamento",
     "location": "Santa Marta",
-    "description": "ver catipsum.com"
+    "description": "ver catipsum.com",
+    "popularity": "3.0"
   },
   {
     "id": "4",
@@ -29,6 +32,7 @@
     "category": "Hostels",
     "title": "Hermitage Hostel",
     "location": "Santa Marta",
-    "description": "ver catipsum.com"
+    "description": "ver catipsum.com",
+    "popularity": "2.0"
   }
 ]

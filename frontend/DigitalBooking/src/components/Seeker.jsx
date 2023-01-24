@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { DatePicker } from "antd";
+import moment from "moment";
+
+import Citys from "../data/Citys.json";
 
 function Seeker() {
+  const { register, handleSubmit } = useForm();
+  const { RangePicker } = DatePicker;
+  const [dates, setDates] = useState([]);
+
+  const onSubmit = (data) => {
+    console.log({ ...data, dateRange: dates });
+  };
+
   return (
     <section className="w-full h-64 bg-thirdColor grid">
       <article className="w-11/12 grid grid-cols-1 m-auto gap-1">
@@ -10,23 +23,35 @@ function Seeker() {
         <form
           action=""
           className="grid grid-rows-1 tablet:grid-cols-3 gap-1 tablet:gap-5"
+          onSubmit={handleSubmit(onSubmit)}
         >
           <select
             name="destinos"
             id=""
             defaultValue="¿A donde vamos?"
             className="h-9 rounded shadow-2xl p-1"
+            {...register("city")}
           >
-            <option value="sancarlos">San Carlos de Bariloche</option>
-            <option value="buenosaires">Buenos Aires</option>
-            <option value="mendoza">Mendoza</option>
-            <option value="cordoba">Córdoba</option>
+            {Citys.map((c, index) => (
+              <option key={index} value={c.name.toLocaleLowerCase().slice(" ")}>
+                {c.name}
+              </option>
+            ))}
           </select>
-          <input
+          {/* <input
             type="date"
             name=""
             id=""
             className="h-9 rounded shadow-2xl p-1"
+          /> */}
+          <RangePicker
+            onChange={(value) => {
+              setDates(
+                value.map((item) => {
+                  return moment(item).format("DD-MM-YYYY");
+                })
+              );
+            }}
           />
           <button
             type="submit"
