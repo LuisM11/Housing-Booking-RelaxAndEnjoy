@@ -1,13 +1,13 @@
-package com.pi.relaxandenjoy;
+package com.Grupo5.DigitalBooking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RelaxandenjoyApplication {
+public class DigitalBookingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RelaxandenjoyApplication.class, args);
+		SpringApplication.run(DigitalBookingApplication.class, args);
 	}
 
 }

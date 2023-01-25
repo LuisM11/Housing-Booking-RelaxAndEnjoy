@@ -1,10 +1,10 @@
-package com.pi.relaxandenjoy;
+package com.Grupo5.DigitalBooking;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RelaxandenjoyApplicationTests {
+class DigitalBookingApplicationTests {
 
 	@Test
 	void contextLoads() {
