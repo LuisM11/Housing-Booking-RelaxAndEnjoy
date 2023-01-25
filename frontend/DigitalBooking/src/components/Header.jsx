@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/logo1.png";
+import Logo from "../assets/r&dlogo.png";
+import Logo2 from "../assets/ryd.png";
 import Lema from "../assets/lema.png";
 
 import ProfileMenu from "./ProfileMenu";
@@ -17,11 +18,13 @@ function Header() {
       <nav className="flex justify-between items-center">
         <Link
           to="/home"
-          className="flex gap-2 items-end"
+          className="flex gap-1 items-end"
           onClick={() => setSelectMenu(0)}
         >
-          <img src={Logo} alt="" />
-          <img src={Lema} alt="" className="hidden h-4 desktop:grid" />
+          <img src={Logo2} alt="Relájese y Disfrute" title="Relájese y Disfrute" className="w-14" />
+          {/* <img src={Lema} alt="" className="hidden h-4 desktop:grid" /> */}
+          <span className="text-sm text-thirdColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
+
         </Link>
         <article
           className={

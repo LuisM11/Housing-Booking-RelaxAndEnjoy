@@ -70,23 +70,17 @@ function LogIn() {
               type="submit"
               className="w-full h-10 bg-mainColor rounded-md text-sm text-fourthColor font-bold"
             >
-              Ingresar
-            </button>
-            <p className="text-xs text-center">
-              ¿Aún no tenes cuenta?{" "}
-              <Link
-                to="/Signin"
-                className="text-mainColor"
-                onClick={() => setSelectMenu(1)}
-              >
-                Registrate
-              </Link>
-            </p>
-          </div>
-        </form>
-      </article>
-    </section>
+              Registrate
+            </Link>
+          </p>
+        </div>
+      </form>
+    </article>
+  </section>
   );
 }
 
+
+
 export default LogIn;
+
