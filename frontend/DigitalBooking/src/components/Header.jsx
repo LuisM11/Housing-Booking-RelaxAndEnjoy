@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/r&dlogo.png";
+import Logo2 from "../assets/ryd.png";
 import Lema from "../assets/lema.png";
+
 
 import { useGlobalContext } from "../context/GlobalContext";
 
@@ -14,12 +16,13 @@ function Header() {
       <nav className="flex justify-between items-center">
         <Link
           to="/home"
-          className="flex gap-2 items-end"
+          className="flex gap-1 items-end"
           onClick={() => setSelectMenu(0)}
         >
-          <img src={Logo} alt="Relájese y Disfrute" title="Relájese y Disfrute" />
-          <img src={Lema} alt="" className="hidden h-4 desktop:grid" />
-          <span text-base text-secundaryColor>El lugar para tu descanso y vacaciones</span>
+          <img src={Logo2} alt="Relájese y Disfrute" title="Relájese y Disfrute" className="w-14" />
+          {/* <img src={Lema} alt="" className="hidden h-4 desktop:grid" /> */}
+          <span className="text-sm text-thirdColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
+
         </Link>
         <article
           className={
@@ -86,18 +89,16 @@ function Header() {
         <div className="hidden tablet:flex gap-2">
           <Link
             to="/Signin"
-            className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
-              selectMenu == 1 ? "hidden" : "flex justify-center items-center"
-            }`}
+            className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${selectMenu == 1 ? "hidden" : "flex justify-center items-center"
+              }`}
             onClick={() => setSelectMenu(1)}
           >
             Crear cuenta
           </Link>
           <Link
             to="/Login"
-            className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
-              selectMenu == 2 ? "hidden" : "flex justify-center items-center"
-            }`}
+            className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${selectMenu == 2 ? "hidden" : "flex justify-center items-center"
+              }`}
             onClick={() => setSelectMenu(2)}
           >
             Inciar sesión
