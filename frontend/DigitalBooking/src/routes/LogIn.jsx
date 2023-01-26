@@ -8,7 +8,7 @@ import User from "../data/User.json";
 
 function LogIn() {
   const { setSelectMenu, setUser } = useGlobalContext();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,formState:{ errors} } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -25,7 +25,7 @@ function LogIn() {
   return (
     <section className="w-full h-full flex justify-center items-center">
       <article className="w-11/12 tablet:w-3/4 h-[540px] flex flex-col justify-center items-center gap-5 my-[86px]">
-        <h2 className="text-mainColor text-xl text-center">Iniciar sesión</h2>
+        <h2 onClick={()=> console.log(errors)} className="text-mainColor text-xl text-center">Iniciar sesión</h2>
         <form
           action=""
           className="w-4/5 flex flex-col justify-center gap-10"
@@ -42,12 +42,11 @@ function LogIn() {
               className="h-10 shadow-sm rounded p-2"
               {...register("email", {
                 required: true,
-                pattern: {
-                  value:
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message:
-                    "Por favor introduzca una dirección de correo electrónico válida",
-                },
+                validate: (value) => {
+                  const email  = User[0]["email"];               
+                  return email === value;
+                }
+                
               })}
             />
             <label htmlFor="password" className="text-xs text-secundaryColor">
@@ -59,16 +58,21 @@ function LogIn() {
               id="password"
               className="h-10 shadow-sm rounded p-2"
               {...register("password", {
-                required: true,
-                maxLength: 25,
-                minLength: 6,
+                required: true,               
+                validate: (value) => {
+                  const password  = User[0].password;
+                  return password === value;
+                }
               })}
-            />
+            />           
           </div>
+
+          {(errors.email || errors.password) && <p className="text-redWarning" role="alert"> Por favor vuelva a intentarlo, sus credenciales son inválidas</p>}
+
           <div className="w-full flex flex-col gap-2">
             <button
               type="submit"
-              className="w-full h-10 bg-mainColor rounded-md text-sm text-fourthColor font-bold"
+              className={ (errors.password ? "border-2  border-redWarning" : "" )+"w-full h-10 bg-mainColor rounded-md text-sm text-fourthColor font-bold"}
             >
               Ingresar
             </button>
