@@ -7,6 +7,7 @@ module.exports = {
       secundaryColor: "#263238",
       thirdColor: "#607D8B",
       fourthColor: "#FFFBE2",
+      redWarning: ' #df3614 '
     },
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
