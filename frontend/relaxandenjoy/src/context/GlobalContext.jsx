@@ -18,7 +18,7 @@ const ContextProvider = ({ children }) => {
 
   const getCategorysList = async () => {
     return await axios
-      .get("http://localhost:8080/Categories")
+      .get("http://localhost:8080/categories")
       .then((resp) => setCategorysList(resp.data));
   };
 
