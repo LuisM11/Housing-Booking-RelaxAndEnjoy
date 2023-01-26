@@ -1,7 +1,6 @@
 package com.pi.relaxandenjoy.model;
 
 import jakarta.persistence.*;
-
 @Entity
 @Table(name = "category")
 public class Category {
