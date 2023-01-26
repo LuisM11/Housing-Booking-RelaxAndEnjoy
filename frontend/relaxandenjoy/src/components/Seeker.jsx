@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { DatePicker } from "antd";
 import moment from "moment";
 
-import Citys from "../data/Citys.json";
+import Cities from "../data/Cities.json";
 
 function Seeker() {
   const { register, handleSubmit } = useForm();
@@ -32,7 +32,7 @@ function Seeker() {
             className="h-9 rounded shadow-2xl p-1"
             {...register("city")}
           >
-            {Citys.map((c, index) => (
+            {Cities.map((c, index) => (
               <option key={index} value={c.name.toLocaleLowerCase().slice(" ")}>
                 {c.name}
               </option>
