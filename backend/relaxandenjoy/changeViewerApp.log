@@ -118,3 +118,39 @@
 [2023-01-26 09:17:28] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
 [2023-01-26 09:20:10] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
 [2023-01-26 09:20:10] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 09:30:17] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 09:30:17] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 10:09:15] [ ERROR] [GlobalExceptions:14] We have an error: The category with id: 5, not found.
+[2023-01-26 10:09:58] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 10:10:30] [ INFO ] [CategoryService:43] Iniciando proceso de registro de nueva categoria: aoaaaaaaaael
+[2023-01-26 10:10:34] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 10:17:17] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 6
+[2023-01-26 10:17:30] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:05:59] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 1
+[2023-01-26 12:06:05] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:07:04] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:07:10] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:07:10] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:07:25] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 2
+[2023-01-26 12:07:28] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 3
+[2023-01-26 12:07:31] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 4
+[2023-01-26 12:07:37] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:07:51] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:07:51] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:12:47] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 1
+[2023-01-26 12:12:51] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 2
+[2023-01-26 12:12:53] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 3
+[2023-01-26 12:12:56] [ WARN ] [CategoryService:51] Se ha eliminado la categoria con id: 4
+[2023-01-26 12:13:03] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:13:03] [ ERROR] [GlobalExceptions:14] We have an error: There are no registered categories.
+[2023-01-26 12:13:08] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:13:08] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:13:08] [ ERROR] [GlobalExceptions:14] We have an error: There are no registered categories.
+[2023-01-26 12:13:08] [ ERROR] [GlobalExceptions:14] We have an error: There are no registered categories.
+[2023-01-26 12:13:46] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:13:57] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:13:57] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:14:48] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:14:48] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:21:56] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
+[2023-01-26 12:21:56] [ INFO ] [CategoryService:33] Iniciando Proceso: Buscando todas las categorias.
