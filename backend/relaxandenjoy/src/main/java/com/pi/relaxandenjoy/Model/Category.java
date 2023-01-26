@@ -1,31 +1,46 @@
 package com.pi.relaxandenjoy.Model;
 
 import javax.persistence.*;
+
+
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String title;
-    private String description;
-    private String urlImage;
+    @Column(name = "id_categories")
+    private Long id;
 
-    public Category(Integer id, String title, String description, String urlImage) {
+    @Column(unique = true, nullable = false, length = 25)
+    private String title;
+
+    @Column
+    private String description;
+
+    @Column
+    private String img;
+
+    public Category(Long id, String title, String description, String img) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.urlImage = urlImage;
+        this.img = img;
+    }
+
+    public Category(String title, String description, String img) {
+        this.title = title;
+        this.description = description;
+        this.img = img;
     }
 
     public Category() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,11 +60,11 @@ public class Category {
         this.description = description;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public String getImg() {
+        return img;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setImg(String img) {
+        this.img = img;
     }
 }

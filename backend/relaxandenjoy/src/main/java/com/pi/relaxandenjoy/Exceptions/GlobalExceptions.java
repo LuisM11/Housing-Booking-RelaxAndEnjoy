@@ -1,4 +1,4 @@
-package com.Grupo5.DigitalBooking.Exceptions;
+package com.pi.relaxandenjoy.Exceptions;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;

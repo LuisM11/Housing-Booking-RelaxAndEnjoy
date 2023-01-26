@@ -1,4 +1,4 @@
-package com.Grupo5.DigitalBooking.Exceptions;
+package com.pi.relaxandenjoy.Exceptions;
 
 public class ResourceNotFoundException extends Exception {
     public ResourceNotFoundException(String message) {super(message);}
