@@ -17,7 +17,7 @@ function Seeker() {
   return (
     <section className="w-full h-64 bg-thirdColor grid">
       <article className="w-11/12 grid grid-cols-1 m-auto gap-1">
-        <h2 className="h-20 font-bold text-fourthColor text-xl tablet:text-[29px] desktop:text-5xl text-center tablet:py-5 desktop:py-0 leading-9">
+        <h2 className="h-20 font-bold text-fourthColor text-[22px] tablet:text-[29px] desktop:text-5xl text-center tablet:py-5 desktop:py-0 leading-9">
           Busca ofertas en hoteles, casas y mucho mas
         </h2>
         <form
@@ -29,9 +29,10 @@ function Seeker() {
             name="destinos"
             id=""
             defaultValue="¿A donde vamos?"
-            className="h-9 rounded shadow-2xl p-1"
+            className="text-secundaryColor/50 h-9 rounded shadow-2xl p-1"
             {...register("city")}
           >
+            <option disabled selected> ¿A donde vamos? </option>
             {Cities.map((c, index) => (
               <option key={index} value={c.name.toLocaleLowerCase().slice(" ")}>
                 {c.name}

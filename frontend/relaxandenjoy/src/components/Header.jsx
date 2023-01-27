@@ -26,27 +26,25 @@ function Header() {
           <span className="text-sm text-thirdColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
 
         </Link>
-        <article
+        <aside
           className={
             toggleMenu
-              ? "fixed bottom-[-100%] left-0 w-full bg-fourthColor top-0"
-              : "hidden"
+              ? "duration-700 flex flex-col h-screen fixed z-10 bottom-[-100%] right-0  w-3/4 bg-fourthColor top-0 desktop:hidden tablet:hidden"
+              : "duration-200 flex flex-col h-screen fixed z-10 right-[-100%]  w-3/4 bg-fourthColor top-0 desktop:hidden tablet:hidden"
           }
         >
           <div className="h-52 bg-mainColor flex flex-col justify-between px-5 pt-5 pb-2">
-            <i
-              className="uil uil-times text-2xl text-fourthColor"
-              onClick={() => setToggleMenu(!toggleMenu)}
-            ></i>
+            <i className="uil uil-times text-2xl text-fourthColor"
+              onClick={() => setToggleMenu(!toggleMenu)}></i>
             {user === null ? (
               <h2 className="text-fourthColor text-right font-bold text-xl">
-                "MENÚ"
+                MENÚ
               </h2>
             ) : (
               <ProfileMenu user={user} />
             )}
           </div>
-          <div className="h-[625px] flex flex-col justify-between items-end ">
+          <div className="grow flex flex-col justify-between">
             <div className={user ? "hidden" : "flex flex-col gap-10 p-5"}>
               <Link
                 to="/Signin"
@@ -62,9 +60,7 @@ function Header() {
               >
                 Crear cuenta
               </Link>
-              <div className={selectMenu !== 0 ? "hidden" : "w-[390px] pl-5"}>
-                <hr className="text-thirdColor" />
-              </div>
+              
               <Link
                 to="/Login"
                 className={
@@ -87,7 +83,7 @@ function Header() {
                   : "w-full flex flex-col"
               }
             >
-              <div className={user ? "grid" : "hidden"}>
+              <div className={user ? "flex-col mb-3" : "hidden"}>
                 <p className="text-secundaryColor text-right text-sm py-1 pr-5">
                   ¿Deseas{" "}
                   <Link
@@ -102,7 +98,7 @@ function Header() {
                   </Link>
                   ?
                 </p>
-                <div className="w-[390px] mx-auto">
+                <div className="w-[85%] mx-auto">
                   <hr className="text-thirdColor" />
                 </div>
               </div>
@@ -122,7 +118,7 @@ function Header() {
               </div>
             </div>
           </div>
-        </article>
+        </aside>
         <div onClick={() => setToggleMenu(!toggleMenu)}>
           <i className="uil uil-bars text-2xl text-mainColor tablet:hidden"></i>
         </div>

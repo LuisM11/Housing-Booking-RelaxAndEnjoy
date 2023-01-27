@@ -13,7 +13,7 @@ module.exports = {
       poppins: ["Poppins", "sans-serif"],
     },
     screens: {
-      tablet: "415px",
+      tablet: "450px",
       // => @media (min-width: 640px) { ... }
 
       desktop: "1367px",
