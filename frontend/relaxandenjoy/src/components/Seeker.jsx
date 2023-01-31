@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { DatePicker } from "antd";
 import moment from "moment";
+const { RangePicker } = DatePicker;
 
 import Cities from "../data/Cities.json";
 
 function Seeker() {
   const { register, handleSubmit } = useForm();
-  const { RangePicker } = DatePicker;
   const [dates, setDates] = useState([]);
 
   const onSubmit = (data) => {
@@ -26,30 +26,26 @@ function Seeker() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <select
-          required
+            required
             name="destinos"
             id=""
             className="invalid:text-secundaryColor/50 text-secundaryColor  h-9 rounded shadow-2xl p-1"
             {...register("city")}
           >
-            <option value={''} disabled selected> ¿A donde vamos? </option>
+            <option value={""} disabled selected>
+              ¿A donde vamos?
+            </option>
             {Cities.map((c, index) => (
               <option key={index} value={c.name.toLocaleLowerCase().slice(" ")}>
                 {c.name}
               </option>
             ))}
           </select>
-          {/* <input
-            type="date"
-            name=""
-            id=""
-            className="h-9 rounded shadow-2xl p-1"
-          /> */}
           <RangePicker
-            onChange={(value) => {
+            onChange={(values) => {
               setDates(
-                value.map((item) => {
-                  return moment(item).format("DD-MM-YYYY");
+                values.map((item) => {
+                  return moment(item.$d).format("DD-MM-YYYY");
                 })
               );
             }}
