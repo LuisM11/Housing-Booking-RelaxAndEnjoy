@@ -26,13 +26,13 @@ function Seeker() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <select
+          required
             name="destinos"
             id=""
-            defaultValue="¿A donde vamos?"
-            className="text-secundaryColor/50 h-9 rounded shadow-2xl p-1"
+            className="invalid:text-secundaryColor/50 text-secundaryColor  h-9 rounded shadow-2xl p-1"
             {...register("city")}
           >
-            <option disabled selected> ¿A donde vamos? </option>
+            <option value={''} disabled selected> ¿A donde vamos? </option>
             {Cities.map((c, index) => (
               <option key={index} value={c.name.toLocaleLowerCase().slice(" ")}>
                 {c.name}
