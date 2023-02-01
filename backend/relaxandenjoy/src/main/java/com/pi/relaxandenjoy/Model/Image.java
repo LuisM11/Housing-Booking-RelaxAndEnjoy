@@ -15,7 +15,7 @@ public class Image {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "id_images", referencedColumnName = "id")
+    @JoinColumn(name = "id_images", insertable = false, updatable = false)
     private Product products;
 
     public Image(Long id, String title, String url, Product products) {

@@ -24,12 +24,17 @@ public class Product {
     @Column
     private String description;
     @ManyToOne
-    @JoinColumn(name = "id_products")
+    @JoinColumn(name = "id_products",updatable = false, insertable = false)
     private Category categories;
     @ManyToOne
-    @JoinColumn(name = "id_products")
+    @JoinColumn(name = "id_products", updatable = false, insertable = false)
     private City city;
-    @OneToOne(mappedBy = "products")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "products_has_features",
+            joinColumns =
+                    { @JoinColumn(name = "id_products")},
+            inverseJoinColumns =
+                    { @JoinColumn(name = "id_features")})
     private Feature features;
 
     @OneToMany(mappedBy = "products")
