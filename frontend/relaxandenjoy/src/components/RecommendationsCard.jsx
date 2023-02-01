@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function RecommendationsCard({ item }) {
   return (
@@ -39,9 +40,9 @@ function RecommendationsCard({ item }) {
           </a>
         </div>
         <p className="h-24 font-medium text-sm mb-2">{item.description}</p>
-        <button className="h-10 bg-mainColor text-fourthColor text-base font-bold rounded-md">
+        <Link to={`/Product/${item.id}`} className="h-10 bg-mainColor flex justify-center items-center text-fourthColor text-lg font-bold rounded-md">
           Ver mas
-        </button>
+        </Link>
       </div>
     </article>
   );
