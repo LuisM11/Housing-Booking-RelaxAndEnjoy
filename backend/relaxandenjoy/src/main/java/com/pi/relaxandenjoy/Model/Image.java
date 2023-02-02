@@ -1,6 +1,10 @@
 package com.pi.relaxandenjoy.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "images")
@@ -14,21 +18,22 @@ public class Image {
     private String title;
     private String url;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "id_images", insertable = false, updatable = false)
-    private Product products;
+    @JoinColumn(name = "id_products", referencedColumnName = "id_products",insertable = false, updatable = false)
+    private Product product;
 
-    public Image(Long id, String title, String url, Product products) {
+    public Image(Long id, String title, String url, Product product) {
         this.id = id;
         this.title = title;
         this.url = url;
-        this.products = products;
+        this.product = product;
     }
 
-    public Image(String title, String url, Product products) {
+    public Image(String title, String url, Product product) {
         this.title = title;
         this.url = url;
-        this.products = products;
+        this.product = product;
     }
 
     public Image() {
@@ -58,11 +63,12 @@ public class Image {
         this.url = url;
     }
 
-    public Product getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(Product products) {
-        this.products = products;
+    public void setProducts(Product product) {
+        this.product = product;
     }
+
 }

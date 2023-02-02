@@ -1,8 +1,13 @@
 package com.pi.relaxandenjoy.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
+@JsonIgnoreProperties({"productxfeature"})
 @Entity
 @Table(name = "products")
 public class Product {
@@ -24,25 +29,33 @@ public class Product {
     @Column
     private String description;
     @ManyToOne
-    @JoinColumn(name = "id_products",updatable = false, insertable = false)
+    @JoinColumn(name = "id_categories",updatable = false, insertable = false)
     private Category categories;
     @ManyToOne
-    @JoinColumn(name = "id_products", updatable = false, insertable = false)
+    @JoinColumn(name = "id_cities", referencedColumnName = "id_cities", updatable = false, insertable = false)
+    @JsonManagedReference
     private City city;
-    @OneToOne(cascade = CascadeType.ALL)
+
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<ProductxFeature>  productxfeature;
+    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "products_has_features",
             joinColumns =
                     { @JoinColumn(name = "id_products")},
             inverseJoinColumns =
                     { @JoinColumn(name = "id_features")})
-    private Feature features;
+    private Set<Feature> features;
 
-    @OneToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Image> images;
 
-    public Product(Long id, String name, Float popularity, String title, String crimg, String location, String description, Category categories, City city, Feature characteristics, Set<Image> images) {
+    public Product(Long id, String title, String name, Float popularity, String crimg, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images) {
         this.id = id;
         this.title = title;
+        this.name = name;
+        this.popularity = popularity;
         this.crimg = crimg;
         this.location = location;
         this.description = description;
@@ -50,21 +63,6 @@ public class Product {
         this.city = city;
         this.features = features;
         this.images = images;
-        this.popularity = popularity;
-        this.name = name;
-    }
-
-    public Product(String title, String name, Float popularity, String crimg, String location, String description, Category categories, City city, Feature characteristics, Set<Image> images) {
-        this.title = title;
-        this.crimg = crimg;
-        this.location = location;
-        this.description = description;
-        this.categories = categories;
-        this.city = city;
-        this.features = features;
-        this.images = images;
-        this.popularity = popularity;
-        this.name = name;
     }
 
     public Product() {
@@ -142,11 +140,11 @@ public class Product {
         this.city = city;
     }
 
-    public Feature getfeatures() {
+    public Set<Feature> getFeatures() {
         return features;
     }
 
-    public void setfeatures(Feature features) {
+    public void setFeatures(Set<Feature> features) {
         this.features = features;
     }
 

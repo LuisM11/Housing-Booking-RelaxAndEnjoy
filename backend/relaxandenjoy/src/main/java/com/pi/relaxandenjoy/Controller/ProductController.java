@@ -21,8 +21,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/buscar/{id}")
-    public ResponseEntity<Product> search(@PathVariable Long id) throws ResourceNotFoundException {
+    @GetMapping("/search/{id}")
+    public ResponseEntity<Product> searchById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.search(id).get());
     }
 
@@ -37,7 +37,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.register(product));
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
         productService.delete(id);
         return ResponseEntity.ok("Product with id: " + id + " was removed");

@@ -1,6 +1,9 @@
 package com.pi.relaxandenjoy.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "features")
@@ -12,23 +15,30 @@ public class Feature {
     private Long id;
     private String name;
     private String icon;
-    @OneToOne(mappedBy = "features")
-    private Product products;
 
-    public Feature(Long id, String name, String icon, Product products) {
+
+//    @JsonBackReference
+//    @OneToMany(mappedBy = "feature",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<ProductxFeature> productxfeature;
+    @JsonBackReference
+    @ManyToMany(mappedBy = "features")
+    private Set<Product> products;
+
+
+    public Feature(Long id, String name, String icon) {
         this.id = id;
         this.name = name;
         this.icon = icon;
-        this.products = products;
     }
 
-    public Feature(String name, String icon, Product products) {
+    public Feature(String name, String icon) {
         this.name = name;
         this.icon = icon;
-        this.products = products;
     }
 
+
     public Feature() {
+
     }
 
     public Long getId() {
@@ -55,11 +65,5 @@ public class Feature {
         this.icon = icon;
     }
 
-    public Product getProducts() {
-        return products;
-    }
 
-    public void setProducts(Product products) {
-        this.products = products;
-    }
 }

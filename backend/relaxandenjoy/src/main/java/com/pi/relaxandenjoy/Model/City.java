@@ -1,19 +1,21 @@
 package com.pi.relaxandenjoy.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "city")
+@Table(name = "cities")
 public class City {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_city")
+    @Column(name = "id_cities")
     private Long id;
     @Column
     private String name;
     @OneToMany(mappedBy = "city")
+    @JsonBackReference
     private Set<Product> products;
 
     public City(Long id, String name, Set<Product> products) {
