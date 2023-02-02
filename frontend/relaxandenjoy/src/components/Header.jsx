@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/r&dlogo.png";
 import Logo2 from "../assets/ryd.png";
-import Lema from "../assets/lema.png";
 
 import ProfileMenu from "./ProfileMenu";
 import ProfileDesktop from "./ProfileDesktop";
@@ -14,7 +12,7 @@ function Header() {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
-    <header className="p-3 desktop:px-10 shadow">
+    <header className="p-3 tablet:p-4 tablet:px-6 desktop:px-10 shadow">
       <nav className="flex justify-between items-center">
         <Link
           to="/home"
@@ -87,7 +85,7 @@ function Header() {
                 <p className="text-secundaryColor text-right text-sm py-1 pr-5">
                   ¿Deseas{" "}
                   <Link
-                    to="/home"
+                    to="/Home"
                     className="text-mainColor"
                     onClick={() => {
                       setUser(null);
@@ -133,7 +131,7 @@ function Header() {
             <div className="flex gap-2">
               <Link
                 to="/Signin"
-                className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+                className={`h-8 desktop:h-9 w-32 desktop:w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
                   selectMenu == 1
                     ? "hidden"
                     : "flex justify-center items-center"
@@ -144,7 +142,7 @@ function Header() {
               </Link>
               <Link
                 to="/Login"
-                className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+                className={`h-8 desktop:h-9 w-32 desktop:w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
                   selectMenu == 2
                     ? "hidden"
                     : "flex justify-center items-center"
