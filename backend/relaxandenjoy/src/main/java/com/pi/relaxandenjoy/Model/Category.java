@@ -1,6 +1,7 @@
 package com.pi.relaxandenjoy.Model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -10,15 +11,14 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categories")
     private Long id;
-
-    @Column(unique = true, nullable = false, length = 25)
+    @Column(unique = true, nullable = false, length = 45)
     private String title;
-
     @Column
     private String description;
-
     @Column
     private String img;
+    @OneToMany(mappedBy = "categories")
+    private Set<Product> products;
 
     public Category(Long id, String title, String description, String img) {
         this.id = id;
