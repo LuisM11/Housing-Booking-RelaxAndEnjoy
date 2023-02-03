@@ -15,8 +15,7 @@ public class Feature {
     private Long id;
     private String name;
     private String icon;
-
-
+    private Integer quantity;
 //    @JsonBackReference
 //    @OneToMany(mappedBy = "feature",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private Set<ProductxFeature> productxfeature;
@@ -25,15 +24,17 @@ public class Feature {
     private Set<Product> products;
 
 
-    public Feature(Long id, String name, String icon) {
+    public Feature(Long id, String name, String icon, Integer quantity) {
         this.id = id;
         this.name = name;
         this.icon = icon;
+        this.quantity = quantity;
     }
 
-    public Feature(String name, String icon) {
+    public Feature(String name, String icon, Integer quantity) {
         this.name = name;
         this.icon = icon;
+        this.quantity = quantity;
     }
 
 
@@ -66,4 +67,11 @@ public class Feature {
     }
 
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }
