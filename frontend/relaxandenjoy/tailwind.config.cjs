@@ -14,10 +14,10 @@ module.exports = {
       poppins: ["Poppins", "sans-serif"],
     },
     screens: {
-      tablet: "450px",
+      tablet: "768px",
       // => @media (min-width: 640px) { ... }
 
-      desktop: "1367px",
+      desktop: "1024px",
       // => @media (min-width: 1280px) { ... }
     },
     extend: {

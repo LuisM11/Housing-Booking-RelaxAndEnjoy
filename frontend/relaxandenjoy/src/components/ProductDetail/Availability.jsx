@@ -9,10 +9,12 @@ function Availability() {
           Fechas disponibles
         </h2>
         <div className="w-full flex flex-col desktop:flex-row desktop:items-center gap-5">
+          <Calendar className="w-full grid tablet:hidden tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor mx-auto" />
           <Calendar
             showDoubleView
-            className="w-[420px] tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor"
+            className="w-[420px] hidden tablet:grid tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor"
           />
+
           <div className="desktop:w-[35%] desktop:h-32 desktop:bg-[#FFFFFF] rounded-lg desktop:shadow-md grid tablet:grid-cols-2 desktop:grid-cols-1 desktop:grid-rows-2 items-center p-5 gap-10 ">
             <p className="text-secundaryColor text-sm">
               Agregá tus fechas de viaje para obtener precios exactos.

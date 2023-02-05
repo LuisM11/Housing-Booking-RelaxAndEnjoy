@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
 
 import Product from "../data/Recommendations.json";
+import { useGlobalContext } from "../context/GlobalContext";
 
 import Header from "../components/ProductDetail/Header";
 import LocationAndScore from "../components/ProductDetail/LocationAndScore";
@@ -14,24 +15,23 @@ import Policies from "../components/ProductDetail/Policies";
 
 function ProductDetail() {
   const { id } = useParams();
+  const { getProductById } = useGlobalContext();
   const [product, setProduct] = useState({});
   const [features, setFeatures] = useState([]);
-
-  const [standards, setStandards] = useState([]);
-  const [safety, setSafety] = useState([]);
-  const [cancellation, setCancellation] = useState([]);
-
   const [images, setImages] = useState([]);
 
+  const getProduct = async (id) => {
+    const resp = await getProductById(id);
+    setProduct(resp);
+    setImages(resp.images);
+    setFeatures(resp.features);
+    console.log(resp);
+  };
+
   useEffect(() => {
-    const pd = Product.find((product) => product.id === id);
-    setProduct(pd);
-    setFeatures(pd.features);
-    setStandards(pd.policies.standards);
-    setSafety(pd.policies.safety);
-    setCancellation(pd.policies.cancellation);
-    setImages(pd.images);
+    getProduct(id);
   }, []);
+  console.log(features);
   return (
     <>
       <section className="w-full h-full">
@@ -57,6 +57,7 @@ function ProductDetail() {
         </section>
 
         <Features features={features} />
+        
 
         <Availability />
 
@@ -71,11 +72,11 @@ function ProductDetail() {
           />
         </article>
 
-        <Policies
+        {/* <Policies
           standards={standards}
           safety={safety}
           cancellation={cancellation}
-        />
+        /> */}
       </section>
     </>
   );

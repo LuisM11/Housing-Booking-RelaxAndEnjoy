@@ -1,9 +1,9 @@
 import React from "react";
-import RecommendationsCard from "./RecommendationsCard";
+import { useGlobalContext } from "../context/GlobalContext";
+import ProductCard from "./ProductCard";
 
-import Recommendations from "../data/Recommendations.json";
-
-function RecommendationsContainer() {
+function ProductsContainer() {
+  const { ProductsList } = useGlobalContext();
   return (
     <section className="h-full w-full grid bg-secundaryColor bg-opacity-10">
       <article className="w-11/12 grid gap-4 my-5 mx-auto">
@@ -11,8 +11,8 @@ function RecommendationsContainer() {
           Recomendaciones
         </h2>
         <div className="w-full grid grid-cols-1 desktop:grid-cols-2 gap-5">
-          {Recommendations.map((item) => {
-            return <RecommendationsCard key={item.id} item={item} />;
+          {ProductsList?.map((item) => {
+            return <ProductCard key={item.id} item={item} />;
           })}
         </div>
       </article>
@@ -20,4 +20,4 @@ function RecommendationsContainer() {
   );
 }
 
-export default RecommendationsContainer;
+export default ProductsContainer;

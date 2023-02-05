@@ -6,10 +6,10 @@ function Header({ product }) {
     <article className="w-full bg-mainColor flex justify-between items-center px-3 tablet:px-6 desktop:px-10 py-2">
       <aside>
         <p className="text-sm text-fourthColor tracking-widest">
-          {product.category}
+          {product?.categories?.title}
         </p>
         <h2 className="text-xl desktop:text-2xl font-bold text-fourthColor tracking-widest">
-          {product.name}
+          {product?.name}
         </h2>
       </aside>
       <Link to="/Home">

@@ -17,7 +17,7 @@ function Seeker() {
   return (
     <section className="w-full h-64 bg-thirdColor grid">
       <article className="w-11/12 grid grid-cols-1 m-auto gap-1">
-        <h2 className="h-20 font-bold text-fourthColor text-[22px] tablet:text-[29px] desktop:text-5xl text-center tablet:py-5 desktop:py-0 leading-9">
+        <h2 className="h-20 font-bold grid items-center text-fourthColor text-2xl tablet:text-3xl desktop:text-4xl text-center tablet:py-5 desktop:py-0 leading-9">
           Busca ofertas en hoteles, casas y mucho mas
         </h2>
         <form

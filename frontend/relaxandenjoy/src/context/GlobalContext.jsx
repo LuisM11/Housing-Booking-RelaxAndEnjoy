@@ -9,12 +9,14 @@ export const useGlobalContext = () => {
 
 const ContextProvider = ({ children }) => {
   const [CategorysList, setCategorysList] = useState([]);
-  const [Product, setProduct] = useState({});
+  const [ProductsList, setProductsList] = useState();
   const [selectMenu, setSelectMenu] = useState(0);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     getCategorysList();
+    getProductsList();
+    console.log(ProductsList);
   }, []);
 
   const getCategorysList = async () => {
@@ -23,10 +25,16 @@ const ContextProvider = ({ children }) => {
       .then((resp) => setCategorysList(resp.data));
   };
 
+  const getProductsList = async () => {
+    return await axios
+      .get("http://localhost:8080/product")
+      .then((resp) => setProductsList(resp.data));
+  };
+
   const getProductById = async (id) => {
     return await axios
-      .get(`http://localhost:8080/products/buscar/id/${id}/`)
-      .then((resp) => setProduct(resp.data));
+      .get(`http://localhost:8080/product/search/${id}/`)
+      .then((resp) => resp.data);
   };
 
   return (
@@ -37,8 +45,8 @@ const ContextProvider = ({ children }) => {
         setSelectMenu,
         user,
         setUser,
-        Product,
-        getProductById,
+        ProductsList,
+        getProductById
       }}
     >
       <div>{children}</div>

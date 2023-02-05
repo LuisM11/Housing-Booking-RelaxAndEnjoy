@@ -2,14 +2,14 @@ import React from "react";
 
 import Seeker from "../components/Seeker";
 import CategorysContainer from "../components/CategorysContainer";
-import RecommendationsContainer from "../components/RecommendationsContainer";
+import ProductsContainer from "../components/ProductsContainer";
 
 function Home() {
   return (
     <>
       <Seeker />
       <CategorysContainer />
-      <RecommendationsContainer />
+      <ProductsContainer />
     </>
   );
 }
