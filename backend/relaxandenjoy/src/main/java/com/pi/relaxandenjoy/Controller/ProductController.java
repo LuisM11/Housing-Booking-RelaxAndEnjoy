@@ -25,6 +25,14 @@ public class ProductController {
     public ResponseEntity<Product> searchById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.search(id).get());
     }
+    @GetMapping("/searchByCity/{id}")
+    public ResponseEntity<List<Product>> searchByCity(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(productService.searchByCity(id));
+    }
+    @GetMapping("/searchByCategory/{id}")
+    public ResponseEntity<List<Product>> searchByCategory(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(productService.searchByCategory(id));
+    }
 
     @GetMapping
     public ResponseEntity<List<Product>> listAll() throws ResourceNotFoundException {
@@ -34,7 +42,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> register(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.register(product));
+        return ResponseEntity.ok(productService.create(product));
     }
 
     @DeleteMapping("/delete/{id}")
