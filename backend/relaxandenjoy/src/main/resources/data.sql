@@ -1,8 +1,8 @@
 INSERT IGNORE INTO categories (id_categories,description,img,title)
-VALUES (1,'25.000','https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80','Cabañas')
+VALUES (1,'25.000','https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80','Cabañas')
     ,(2,'110.000','https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80','Hoteles')
     ,(3,'120.000','https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80','Departamentos')
-    ,(4,'10.000','https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80','Glampings')
+    ,(4,'10.000','https://cf.bstatic.com/xdata/images/hotel/max1024x768/399239491.jpg?k=fb9b1e9727e739e0438a1a061d2caecd8b6583b6c7ae95ff9ec2a5cbf1d2fe40&o=&hp=1','Glampings')
     ;
 INSERT IGNORE INTO cities (id_cities,name) VALUES (1,'Tunja'),(2,'Manizales'),(3,'Medellin'), (4,'Santa Marta'), (5,'Bogota'), (6,'Cali'), (7,'San Andres');
 
@@ -14,10 +14,10 @@ VALUES (1,'Cocina','uil uil-restaurant',1),
        (5,'Estacionamiento','fa-solid fa-car',null),
        (6,'piscina','fa-solid fa-person-swimming',null),
        (7,'Wifi','fa-solid fa-wififa-solid fa-wifi',null),
-       (8,'Habitacion','',1),(9,'Habitacion','',2),(10,'Habitacion','',3),(11,'Habitacion','',4), (12,'Habitacion','',5),
-       (13,'Baño','',1), (14,'Baño','',2),(15,'Baño','',3),(16,'Baño','',4),(17,'Baño','',5),
-       (18,'Balcon','',null),
-       (19,'Calefaccion','',null);
+       (8,'Habitacion','uil uil-bed-double',1),(9,'Habitacion','uil uil-bed-double',2),(10,'Habitacion','uil uil-bed-double',3),(11,'Habitacion','uil uil-bed-double',4), (12,'Habitacion','uil uil-bed-double',5),
+       (13,'Baño','uil uil-bath',1), (14,'Baño','uil uil-bath',2),(15,'Baño','uil uil-bath',3),(16,'Baño','uil uil-bath',4),(17,'Baño','uil uil-bath',5),
+       (18,'Balcon','uil uil-house-user',null),
+       (19,'Calefaccion','uil uil-temperature-plus',null);
 
 INSERT IGNORE INTO products (id_products,crimg,title,location,description,id_cities,id_categories,name,popularity)
 VALUES (1,'https://images.unsplash.com/photo-1525113990976-399835c43838?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80', 'Alojate en la mejor ubicacion del territorio Boyacense','Tunja, Boyacá','Cómoda cabaña con chimenea a leña, ubicada en la reserva forestal a 35 minutos de la ciudad de Tunja. Perfecta para un fin de semana en familia o con amigos. Cuenta con 3 camarotes dobles, 3 baños, cocina y sala acogedora. Reserva ya si te gusta el entorno silvestre',1,1,'Cabaña Pamplonera',5.0),
@@ -42,12 +42,12 @@ INSERT IGNORE INTO images (id_images,title,url,id_products) VALUES
 (8,'Cabin s','https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',2),
 (9,'Cabin triangular','https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',2),
 (10,'Cabin Scenery','https://images.freeimages.com/images/large-previews/1d3/chalet-1201139.jpg',2),
-(11,'Hotel HMed','https://media.istockphoto.com/id/1333257932/es/foto/imagen-generada-digitalmente-del-lujoso-vest%C3%ADbulo-del-hotel.jpg?s=612x612&w=0&k=20&c=2YQ4ltEiPKCWwQEdjg7c19x5LijR2sjX36XdsMU9yl4=',3),
+(11,'Hotel HMed','https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',3),
 (12,'Hotel HMed2','https://images.freeimages.com/images/large-previews/b61/symmetry-1203213.jpg',3),
-(13,'Hotel HMed3','https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',3),
-(14,'Hotel HMed4','https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',3),
-(15,'Hotel HMed5','https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',3),
-(16,'Hotel Palm','https://images.unsplash.com/photo-1563911302283-d2bc129e7570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',4),
+(13,'Hotel HMed3','https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',3),
+(14,'Hotel HMed4','https://images.unsplash.com/photo-1444201983204-c43cbd584d93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',3),
+(15,'Hotel HMed5','https://images.unsplash.com/photo-1496417263034-38ec4f0b665a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',3),
+(16,'Hotel Palm','https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',4),
 (17,'Hotel Palm2','https://images.unsplash.com/photo-1568084680786-a84f91d1153c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',4),
 (18,'Hotel Palm3','https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80',4),
 (19,'Hotel Palm4','https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',4),

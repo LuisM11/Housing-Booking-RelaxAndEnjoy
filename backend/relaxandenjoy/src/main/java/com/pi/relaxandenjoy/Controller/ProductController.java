@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
-@CrossOrigin("http://?????????/")
+@CrossOrigin()
 public class ProductController {
 
     private ProductService productService;

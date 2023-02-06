@@ -30,7 +30,7 @@ public class CategoryService {
     }
 
     public List<Category> listAll() throws ResourceNotFoundException {
-        LOGGER.info("Iniciando Proceso: Buscando todas las categorias.");
+        LOGGER.info("Starting Process: Searching all the categories...");
         List<Category> categoryList = categoryRepository.findAll();
         if (categoryList.size() > 0) {
             return categoryList;
@@ -40,7 +40,7 @@ public class CategoryService {
     }
 
     public Category registrar(Category category) {
-        LOGGER.info("Iniciando proceso de registro de nueva categoria: " + category.getTitle());
+        LOGGER.info("Starting process: creating new categorie... " + category.getTitle());
         return categoryRepository.save(category);
     }
 

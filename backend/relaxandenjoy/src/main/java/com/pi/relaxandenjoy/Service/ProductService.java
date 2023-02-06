@@ -31,7 +31,7 @@ public class ProductService {
     }
 
     public List<Product> listAll() throws ResourceNotFoundException {
-        LOGGER.info("Starting Process: searching all products.");
+        LOGGER.info("Starting Process: Searching all products...");
         List<Product> productList = productRepository.findAll();
         if (productList.size() > 0) {
             return productList;
