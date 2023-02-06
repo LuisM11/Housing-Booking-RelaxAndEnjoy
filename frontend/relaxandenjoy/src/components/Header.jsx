@@ -21,7 +21,7 @@ function Header() {
         >
           <img src={Logo2} alt="Relájese y Disfrute" title="Relájese y Disfrute" className="w-14" />
           {/* <img src={Lema} alt="" className="hidden h-4 desktop:grid" /> */}
-          <span className="text-sm text-thirdColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
+          <span className="ml-2 text-sm text-secundaryColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
 
         </Link>
         <aside
@@ -131,7 +131,7 @@ function Header() {
             <div className="flex gap-2">
               <Link
                 to="/Signin"
-                className={`h-8 desktop:h-9 w-32 desktop:w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+                className={`h-8 desktop:h-9 w-32 desktop:w-40  bg-mainColor text-secundaryColor text-sm rounded shadow-2xl ${
                   selectMenu == 1
                     ? "hidden"
                     : "flex justify-center items-center"
@@ -142,7 +142,7 @@ function Header() {
               </Link>
               <Link
                 to="/Login"
-                className={`h-8 desktop:h-9 w-32 desktop:w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+                className={`h-8 desktop:h-9 w-32 desktop:w-40 text-secundaryColor border border-secundaryColor text-sm rounded shadow-2xl ${
                   selectMenu == 2
                     ? "hidden"
                     : "flex justify-center items-center"

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Header({ product }) {
   return (
-    <article className="w-full bg-mainColor flex justify-between items-center px-3 tablet:px-6 desktop:px-10 py-2">
+    <article className="w-full h-28 bg-thirdColor flex justify-between items-center px-3 tablet:px-6 desktop:px-10 py-2">
       <aside>
         <p className="text-sm text-fourthColor tracking-widest">
           {product?.categories?.title}

@@ -45,7 +45,7 @@ function ProductDetail() {
               <i className="uil uil-heart text-2xl desktop:text-3xl text-thirdColor"></i>
             </div>
 
-            <Gallery product={product} images={images} />
+            <Gallery images={images} />
 
             <article className="w-full px-3 tablet:px-6 desktop:px-10 py-5">
               <h2 className="text-2xl font-bold text-secundaryColor mb-5">
