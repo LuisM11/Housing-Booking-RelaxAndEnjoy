@@ -1,15 +1,16 @@
 import React from "react";
 
 import Seeker from "../components/Seeker";
-import CategorysContainer from "../components/CategorysContainer";
-import ProductsContainer from "../components/ProductsContainer";
+import CategoriesContainer from "../components/CategoriesContainer";
+import ProductsContainer from "./ProductsContainer";
+import { Outlet } from "react-router-dom";
 
 function Home() {
   return (
     <>
       <Seeker />
-      <CategorysContainer />
-      <ProductsContainer />
+      <CategoriesContainer />
+      <Outlet/>
     </>
   );
 }

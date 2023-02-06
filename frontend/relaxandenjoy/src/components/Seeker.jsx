@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { DatePicker } from "antd";
 import moment from "moment";
+import {useGlobalContext } from "../context/GlobalContext";
+
 const { RangePicker } = DatePicker;
 
-import Cities from "../data/Cities.json";
+/* import Cities from "../data/Cities.json"; */
 
 function Seeker() {
+  const {getCitiesList} = useGlobalContext();
   const { register, handleSubmit } = useForm();
   const [dates, setDates] = useState([]);
+  const [cities,setCites] = useState([])
 
+  const getCitiestoSelect = async ()=>{
+    const Cities = await getCitiesList();
+    setCites(Cities)
+  }
   const onSubmit = (data) => {
     console.log({ ...data, dateRange: dates });
   };
+
+  useEffect(()=>{
+    getCitiestoSelect()
+    console.log(cities)
+  },[])
 
   return (
     <section className="w-full h-64 bg-thirdColor grid">
@@ -36,7 +49,7 @@ function Seeker() {
             <option value={""} disabled>
               ¿A donde vamos?
             </option>
-            {Cities.map((c, index) => (
+            {cities.map((c, index) => (
               <option key={index} value={c.name.toLocaleLowerCase().slice(" ")}>
                 {c.name}
               </option>

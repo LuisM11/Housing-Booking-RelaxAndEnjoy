@@ -8,46 +8,50 @@ export const useGlobalContext = () => {
 };
 
 const ContextProvider = ({ children }) => {
-  const [CategorysList, setCategorysList] = useState([]);
-  const [ProductsList, setProductsList] = useState();
+  const [CategoriesList, setCategoriesList] = useState([]);
   const [selectMenu, setSelectMenu] = useState(0);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    getCategorysList();
-    getProductsList();
-    console.log(ProductsList);
-  }, []);
-
-  const getCategorysList = async () => {
+  
+  const getCategoriesList = async () => {
     return await axios
-      .get("http://localhost:8080/categories")
-      .then((resp) => setCategorysList(resp.data));
+    .get("http://localhost:8080/categories")
+    .then((resp) => setCategoriesList(resp.data));
   };
-
+  const getCitiesList = async () => {
+    return await axios
+    .get("http://localhost:8080/cities")
+    .then((resp) => resp.data);
+  };
+  
   const getProductsList = async () => {
     return await axios
-      .get("http://localhost:8080/product")
-      .then((resp) => setProductsList(resp.data));
+    .get("http://localhost:8080/product")
+    .then((resp) => resp.data);
   };
-
+  
   const getProductById = async (id) => {
     return await axios
-      .get(`http://localhost:8080/product/search/${id}/`)
-      .then((resp) => resp.data);
+    .get(`http://localhost:8080/product/search/${id}/`)
+    .then((resp) => resp.data);
   };
+
+  useEffect(() => {
+    getCategoriesList();
+  }, []);
 
   return (
     <GlobalContext.Provider
-      value={{
-        CategorysList,
-        selectMenu,
-        setSelectMenu,
-        user,
-        setUser,
-        ProductsList,
-        getProductById
-      }}
+    value={{
+      CategoriesList,
+      selectMenu,
+      setSelectMenu,
+      user,
+      setUser,
+      getProductsList,
+      getProductById,
+      getCitiesList
+    }}
     >
       <div>{children}</div>
     </GlobalContext.Provider>

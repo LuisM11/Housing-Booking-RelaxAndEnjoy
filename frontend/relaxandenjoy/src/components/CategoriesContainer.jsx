@@ -4,8 +4,8 @@ import CategoryCard from "./CategoryCard";
 
 import { useGlobalContext } from "../context/GlobalContext";
 
-function CategorysContainer() {
-  const { CategorysList } = useGlobalContext();
+function CategoriesContainer() {
+  const { CategoriesList } = useGlobalContext();
 
   return (
     <section className="h-full w-full">
@@ -14,7 +14,7 @@ function CategorysContainer() {
           Buscar por tipo de alojamiento
         </h2>
         <div className="w-full grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 gap-5">
-          {CategorysList.map((item) => {
+          {CategoriesList.map((item) => {
             return <CategoryCard key={item.id} item={item} />;
           })}
         </div>
@@ -23,4 +23,4 @@ function CategorysContainer() {
   );
 }
 
-export default CategorysContainer;
+export default CategoriesContainer;

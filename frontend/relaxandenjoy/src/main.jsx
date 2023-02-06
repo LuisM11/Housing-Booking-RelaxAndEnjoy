@@ -11,6 +11,7 @@ import SignIn from "./routes/SignIn";
 import ProductDetail from "./routes/ProductDetail";
 
 import "./index.css";
+import ProductsContainer from "./routes/ProductsContainer";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -18,7 +19,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ContextProvider>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="/Home" element={<Home />} />
+            <Route path="Home" element={<Home />} >
+              <Route index element = {<ProductsContainer/>} />
+              <Route path="Categories" element={<div>PRUEBA</div>}/>
+            </Route>
             <Route path="/Signin" element={<SignIn />} />
             <Route path="/Login" element={<LogIn />} />
             <Route path="/Product/:id" element={<ProductDetail />} />
