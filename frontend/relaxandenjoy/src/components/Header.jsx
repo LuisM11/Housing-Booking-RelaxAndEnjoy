@@ -15,7 +15,7 @@ function Header() {
     <header className="p-3 tablet:p-4 tablet:px-6 desktop:px-10 shadow">
       <nav className="flex justify-between items-center">
         <Link
-          to="/home"
+          to="/Home"
           className="flex gap-1 items-end"
           onClick={() => setSelectMenu(0)}
         >
