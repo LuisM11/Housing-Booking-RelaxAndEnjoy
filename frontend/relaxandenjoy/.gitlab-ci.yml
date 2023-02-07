@@ -1,9 +1,4 @@
-stages:
-  -build
-  -test
-  -deploy
-
-deploy-app
+deploy DEV:
   stage: deploy
   when: manual
   except:
@@ -16,7 +11,7 @@ deploy-app
     - aws --version
     - echo "Extracting the production build"
     - echo "Uploading files to AWS Bucket"
-    - aws s3 cp -- . s3://$frontend_s3
+    - aws s3 cp --recursive . s3://$frontend_s3
 
 
 
