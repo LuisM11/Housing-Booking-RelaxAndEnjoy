@@ -14,7 +14,7 @@ function CategoriesContainer() {
           Buscar por tipo de alojamiento
         </h2>
         <div className="w-full grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 gap-5">
-          {CategoriesList.map((item) => {
+          {CategoriesList?.map((item) => {
             return <CategoryCard key={item.id} item={item} />;
           })}
         </div>

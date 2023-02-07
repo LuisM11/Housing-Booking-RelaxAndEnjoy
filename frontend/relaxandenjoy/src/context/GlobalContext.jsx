@@ -35,6 +35,11 @@ const ContextProvider = ({ children }) => {
     .get(`http://localhost:8080/product/search/${id}/`)
     .then((resp) => resp.data);
   };
+  const getProductsByCategory = async (id) => {
+    return await axios
+    .get(`http://localhost:8080/product/searchByCategory/${id}/`)
+    .then((resp) => resp.data);
+  };
 
   useEffect(() => {
     getCategoriesList();
@@ -50,6 +55,7 @@ const ContextProvider = ({ children }) => {
       setUser,
       getProductsList,
       getProductById,
+      getProductsByCategory,
       getCitiesList
     }}
     >

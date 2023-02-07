@@ -142,7 +142,7 @@ function Header() {
               </Link>
               <Link
                 to="/Login"
-                className={`h-8 desktop:h-9 w-32 desktop:w-40 text-secundaryColor border border-secundaryColor text-sm rounded shadow-2xl ${
+                className={`h-8 desktop:h-9 w-32 desktop:w-40 text-thirdColor border border-thirdColor text-sm rounded shadow-2xl ${
                   selectMenu == 2
                     ? "hidden"
                     : "flex justify-center items-center"

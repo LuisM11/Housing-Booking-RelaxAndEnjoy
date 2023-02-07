@@ -12,6 +12,7 @@ import ProductDetail from "./routes/ProductDetail";
 
 import "./index.css";
 import ProductsContainer from "./routes/ProductsContainer";
+import CategorizedProducts from "./routes/CategorizedProducts";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -21,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<App />}>
             <Route path="Home" element={<Home />} >
               <Route index element = {<ProductsContainer/>} />
-              <Route path="Categories" element={<div>PRUEBA</div>}/>
+              <Route path="Categories/:id" element={<CategorizedProducts/>}/>
             </Route>
             <Route path="/Signin" element={<SignIn />} />
             <Route path="/Login" element={<LogIn />} />
