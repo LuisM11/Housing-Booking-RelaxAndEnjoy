@@ -1,6 +1,7 @@
 deploy frd:
-  image: 
-    name: banst/awscli
+  stage: deploy
+  when: manual
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
     entrypoint: [""]
   script: 
     -aws configure set region us-east-2
