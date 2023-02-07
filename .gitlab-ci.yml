@@ -1,0 +1,18 @@
+
+
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - deploy
+
+
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  script:
+   - echo "Installing aws command line"
+    - pip install awscli
+    - aws --version
+    - echo "Extracting the production build"
+    - echo "Uploading files to AWS Bucket"
+    - aws s3 cp --recursive . s3://$frontend_s3
