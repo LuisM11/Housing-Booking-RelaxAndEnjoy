@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { useGlobalContext } from "../context/GlobalContext";
@@ -11,18 +11,20 @@ const { RangePicker } = DatePicker;
 
 function Seeker({setSearchData,cities,setCities}) {
   const { getCitiesList } = useGlobalContext();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm({defaultValues: {city: ''}});
   const [dates, setDates] = useState([]);
-  
   const nav = useNavigate()
 
   const getCitiestoSelect = async () => {
     const Cities = await getCitiesList();
     setCities(Cities)
   }
+
+
   const onSubmit = (data) => {
     console.log({ ...data, dateRange: dates });
     setSearchData(data)
+    reset()
     nav('/Home/Search')
     
   };
@@ -42,7 +44,6 @@ function Seeker({setSearchData,cities,setCities}) {
             onSubmit={handleSubmit(onSubmit)}
           >
             <select
-              defaultValue={""}
               required
               name="destinos"
               id=""
@@ -50,7 +51,7 @@ function Seeker({setSearchData,cities,setCities}) {
               {...register("city")}
             >
               <option value={""} disabled>
-                ¿A donde vamos?
+                ¿A dónde vamos?
               </option>
               {cities.map((c, index) => (
                 <option key={index} value={c.name.toLocaleLowerCase().slice(" ")}>

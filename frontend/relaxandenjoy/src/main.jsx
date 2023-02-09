@@ -5,7 +5,7 @@ import ContextProvider from "./context/GlobalContext";
 import App from "./App";
 import Home from "./routes/Home";
 import LogIn from "./routes/LogIn";
-import SignIn from "./routes/SignIn";
+import SignUp from "./routes/SignUp";
 import ProductDetail from "./routes/ProductDetail";
 
 import "./index.css";
@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <Route path="Categories/:id" element={<CategorizedProducts/>}/>
               <Route path="Search" element={<SearchedProducts/>}/>
             </Route>
-            <Route path="/Signin" element={<SignIn />} />
+            <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Login" element={<LogIn />} />
             <Route path="/Product/:id" element={<ProductDetail />} />
           </Route>

@@ -23,7 +23,15 @@ function SearchedProducts() {
     getCityId()
     setUrlParams(searchData)
     setHideCategories(true)
+    return ()=>{
+      setHideCategories(false)
+
+      }
+    
   }, [urlParams])
+
+  
+  
 
   return (
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { useGlobalContext } from "../context/GlobalContext";
 
-function SignIn() {
+function SignUp() {
   const { setSelectMenu } = useGlobalContext();
   const { register, getValues, handleSubmit , formState:{ errors} } = useForm();
   
@@ -154,4 +154,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;

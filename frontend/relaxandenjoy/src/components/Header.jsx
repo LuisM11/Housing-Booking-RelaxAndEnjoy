@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo2 from "../assets/ryd.png";
+import Logo2 from '../assets/ryd2.png'
+import Logo from "../assets/ryd.png";
 
 import ProfileMenu from "./ProfileMenu";
 import ProfileDesktop from "./ProfileDesktop";
@@ -45,7 +46,7 @@ function Header() {
           <div className="grow flex flex-col justify-between">
             <div className={user ? "hidden" : "flex flex-col gap-10 p-5"}>
               <Link
-                to="/Signin"
+                to="/SignUp"
                 className={
                   selectMenu == 1
                     ? "hidden"
@@ -130,7 +131,7 @@ function Header() {
           ) : (
             <div className="flex gap-2">
               <Link
-                to="/Signin"
+                to="/SignUp"
                 className={`h-8 desktop:h-9 w-32 desktop:w-40  bg-mainColor text-secundaryColor text-sm rounded shadow-2xl ${
                   selectMenu == 1
                     ? "hidden"
