@@ -79,7 +79,7 @@ function LogIn() {
             <p className="text-xs text-center">
               ¿Aún no tenes cuenta?{" "}
               <Link
-                to="/Signin"
+                to="/SignUp"
                 className="text-mainColor"
                 onClick={() => setSelectMenu(1)}
               >

@@ -72,20 +72,35 @@ function ProductCard({ item }) {
             </p>
           </aside>
         </div>
-        <div className="h-6 flex gap-5 mb-0">
-          <span className="text-secundaryColor text-sm font-medium">
-            <i className="uil uil-map-marker"></i> {item.location}
+        <div className="h-6 flex mb-0 justify-between h-fit mt-2">
+          <div>
+            <i className="uil uil-map-marker"></i> 
+          <span className="text-secundaryColor text-sm font-medium max-w-[48%] h-fit pl-1">
+            {item.location}
           </span>
+          </div>
           <a href="" className="text-mainColor text-sm">
             MOSTRAR EN EL MAPA
           </a>
         </div>
-        <p className="h-24 font-medium text-sm mb-2">{item.description}</p>
+        <div className="flex items-center justify-around h-14">
+          {item.features.map((ft, index) => {
+          return (
+              <i className={`${ft.icon} text-xl text-secundaryColor`}></i>          
+          );
+        })}
+        </div>
+        <div className="h-20 font-medium text-[13px] flex items-end pb-2">
+          <p>
+          {item.description.slice(0,70)+ '... '} 
+          <Link className="text-mainColor" to={`/Product/${item.id}`}> más</Link>
+          </p>
+          </div>
         <Link
           to={`/Product/${item.id}`}
-          className="h-10 bg-mainColor flex justify-center items-center text-fourthColor text-lg font-bold rounded-md"
+          className="min-h-10 bg-mainColor flex justify-center items-center text-fourthColor text-lg font-bold rounded-md mb-1"
         >
-          Ver mas
+          Ver más
         </Link>
       </div>
     </article>
