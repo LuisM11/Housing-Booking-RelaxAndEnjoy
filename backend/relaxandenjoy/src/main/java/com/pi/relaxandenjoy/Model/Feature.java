@@ -1,6 +1,7 @@
 package com.pi.relaxandenjoy.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Feature {
 //    @JsonBackReference
 //    @OneToMany(mappedBy = "feature",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private Set<ProductxFeature> productxfeature;
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(mappedBy = "features")
     private Set<Product> products;
 

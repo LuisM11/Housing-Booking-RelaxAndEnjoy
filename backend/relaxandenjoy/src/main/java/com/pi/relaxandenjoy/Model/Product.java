@@ -2,12 +2,14 @@ package com.pi.relaxandenjoy.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-@JsonIgnoreProperties({"productxfeature"})
+//@JsonIgnoreProperties({"productxfeature"})
 @Entity
 @Table(name = "products")
 public class Product {
@@ -28,19 +30,18 @@ public class Product {
     private String location;
     @Column
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "id_categories",updatable = false, insertable = false)
+    @ManyToOne()
+    @JoinColumn(name = "id_categories",referencedColumnName = "id_categories")
     private Category categories;
     @ManyToOne
-    @JoinColumn(name = "id_cities", referencedColumnName = "id_cities", updatable = false, insertable = false)
-    @JsonManagedReference
+    @JoinColumn(name = "id_cities", referencedColumnName = "id_cities")
     private City city;
 
 //    @JsonManagedReference
 //    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private Set<ProductxFeature>  productxfeature;
-    @JsonManagedReference
-    @ManyToMany(cascade = CascadeType.ALL)
+
+    @ManyToMany
     @JoinTable(name = "products_has_features",
             joinColumns =
                     { @JoinColumn(name = "id_products")},
@@ -48,7 +49,10 @@ public class Product {
                     { @JoinColumn(name = "id_features")})
     private Set<Feature> features;
 
-    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_products")
+    @NotNull
     private Set<Image> images;
 
     public Product(Long id, String title, String name, Float popularity, String crimg, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images) {
@@ -154,5 +158,22 @@ public class Product {
 
     public void setImages(Set<Image> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", popularity=" + popularity +
+                ", crimg='" + crimg + '\'' +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", categories=" + categories +
+                ", city=" + city +
+                ", features=" + features +
+                ", images=" + images +
+                '}';
     }
 }

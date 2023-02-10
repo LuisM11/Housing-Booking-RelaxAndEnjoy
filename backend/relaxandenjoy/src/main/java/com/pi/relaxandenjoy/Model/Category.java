@@ -1,5 +1,7 @@
 package com.pi.relaxandenjoy.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,7 +19,8 @@ public class Category {
     private String description;
     @Column
     private String img;
-    @OneToMany(mappedBy = "categories")
+    @JsonIgnore
+    @OneToMany(mappedBy = "categories",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Product> products;
 
     public Category(Long id, String title, String description, String img) {

@@ -1,6 +1,7 @@
 package com.pi.relaxandenjoy.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,8 +15,8 @@ public class City {
     private Long id;
     @Column
     private String name;
-    @OneToMany(mappedBy = "city")
-    @JsonBackReference
+    @OneToMany(mappedBy = "city",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Product> products;
 
     public City(Long id, String name, Set<Product> products) {

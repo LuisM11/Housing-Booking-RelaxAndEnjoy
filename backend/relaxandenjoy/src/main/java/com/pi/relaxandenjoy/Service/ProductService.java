@@ -3,25 +3,34 @@ package com.pi.relaxandenjoy.Service;
 import com.pi.relaxandenjoy.Exceptions.ResourceNotFoundException;
 import com.pi.relaxandenjoy.Model.Category;
 import com.pi.relaxandenjoy.Model.City;
+import com.pi.relaxandenjoy.Model.Image;
 import com.pi.relaxandenjoy.Model.Product;
 import com.pi.relaxandenjoy.Repository.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductService {
 
+    private EntityManagerFactory entityManagerFactory;
     private static final Logger LOGGER = Logger.getLogger(ProductService.class);
     private ProductRepository productRepository;
     private CityService cityService;
     private CategoryService categoryService;
 
+
     @Autowired
-    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService) {
+    public ProductService(EntityManagerFactory entityManagerFactory, ProductRepository productRepository, CityService cityService, CategoryService categoryService) {
+        this.entityManagerFactory = entityManagerFactory;
         this.productRepository = productRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
@@ -80,4 +89,28 @@ public class ProductService {
             throw new ResourceNotFoundException("Product with id: " + id + " not found.");
         }
     }
+
+//    @Transactional
+//    public Product saveParentAndChildren(Product parent) {
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        Image img1 = new Image(78L,"prueba1","www",null);
+//        Image img2 = new Image(44L,"prueba2","www",null);
+//        img1.setProduct(parent); img2.setProduct(parent);
+//        Set<Image> imgs = new HashSet<>();
+//        imgs.add(img1); imgs.add(img2);
+//        parent.setImages(imgs);
+//        entityManager.getTransaction().begin();
+//        entityManager.merge(parent);
+//        entityManager.merge(img2);
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
+//
+//
+//        entityManager.persist(parent);
+//        for (Image child : parent.getImages()) {
+//            child.setProduct(parent);
+//            entityManager.persist(child);
+//        }
+//        return parent;
+//    }
 }

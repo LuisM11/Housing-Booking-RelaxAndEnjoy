@@ -18,22 +18,23 @@ public class Image {
     private String title;
     private String url;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "id_products", referencedColumnName = "id_products",insertable = false, updatable = false)
-    private Product product;
+//    @JsonBackReference
+//    @ManyToOne()
+//    @JoinColumn(name = "id_products", referencedColumnName = "id_products")
+//    private Product product;
 
-    public Image(Long id, String title, String url, Product product) {
+    public Image(Long id, String title, String url) {
         this.id = id;
         this.title = title;
         this.url = url;
-        this.product = product;
+//        this.product = product;
     }
 
-    public Image(String title, String url, Product product) {
+
+    public Image(String title, String url) {
         this.title = title;
         this.url = url;
-        this.product = product;
+
     }
 
     public Image() {
@@ -63,12 +64,13 @@ public class Image {
         this.url = url;
     }
 
-    public Product getProduct() {
-        return product;
-    }
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
 
-    public void setProducts(Product product) {
-        this.product = product;
-    }
 
 }
