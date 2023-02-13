@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 @CrossOrigin()
 public class ProductController {
 
@@ -22,15 +22,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/search/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> searchById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.search(id).get());
     }
-    @GetMapping("/searchByCity/{id}")
+    @GetMapping("/City/{id}")
     public ResponseEntity<List<Product>> searchByCity(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.searchByCity(id));
     }
-    @GetMapping("/searchByCategory/{id}")
+    @GetMapping("/Category/{id}")
     public ResponseEntity<List<Product>> searchByCategory(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.searchByCategory(id));
     }

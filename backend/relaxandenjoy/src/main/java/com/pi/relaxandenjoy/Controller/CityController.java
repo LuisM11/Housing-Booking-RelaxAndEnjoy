@@ -27,7 +27,7 @@ public class CityController {
 
     }
 
-    @GetMapping("/search/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<City> search(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(cityService.search(id).get());
     }
@@ -37,7 +37,7 @@ public class CityController {
         return ResponseEntity.ok(cityService.create(city));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
         cityService.delete(id);
         return ResponseEntity.ok("City with id: " + id + " was removed");

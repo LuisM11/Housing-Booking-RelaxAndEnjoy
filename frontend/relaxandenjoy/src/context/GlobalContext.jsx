@@ -26,24 +26,24 @@ const ContextProvider = ({ children }) => {
   
   const getProductsList = async () => {
     return await axios
-    .get("http://localhost:8080/product")
+    .get("http://localhost:8080/products")
     .then((resp) => resp.data);
   };
   
   const getProductById = async (id) => {
     return await axios
-    .get(`http://localhost:8080/product/search/${id}/`)
+    .get(`http://localhost:8080/products/${id}/`)
     .then((resp) => resp.data);
   };
   const getProductsByCategory = async (id) => {
     return await axios
-    .get(`http://localhost:8080/product/searchByCategory/${id}/`)
+    .get(`http://localhost:8080/products/Category/${id}/`)
     .then((resp) => resp.data);
   };
 
   const getProductsByCity = async (id) => {
     return await axios
-    .get(`http://localhost:8080/product/searchByCity/${id}/`)
+    .get(`http://localhost:8080/products/City/${id}/`)
     .then((resp) => resp.data);
   };
 

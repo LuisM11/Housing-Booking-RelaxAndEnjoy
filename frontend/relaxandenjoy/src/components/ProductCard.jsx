@@ -88,7 +88,7 @@ function ProductCard({ item }) {
         <div className="flex items-center justify-start h-14">
           {item.features.map((ft, index) => {
           return (
-              <i className={`${ft.icon} text-lg text-secundaryColor mr-2`}></i>          
+              <i title={ft.name} className={`${ft.icon} text-lg text-secundaryColor mr-2`}></i>          
           );
         })}
         </div>
