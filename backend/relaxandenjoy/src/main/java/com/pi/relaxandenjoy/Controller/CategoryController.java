@@ -28,7 +28,7 @@ public class CategoryController {
 
     }
 
-    @GetMapping("/buscar/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Category> search(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoryService.search(id).get());
     }
@@ -38,10 +38,10 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.registrar(category));
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Long id) throws ResourceNotFoundException {
         categoryService.eliminar(id);
-        return ResponseEntity.ok("Se elimino categoria con id: " + id);
+        return ResponseEntity.ok("Category with id: " + id + " was removed");
     }
 }
 

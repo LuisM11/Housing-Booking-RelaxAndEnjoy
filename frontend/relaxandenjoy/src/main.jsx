@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import ContextProvider from "./context/GlobalContext";
-
 import App from "./App";
-import Home from "./components/Home";
+import Home from "./routes/Home";
 import LogIn from "./routes/LogIn";
-import SignIn from "./routes/SignIn";
+import SignUp from "./routes/SignUp";
+import ProductDetail from "./routes/ProductDetail";
 
 import "./index.css";
+import ProductsContainer from "./routes/ProductsContainer";
+import CategorizedProducts from "./routes/CategorizedProducts";
+import SearchedProducts from "./components/SearchedProducts";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,9 +19,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ContextProvider>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="/Home" element={<Home />} />
-            <Route path="/Signin" element={<SignIn />} />
+            <Route path="Home" element={<Home />} >
+              <Route index element = {<ProductsContainer/>} />
+              <Route path="Categories/:id" element={<CategorizedProducts/>}/>
+              <Route path="Search" element={<SearchedProducts/>}/>
+            </Route>
+            <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Login" element={<LogIn />} />
+            <Route path="/Product/:id" element={<ProductDetail />} />
           </Route>
         </Routes>
       </ContextProvider>

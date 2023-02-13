@@ -2,33 +2,165 @@
   {
     "id": "1",
     "crimg": "https://images.unsplash.com/photo-1525113990976-399835c43838?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-    "category": "Bed and breakfast",
-    "title": "Cabaña en Cartagena",
-    "location": "Cartagena",
-    "description": "ver catipsum.com"
+    "category": "Cabañas",
+    "name": "Cabaña Pamplonera",
+    "location": "Boyacá",
+    "title": "Alojate bien chimba",
+    "description": "Cómoda cabaña con chimenea a leña, ubicada en la reserva forestal a 35 minutos de la ciudad de Tunja. Perfecta para un fin de semana en familia o con amigos. Cuenta con 3 camorotes dobles, 2 baños, cocina y sala acogedora. Reserva ya si te gusta el entorno silvestre",
+    "popularity": "5.0",
+    "features": [
+      { "id": "1", "name": "Cocina", "icon": "uil uil-restaurant" },
+      { "id": "2", "name": "Televisor", "icon": "uil uil-tv-retro" },
+      { "id": "3", "name": "Aire acondicionado", "icon": "uil uil-snowflake" },
+      { "id": "4", "name": "Apto mascotas", "icon": "fa-solid fa-paw" },
+      { "id": "5", "name": "Estacionamiento gratuito", "icon": "fa-solid fa-car" },
+      { "id": "6", "name": "Pileta", "icon": "fa-solid fa-person-swimming" },
+      { "id": "7", "name": "Wifi", "icon": "fa-solid fa-wifi" }
+    ],
+    "checkout": "10:00",
+    "policies": {
+      "standards": [
+        "Check-out: 10:00.",
+        "No se permiten fiestas.",
+        "No fumar."
+      ],
+      "safety": [
+        "Se aplican las pautas de distanciamiento social y otras normas relacionadas con el coronavirus.",
+        "Detector de humo.",
+        "Depósito de seguridad."
+      ],
+      "cancellation": [
+        "Agregá las fechas de tu viaje para obtener los detalles de cancelacion de esta estadia."
+      ]
+    },
+    "images": [
+      { "id": "1", "title": "", "url":"https://images.unsplash.com/photo-1525113990976-399835c43838?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"},
+      { "id": "2", "title": "", "url":"https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"},
+      { "id": "3", "title": "", "url":"https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
+      { "id": "4", "title": "", "url":"https://images.unsplash.com/photo-1525113990976-399835c43838?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"}
+    ]
   },
   {
     "id": "2",
-    "crimg": "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    "crimg": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
     "category": "Hoteles",
-    "title": "Hilton Hotel",
+    "name": "Hilton Hotel",
     "location": "Medellin",
-    "description": "ver catipsum.com"
+    "title": "Alojate bien chimba2",
+    "description": "Servico de calidad con cómodas habitaciones dobles y sencillas, comfortable espacio y acceso a servicios como piscina, restaurante y bar. además si necesitas transladarte por la ciudad contamos con transporte propio, el cual se cargará a la habitación",
+    "popularity": "4.0",
+    "features": [
+      { "id": "1", "name": "Cocina", "icon": "uil uil-restaurant" },
+      { "id": "2", "name": "Televisor", "icon": "uil uil-tv-retro" },
+      { "id": "3", "name": "Aire acondicionado", "icon": "uil uil-snowflake" },
+      { "id": "4", "name": "Apto mascotas", "icon": "fa-solid fa-paw" },
+      { "id": "5", "name": "Estacionamiento gratuito", "icon": "fa-solid fa-car" },
+      { "id": "6", "name": "Pileta", "icon": "fa-solid fa-person-swimming" },
+      { "id": "7", "name": "Wifi", "icon": "fa-solid fa-wifi" }
+    ],
+    "checkout": "12:00",
+    "policies": {
+      "standards": [
+        "Check-out: 10:00.",
+        "No se permiten fiestas. 2222222222",
+        "No fumar."
+      ],
+      "safety": [
+        "Se aplican las pautas de distanciamiento social y otras normas relacionadas con el coronavirus.",
+        "Detector de humo.",
+        "Depósito de seguridad."
+      ],
+      "cancellation": [
+        "Agregá las fechas de tu viaje para obtener los detalles de cancelacion de esta estadia."
+      ]
+    },
+    "images": [
+      { "id": "1", "title": "", "url":"https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"},
+      { "id": "2", "title": "", "url":"https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"},
+      { "id": "3", "title": "", "url":"https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
+      { "id": "4", "title": "", "url":"https://images.unsplash.com/photo-1525113990976-399835c43838?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"}
+    ]
   },
   {
     "id": "3",
     "crimg": "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     "category": "Departamentos",
-    "title": "Soledad Apartamento",
+    "name": "Soledad Apartamento",
     "location": "Santa Marta",
-    "description": "ver catipsum.com"
+    "title": "Alojate bien chimba3",
+    "description": "Cómodo, cálido y con acceso rápido a las mejores playas de Santa Marta, 4 habitaciones, moderna cocina y amplio espacio si lo que buscas es playa, brisa y mar este espacio es para ti",
+    "popularity": "3.0",
+    "features": [
+      { "id": "1", "name": "Cocina", "icon": "uil uil-restaurant" },
+      { "id": "2", "name": "Televisor", "icon": "uil uil-tv-retro" },
+      { "id": "3", "name": "Aire acondicionado", "icon": "uil uil-snowflake" },
+      { "id": "4", "name": "Apto mascotas", "icon": "fa-solid fa-paw" },
+      { "id": "5", "name": "Estacionamiento gratuito", "icon": "fa-solid fa-car" },
+      { "id": "6", "name": "Pileta", "icon": "fa-solid fa-person-swimming" },
+      { "id": "7", "name": "Wifi", "icon": "fa-solid fa-wifi" }
+    ],
+    "checkout": "15:00",
+    "policies": {
+      "standards": [
+        "Check-out: 10:00.",
+        "No se permiten fiestas.",
+        "No fumar."
+      ],
+      "safety": [
+        "Se aplican las pautas de distanciamiento social y otras normas relacionadas con el coronavirus.",
+        "Detector de humo.",
+        "Depósito de seguridad."
+      ],
+      "cancellation": [
+        "Agregá las fechas de tu viaje para obtener los detalles de cancelacion de esta estadia."
+      ]
+    },
+    "images": [
+      { "id": "1", "title": "", "url":"https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
+      { "id": "2", "title": "", "url":"https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"},
+      { "id": "3", "title": "", "url":"https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
+      { "id": "4", "title": "", "url":"https://images.unsplash.com/photo-1525113990976-399835c43838?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"}
+    ]
   },
   {
     "id": "4",
-    "crimg": "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    "category": "Hostels",
-    "title": "Hermitage Hostel",
-    "location": "Santa Marta",
-    "description": "ver catipsum.com"
+    "crimg": "https://images.unsplash.com/photo-1593053272490-e0ed6d6a42c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    "category": "Glampings",
+    "name": "Glamping Nevado",
+    "location": "Caldas",
+    "title": "Alojate bien chimba4",
+    "description": "Glamping con excelente espacio, bordeado por el Nevado del Ruiz perfecto para amantes de la naturaleza y de las noches al aire libre.Reserva desde 2 días y 2 noches. Capacidad de 5 personas",
+    "popularity": "4.0",
+    "features": [
+      { "id": "1", "name": "Cocina", "icon": "uil uil-restaurant" },
+      { "id": "2", "name": "Televisor", "icon": "uil uil-tv-retro" },
+      { "id": "3", "name": "Aire acondicionado", "icon": "uil uil-snowflake" },
+      { "id": "4", "name": "Apto mascotas", "icon": "fa-solid fa-paw" },
+      { "id": "5", "name": "Estacionamiento gratuito", "icon": "fa-solid fa-car" },
+      { "id": "6", "name": "Pileta", "icon": "fa-solid fa-person-swimming" },
+      { "id": "7", "name": "Wifi", "icon": "fa-solid fa-wifi" }
+    ],
+    "checkout": "9:00",
+    "policies": {
+      "standards": [
+        "Check-out: 10:00.",
+        "No se permiten fiestas.",
+        "No fumar."
+      ],
+      "safety": [
+        "Se aplican las pautas de distanciamiento social y otras normas relacionadas con el coronavirus.",
+        "Detector de humo.",
+        "Depósito de seguridad."
+      ],
+      "cancellation": [
+        "Agregá las fechas de tu viaje para obtener los detalles de cancelacion de esta estadia."
+      ]
+    },
+    "images": [
+      { "id": "1", "title": "", "url":"https://images.unsplash.com/photo-1593053272490-e0ed6d6a42c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"},
+      { "id": "2", "title": "", "url":"https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"},
+      { "id": "3", "title": "", "url":"https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"},
+      { "id": "4", "title": "", "url":"https://images.unsplash.com/photo-1525113990976-399835c43838?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"}
+    ]
   }
 ]

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      navigate("/home");
+      navigate("/Home");
     }
   });
   return (

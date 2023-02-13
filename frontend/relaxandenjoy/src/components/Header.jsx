@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/r&dlogo.png";
-import Logo2 from "../assets/ryd.png";
-import Lema from "../assets/lema.png";
+import Logo2 from '../assets/ryd2.png'
+import Logo from "../assets/ryd.png";
 
 import ProfileMenu from "./ProfileMenu";
 import ProfileDesktop from "./ProfileDesktop";
@@ -14,16 +13,16 @@ function Header() {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
-    <header className="p-3 desktop:px-10 shadow">
+    <header className="p-3 tablet:p-4 tablet:px-6 desktop:px-10 shadow">
       <nav className="flex justify-between items-center">
         <Link
-          to="/home"
+          to="/Home"
           className="flex gap-1 items-end"
           onClick={() => setSelectMenu(0)}
         >
           <img src={Logo2} alt="Relájese y Disfrute" title="Relájese y Disfrute" className="w-14" />
           {/* <img src={Lema} alt="" className="hidden h-4 desktop:grid" /> */}
-          <span className="text-sm text-thirdColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
+          <span className="ml-2 text-sm text-secundaryColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
 
         </Link>
         <aside
@@ -47,7 +46,7 @@ function Header() {
           <div className="grow flex flex-col justify-between">
             <div className={user ? "hidden" : "flex flex-col gap-10 p-5"}>
               <Link
-                to="/Signin"
+                to="/SignUp"
                 className={
                   selectMenu == 1
                     ? "hidden"
@@ -87,7 +86,7 @@ function Header() {
                 <p className="text-secundaryColor text-right text-sm py-1 pr-5">
                   ¿Deseas{" "}
                   <Link
-                    to="/home"
+                    to="/Home"
                     className="text-mainColor"
                     onClick={() => {
                       setUser(null);
@@ -132,8 +131,8 @@ function Header() {
           ) : (
             <div className="flex gap-2">
               <Link
-                to="/Signin"
-                className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+                to="/SignUp"
+                className={`h-8 desktop:h-9 w-32 desktop:w-40  bg-mainColor text-secundaryColor text-sm rounded shadow-2xl ${
                   selectMenu == 1
                     ? "hidden"
                     : "flex justify-center items-center"
@@ -144,7 +143,7 @@ function Header() {
               </Link>
               <Link
                 to="/Login"
-                className={`h-9 w-40 border border-fourthColor-1 text-mainColor text-sm rounded shadow-2xl ${
+                className={`h-8 desktop:h-9 w-32 desktop:w-40 text-thirdColor border border-thirdColor text-sm rounded shadow-2xl ${
                   selectMenu == 2
                     ? "hidden"
                     : "flex justify-center items-center"
