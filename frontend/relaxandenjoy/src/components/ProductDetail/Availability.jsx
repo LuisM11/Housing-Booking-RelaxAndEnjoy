@@ -1,7 +1,8 @@
 import React from "react";
 import Calendar from "react-calendar";
+import { Link } from "react-router-dom";
 
-function Availability() {
+function Availability({ product }) {
   return (
     <section className="w-full bg-secundaryColor bg-opacity-10 px-3 tablet:px-6 desktop:px-10 py-4">
       <article className="w-full grid">
@@ -19,9 +20,12 @@ function Availability() {
             <p className="text-secundaryColor text-sm">
               Agregá tus fechas de viaje para obtener precios exactos.
             </p>
-            <button className="h-9 w-full bg-mainColor text-fourthColor tablet:text-md rounded shadow-lg">
+            <Link
+              to={`/Reservation/${product.id}`}
+              className="h-9 w-full bg-mainColor text-fourthColor flex justify-center items-center tablet:text-md rounded shadow-lg"
+            >
               Iniciar reserva
-            </button>
+            </Link>
           </div>
         </div>
       </article>

@@ -12,6 +12,7 @@ import "./index.css";
 import ProductsContainer from "./routes/ProductsContainer";
 import CategorizedProducts from "./routes/CategorizedProducts";
 import SearchedProducts from "./components/SearchedProducts";
+import Reservation from "./routes/Reservation";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Login" element={<LogIn />} />
             <Route path="/Product/:id" element={<ProductDetail />} />
+            <Route path="/Reservation/:id" element={<Reservation />} />
           </Route>
         </Routes>
       </ContextProvider>
