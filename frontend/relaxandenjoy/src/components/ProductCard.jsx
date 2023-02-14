@@ -74,7 +74,7 @@ function ProductCard({ item }) {
             </p>
           </aside>
         </div>
-        <div className="h-6 flex mb-0 justify-between h-fit mt-2">
+        <div className="h-6 flex mb-0 justify-between mt-2">
           <div>
             <i className="uil uil-map-marker"></i> 
           <span className="text-secundaryColor text-sm font-medium max-w-[48%] h-fit pl-1">

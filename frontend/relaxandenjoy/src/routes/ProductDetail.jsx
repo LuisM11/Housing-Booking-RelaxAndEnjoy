@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 import "react-calendar/dist/Calendar.css";
 
-import Product from "../data/Recommendations.json";
 import { useGlobalContext } from "../context/GlobalContext";
 
 import Header from "../components/ProductDetail/Header";
@@ -11,7 +10,6 @@ import LocationAndScore from "../components/ProductDetail/LocationAndScore";
 import Gallery from "../components/ProductDetail/Gallery";
 import Features from "../components/ProductDetail/Features";
 import Availability from "../components/ProductDetail/Availability";
-import Policies from "../components/ProductDetail/Policies";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -25,13 +23,11 @@ function ProductDetail() {
     setProduct(resp);
     setImages(resp.images);
     setFeatures(resp.features);
-    console.log(resp);
   };
 
   useEffect(() => {
     getProduct(id);
   }, []);
-  console.log(features);
   return (
     <>
       <section className="w-full h-full">
@@ -45,7 +41,7 @@ function ProductDetail() {
               <i className="uil uil-heart text-2xl desktop:text-3xl text-thirdColor"></i>
             </div>
 
-            <Gallery images={images} />
+            <Gallery images={images}/>
 
             <article className="w-full px-3 tablet:px-6 desktop:px-10 py-5">
               <h2 className="text-2xl font-bold text-secundaryColor mb-5">
@@ -71,12 +67,6 @@ function ProductDetail() {
             className="tablet:w-full h-full rounded-lg"
           />
         </article>
-
-        {/* <Policies
-          standards={standards}
-          safety={safety}
-          cancellation={cancellation}
-        /> */}
       </section>
     </>
   );

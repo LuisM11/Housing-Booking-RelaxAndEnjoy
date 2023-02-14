@@ -9,7 +9,7 @@ function ProductsContainer() {
 
   const getProducts= async () =>{
     let products = await getProductsList()
-    products.sort((a, b) => 0.5 - Math.random())
+    products.sort(() => 0.5 - Math.random())
     setProducts(products)
   }
 

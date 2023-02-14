@@ -25,6 +25,7 @@ function Header() {
           <span className="ml-2 text-sm text-secundaryColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
 
         </Link>
+        
         <aside
           className={
             toggleMenu
@@ -43,6 +44,7 @@ function Header() {
               <ProfileMenu user={user} />
             )}
           </div>
+
           <div className="grow flex flex-col justify-between">
             <div className={user ? "hidden" : "flex flex-col gap-10 p-5"}>
               <Link
@@ -75,6 +77,7 @@ function Header() {
                 Inciar sesión
               </Link>
             </div>
+
             <div
               className={
                 user
@@ -101,6 +104,7 @@ function Header() {
                   <hr className="text-thirdColor" />
                 </div>
               </div>
+
               <div className="text-3xl text-thirdColor flex justify-end gap-5 py-3 pr-5">
                 <a href="https://www.facebook.com" target="_blank">
                   <i className="uil uil-facebook"></i>
@@ -118,9 +122,11 @@ function Header() {
             </div>
           </div>
         </aside>
+
         <div onClick={() => setToggleMenu(!toggleMenu)}>
           <i className="uil uil-bars text-2xl text-mainColor tablet:hidden"></i>
         </div>
+
         <div className="hidden tablet:flex">
           {user ? (
             <ProfileDesktop
