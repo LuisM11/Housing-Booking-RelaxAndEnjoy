@@ -35,36 +35,17 @@ function SignUp() {
           <div className="flex flex-col gap-3">
             <div className="flex justify-between gap-4">
               <div className="grid w-full">
-                {/* <label htmlFor="name" className="text-xs text-secundaryColor">
-                  Nombre
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  className={
-                    (errors.firstName ? "border-2  border-redWarning" : "") +
-                    " h-10 shadow-sm rounded p-2"
-                  }
-                  {...register("firstName", {
-                    required: true,
-                    maxLength: 20,
-                    minLength: 2,
-                    message: "",
-                  })}
-                /> */}
                 <div>
                   <div className="mb-2 block">
                     <Label htmlFor="name" value="Nombre" />
                   </div>
-                  <TextInput
-                    id="name"
-                    name="name"
+                  <input
                     type="text"
-                    required={true}
+                    name="name"
+                    id="name"
                     className={
                       (errors.firstName ? "border-2  border-redWarning" : "") +
-                      " h-10 shadow-sm rounded"
+                      " h-10 shadow-sm rounded p-2 w-full mb-3"
                     }
                     {...register("firstName", {
                       required: true,
@@ -95,46 +76,24 @@ function SignUp() {
               </div>
 
               <div className="grid w-full">
-                {/* <label
-                  htmlFor="lastName"
-                  className="text-xs text-secundaryColor"
-                >
-                  Apellido
-                </label>
-                <input
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="lastName" value="Apellido" />
+                  </div>
+                  <input
                   type="text"
                   name="lastName"
                   id="lastName"
                   className={
                     (errors.lastName ? "border-2  border-redWarning" : "") +
-                    " h-10 shadow-sm rounded p-2"
+                    " h-10 shadow-sm rounded p-2 w-full mb-3"
                   }
                   {...register("lastName", {
                     required: true,
                     maxLength: 20,
                     minLength: 2,
                   })}
-                /> */}
-                <div>
-                  <div className="mb-2 block">
-                    <Label htmlFor="lastName" value="Apellido" />
-                  </div>
-                  <TextInput
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    required={true}
-                    className={
-                      (errors.firstName ? "border-2  border-redWarning" : "") +
-                      " h-10 shadow-sm rounded"
-                    }
-                    {...register("firstName", {
-                      required: true,
-                      maxLength: 20,
-                      minLength: 2,
-                      message: "",
-                    })}
-                  />
+                />
                 </div>
                 {errors.lastName?.type === "required" && (
                   <p className="text-redWarning" role="alert">
@@ -157,16 +116,17 @@ function SignUp() {
               </div>
             </div>
 
-            {/* <label htmlFor="email" className="text-xs text-secundaryColor">
-              Correo electrónico
-            </label>
-            <input
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="Correo electrónico" />
+              </div>
+              <input
               type="email"
               name="email"
               id="email"
               className={
                 (errors.email ? "border-2  border-redWarning" : "") +
-                " h-10 shadow-sm rounded p-2"
+                " h-10 shadow-sm rounded p-2 w-full"
               }
               {...register("email", {
                 required: true,
@@ -177,30 +137,7 @@ function SignUp() {
                     "Por favor introduzca una dirección de correo electrónico válida",
                 },
               })}
-            /> */}
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="email" value="Correo electrónico" />
-              </div>
-              <TextInput
-                id="email"
-                type="email"
-                name="email"
-                required={true}
-                className={
-                  (errors.email ? "border-2  border-redWarning" : "") +
-                  " h-10 shadow-sm rounded"
-                }
-                {...register("email", {
-                  required: true,
-                  pattern: {
-                    value:
-                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message:
-                      "Por favor introduzca una dirección de correo electrónico válida",
-                  },
-                })}
-              />
+            />
             </div>
             {errors.email?.type === "required" && (
               <p className="text-redWarning" role="alert">
@@ -215,38 +152,24 @@ function SignUp() {
               </p>
             )}
 
-            {/* <label htmlFor="password" className="text-xs text-secundaryColor">
-              Contraseña
-            </label>
-            <input
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="password" value="Contraseña" />
+              </div>
+              <input
               type="password"
               name="password"
               id="password"
               className={
                 (errors.password ? "border-2  border-redWarning" : "") +
-                " h-10 shadow-sm rounded p-2"
+                " h-10 shadow-sm rounded p-2 w-full"
               }
               {...register("password", {
                 required: true,
                 maxLength: 25,
                 minLength: 6,
               })}
-            /> */}
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="password" value="Contraseña" />
-              </div>
-              <TextInput
-                id="password"
-                type="password"
-                name="password"
-                required={true}
-                {...register("password", {
-                  required: true,
-                  maxLength: 25,
-                  minLength: 6,
-                })}
-              />
+            />
             </div>
             {errors.password?.type === "required" && (
               <p className="text-redWarning" role="alert">
@@ -267,19 +190,17 @@ function SignUp() {
               </p>
             )}
 
-            {/* <label
-              htmlFor="confirmPassword"
-              className="text-xs text-secundaryColor"
-            >
-              Confirmar contraseña
-            </label>
-            <input
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="confirmPassword" value="Confirmar contraseña" />
+              </div>
+              <input
               type="password"
               name="confirmPassword"
               id="confirmPassword"
               className={
                 (errors.confirmPassword ? "border-2  border-redWarning" : "") +
-                " h-10 shadow-sm rounded p-2"
+                " h-10 shadow-sm rounded p-2 w-full"
               }
               {...register("confirmPassword", {
                 required: true,
@@ -292,28 +213,7 @@ function SignUp() {
                   );
                 },
               })}
-            /> */}
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="confirmPassword" value="Confirmar contraseña" />
-              </div>
-              <TextInput
-                id="confirmPassword"
-                type="password"
-                required={true}
-                shadow={true}
-                {...register("confirmPassword", {
-                  required: true,
-                  maxLength: 25,
-                  minLength: 6,
-                  validate: (value) => {
-                    const { password } = getValues();
-                    return (
-                      password === value || "¡Las contraseñas deben coincidir!"
-                    );
-                  },
-                })}
-              />
+            />
             </div>
             {errors.confirmPassword?.type && (
               <p className="text-redWarning" role="alert">
@@ -323,9 +223,9 @@ function SignUp() {
             )}
 
             <div className="flex items-center gap-2">
-              <Checkbox id="agree"/>
+              <Checkbox id="agree" />
               <Label htmlFor="agree">
-              Estoy de acuerdo con los{" "}
+                Estoy de acuerdo con los{" "}
                 <a
                   href=""
                   className="text-mainColor hover:underline dark:text-fourthColor"

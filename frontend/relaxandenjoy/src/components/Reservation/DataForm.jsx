@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Calendar from "react-calendar";
 import { DatePicker, TimePicker } from "antd";
 import moment from "moment";
+import Policies from "../ProductDetail/Policies";
 
 const { RangePicker } = DatePicker;
 
@@ -14,7 +15,7 @@ function DataForm({ product }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [arrival, setArrival] = useState();
+  const [arrival, setArrival] = useState("");
   const [dates, setDates] = useState([]);
 
   const onSubmit = (data) => {
@@ -24,14 +25,14 @@ function DataForm({ product }) {
 
   return (
     <form
-      className="w-full h-full bg-thirdColor bg-opacity-10 p-10"
+      className="w-full h-full grid bg-thirdColor bg-opacity-10"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className="text-secundaryColor text-xl font-bold mb-5">
+      <h2 className="text-secundaryColor text-xl font-bold p-3">
         Completá tus datos
       </h2>
-      <div className="grid grid-cols-3 row-span-3 gap-8">
-        <article className="grid grid-cols-2 gap-5 col-start-1 col-span-2 bg-white brdrs p-8">
+      <div className="grid grid-cols-1 desktop:grid-cols-3 desktop:row-span-3 gap-8 px-3 mb-8">
+        <article className="grid tablet:grid-cols-2 gap-5 desktop:col-start-1 desktop:col-span-2 bg-white brdrs p-8">
           <div>
             <div className="mb-2 block">
               <Label htmlFor="firstName" value="Nombre" />
@@ -120,17 +121,18 @@ function DataForm({ product }) {
           </div>
         </article>
 
-        <article className="grid col-start-1 col-span-2">
+        <article className="grid desktop:col-start-1 desktop:col-span-2">
           <h2 className="text-secundaryColor text-lg font-bold mb-5">
             Seleccioná tu fecha de reserva
           </h2>
+          <Calendar className="tablet:hidden w-full rounded-lg shadow-md border-none text-thirdColor bg-white brdrs p-10" />
           <Calendar
             showDoubleView
-            className="w-full rounded-lg shadow-md border-none text-thirdColor bg-white brdrs p-8"
+            className=" hidden tablet:grid w-full rounded-lg shadow-md border-none text-thirdColor bg-white brdrs p-8"
           />
         </article>
 
-        <article className="grid col-start-1 col-span-2">
+        <article className="grid desktop:col-start-1 desktop:col-span-2">
           <h2 className="text-secundaryColor text-lg font-bold mb-5">
             Tu horario de llegada
           </h2>
@@ -147,90 +149,101 @@ function DataForm({ product }) {
               <TimePicker
                 required={true}
                 onChange={(value) =>
-                    setArrival(moment(value.$d).format("HH:MM:SS"))
+                  setArrival(moment(value.$d).format("HH:MM:SS"))
                 }
-                className="w-1/2"
+                className="w-full tablet:w-72"
               />
             </div>
           </div>
         </article>
 
-        <article className="flex flex-col col-start-3 row-start-1 row-end-4 bg-white brdrs">
-          <h2 className="text-secundaryColor text-xl font-bold my-5 mx-8">
-            Detalle de la reserva
-          </h2>
-          <img src={product.crimg} alt="" className="w-full h-128" />
-          <div className="grid gap-2 p-8">
-            <p className="text-secundaryColor opacity-50">
-              {product?.categories?.title}
-            </p>
-            <h2 className="text-secundaryColor text-2xl font-bold">
-              {product?.name}
+        <article className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-1 desktop:col-start-3 desktop:row-start-1 desktop:row-end-4 bg-white brdrs gap-5">
+          <div>
+            <h2 className="text-secundaryColor text-xl font-bold my-2 desktop:my-5 mx-8">
+              Detalle de la reserva
             </h2>
-            <span
-              className={
-                product.popularity < 3
-                  ? "text-md text-[#b23b3b]"
-                  : "text-md text-[#10771A]"
-              }
-            >
-              {product.popularity === 0 ? (
-                product.popularity
-              ) : product.popularity < 2 ? (
-                <i className="uil uil-favorite"></i>
-              ) : product.popularity < 3 ? (
-                <>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                </>
-              ) : product.popularity < 4 ? (
-                <>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                </>
-              ) : product.popularity < 5 ? (
-                <>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                </>
-              ) : (
-                <>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                  <i className="uil uil-favorite"></i>
-                </>
-              )}
-            </span>
-            <p className="text-sm text-secundaryColor">
-              <i className="uil uil-map-marker"></i>
-              {product?.location}
-            </p>
-          </div>
-          <div className="grid px-8">
-            <RangePicker
-              onChange={(values) => {
-                setDates(
-                  values.map((item) => {
-                    return moment(item.$d).format("DD-MM-YYYY");
-                  })
-                );
-              }}
+            <img
+              src={product.crimg}
+              alt=""
+              className="tablet:w-[400px] desktop:w-full tablet:h-[250px] desktop:h-[500px] tablet:mx-8 desktop:mx-0"
             />
           </div>
-          <Button
-            type="submit"
-            color=""
-            className="w-96 h-10 bg-mainColor rounded-md text-xs text-fourthColor font-bold my-8 mx-auto"
-          >
-            Confirmar reserva
-          </Button>
+          <div>
+            <div className="grid gap-2 p-8">
+              <p className="text-secundaryColor opacity-50">
+                {product?.categories?.title}
+              </p>
+              <h2 className="text-secundaryColor text-2xl font-bold">
+                {product?.name}
+              </h2>
+              <span
+                className={
+                  product.popularity < 3
+                    ? "text-md text-[#b23b3b]"
+                    : "text-md text-[#10771A]"
+                }
+              >
+                {product.popularity === 0 ? (
+                  product.popularity
+                ) : product.popularity < 2 ? (
+                  <i className="uil uil-favorite"></i>
+                ) : product.popularity < 3 ? (
+                  <>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                  </>
+                ) : product.popularity < 4 ? (
+                  <>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                  </>
+                ) : product.popularity < 5 ? (
+                  <>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                  </>
+                ) : (
+                  <>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                    <i className="uil uil-favorite"></i>
+                  </>
+                )}
+              </span>
+              <p className="text-sm text-secundaryColor">
+                <i className="uil uil-map-marker"></i>
+                {product?.location}
+              </p>
+            </div>
+            <div className="grid px-8">
+              <RangePicker
+                onChange={(values) => {
+                  setDates(
+                    values.map((item) => {
+                      return moment(item.$d).format("DD-MM-YYYY");
+                    })
+                  );
+                }}
+              />
+            </div>
+            <div className="px-8">
+              <Button
+                type="submit"
+                color=""
+                className="w-full h-10 bg-mainColor rounded-md text-xs text-fourthColor font-bold my-8 mx-auto"
+              >
+                Confirmar reserva
+              </Button>
+            </div>
+          </div>
         </article>
       </div>
+      <Policies />
     </form>
   );
 }

@@ -1,0 +1,13 @@
+[
+  {
+    "standards": ["Check-out: 10:00.", "No se permiten fiestas.", "No fumar."],
+    "safety": [
+      "Se aplican las pautas de distanciamiento social y otras normas relacionadas con el coronavirus.",
+      "Detector de humo.",
+      "Depósito de seguridad."
+    ],
+    "cancellation": [
+      "Agregá las fechas de tu viaje para obtener los detalles de cancelacion de esta estadia."
+    ]
+  }
+]

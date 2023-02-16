@@ -15,8 +15,6 @@ function Reservation() {
     window.scrollTo(0, 68);
     const resp = await getProductById(id);
     setProduct(resp);
-    setImages(resp.images);
-    setFeatures(resp.features);
   };
 
   useEffect(() => {

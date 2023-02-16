@@ -42,33 +42,15 @@ function LogIn() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-3">
-            {/* <label htmlFor="email" className="text-xs text-secundaryColor">
-              Correo electrónico
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className="h-10 shadow-sm rounded p-2"
-              {...register("email", {
-                required: true,
-                validate: (value) => {
-                  const email  = User[0]["email"];               
-                  return email === value;
-                }
-                
-              })}
-            /> */}
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="email1" value="Correo electrónico" />
+                <Label htmlFor="email" value="Correo electrónico" />
               </div>
-              <TextInput
-                id="email1"
+              <input
                 type="email"
                 name="email"
-                placeholder="name@example.com"
-                required={true}
+                id="email"
+                className="h-10 w-full shadow-sm rounded p-2"
                 {...register("email", {
                   required: true,
                   validate: (value) => {
@@ -81,13 +63,13 @@ function LogIn() {
 
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="password1" value="Contraseña" />
+                <Label htmlFor="password" value="Contraseña" />
               </div>
-              <TextInput
-                id="password1"
+              <input
                 type="password"
                 name="password"
-                required={true}
+                id="password"
+                className="h-10 w-full shadow-sm rounded p-2"
                 {...register("password", {
                   required: true,
                   validate: (value) => {
@@ -97,28 +79,10 @@ function LogIn() {
                 })}
               />
             </div>
-
-            {/* <label htmlFor="password" className="text-xs text-secundaryColor">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className="h-10 shadow-sm rounded p-2"
-              {...register("password", {
-                required: true,
-                validate: (value) => {
-                  const password = User[0].password;
-                  return password === value;
-                },
-              })}
-            /> */}
           </div>
 
           {(errors.email || errors.password) && (
             <p className="text-redWarning" role="alert">
-              {" "}
               Por favor vuelva a intentarlo, sus credenciales son inválidas
             </p>
           )}
