@@ -4,11 +4,13 @@ import { useForm } from "react-hook-form";
 import Calendar from "react-calendar";
 import { DatePicker, TimePicker } from "antd";
 import moment from "moment";
-import Policies from "../ProductDetail/Policies";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const { RangePicker } = DatePicker;
 
 function DataForm({ product }) {
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -19,8 +21,28 @@ function DataForm({ product }) {
   const [dates, setDates] = useState([]);
 
   const onSubmit = (data) => {
-    console.log({ ...data, arrival: arrival, dateRange: dates });
-    reset();
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡Si despues deseas cancelar la reserva, solo se devuelve el 90% del valor total!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FBC02D",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirmar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log({ ...data, arrival: arrival, dateRange: dates });
+        Swal.fire({
+          title: "¡Muchas gracias!",
+          text: "Su reserva se ha realizado con éxito.",
+          icon: "success",
+          confirmButtonColor: "#FBC02D",
+          confirmButtonText: "Ok",
+        });
+        reset();
+        navigate("/Home");
+      }
+    });
   };
 
   return (
@@ -243,7 +265,6 @@ function DataForm({ product }) {
           </div>
         </article>
       </div>
-      <Policies />
     </form>
   );
 }

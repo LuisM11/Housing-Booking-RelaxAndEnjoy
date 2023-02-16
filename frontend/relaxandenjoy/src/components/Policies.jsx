@@ -1,9 +1,8 @@
 import React from "react";
 
-import PoliciesData from "../../data/Policies.json"
+import PoliciesData from "../data/Policies.json"
 
 function Policies() {
-  console.log(PoliciesData);
   return (
     <article className="w-full bg-white py-4">
       <div className="px-3 tablet:px-6 desktop:px-10 pb-4">

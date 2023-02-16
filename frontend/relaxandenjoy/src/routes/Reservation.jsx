@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Header from "../components/ProductDetail/Header";
 import DataForm from "../components/Reservation/DataForm";
+import Policies from "../components/Policies";
 
 import { useGlobalContext } from "../context/GlobalContext";
 
@@ -24,6 +25,7 @@ function Reservation() {
     <div>
       <Header product={product} />
       <DataForm product={product} />
+      <Policies />
     </div>
   );
 }

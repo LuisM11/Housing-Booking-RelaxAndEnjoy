@@ -10,6 +10,7 @@ import LocationAndScore from "../components/ProductDetail/LocationAndScore";
 import Gallery from "../components/ProductDetail/Gallery";
 import Features from "../components/ProductDetail/Features";
 import Availability from "../components/ProductDetail/Availability";
+import Policies from "../components/Policies";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -68,6 +69,7 @@ function ProductDetail() {
             className="tablet:w-full h-full rounded-lg"
           />
         </article>
+        <Policies />
       </section>
     </>
   );
