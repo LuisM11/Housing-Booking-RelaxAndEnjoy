@@ -50,7 +50,7 @@ public class Product {
     private Set<Feature> features;
 
 //    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "id_products")
     @NotNull
     private Set<Image> images;

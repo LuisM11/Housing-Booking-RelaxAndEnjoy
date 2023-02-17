@@ -21,7 +21,6 @@ import java.util.Set;
 @Service
 public class ProductService {
 
-    private EntityManagerFactory entityManagerFactory;
     private static final Logger LOGGER = Logger.getLogger(ProductService.class);
     private ProductRepository productRepository;
     private CityService cityService;
@@ -29,8 +28,7 @@ public class ProductService {
 
 
     @Autowired
-    public ProductService(EntityManagerFactory entityManagerFactory, ProductRepository productRepository, CityService cityService, CategoryService categoryService) {
-        this.entityManagerFactory = entityManagerFactory;
+    public ProductService( ProductRepository productRepository, CityService cityService, CategoryService categoryService) {
         this.productRepository = productRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
