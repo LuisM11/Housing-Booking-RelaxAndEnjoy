@@ -14,7 +14,7 @@ build ryd:
       - npm run build  
    artifacts:    
       paths:          
-         - dist/    
+         - frontend/relaxandenjoy/dist/    
       expire_in: 2 hour
 
 
@@ -27,4 +27,6 @@ deploy ryd:
    script:
       - pip install --upgrade pip
       - pip install awscli
-      - aws s3 sync dist/ s3://$FRONTEND_S3
+      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - aws s3 sync frontend/relaxandenjoy/dist/ s3://$FRONTEND_S3
