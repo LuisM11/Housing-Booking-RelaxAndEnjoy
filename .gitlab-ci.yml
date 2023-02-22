@@ -1,7 +1,12 @@
-deploy frd:
-  stage: deploy
-  when: manual
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  script: 
-    -aws configure set region us-east-2
-    -aws s3 cp frontend/relaxandenjoy/ s3://$FRONTEND_S3
+stages:
+   - deploy
+
+deploy ryd:
+   image: python:latest
+   stage: deploy
+   only:
+      - main
+   script:
+      - pip3 install awscli
+      - aws s3 sync dist/ s3://$FRONTEND_S3
+
