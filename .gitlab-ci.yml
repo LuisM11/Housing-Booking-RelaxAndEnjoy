@@ -3,7 +3,7 @@ stages:
    - deploy
 
 
-build prod:  
+build ryd:  
    image: node:latest
    stage: build  
    only:    
@@ -25,5 +25,6 @@ deploy ryd:
    only:
       - main
    script:
+      - pip install --upgrade pip
       - pip install awscli
       - aws s3 sync dist/ s3://$FRONTEND_S3
