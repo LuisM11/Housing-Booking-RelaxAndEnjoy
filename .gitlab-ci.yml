@@ -25,5 +25,5 @@ deploy ryd:
    only:
       - main
    script:
-      - pip3 install awscli
-      - aws s3 sync ./build s3://$FRONTEND_S3
+      - pip install awscli
+      - aws s3 sync dist/ s3://$FRONTEND_S3
