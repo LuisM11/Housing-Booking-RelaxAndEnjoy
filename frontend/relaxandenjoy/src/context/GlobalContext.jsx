@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
+import {registerFetch,logInFetch,captureToken} from "./authUtils";
 
 export const GlobalContext = createContext();
 
@@ -11,6 +12,7 @@ const ContextProvider = ({ children }) => {
   const [CategoriesList, setCategoriesList] = useState([]);
   const [selectMenu, setSelectMenu] = useState(0);
   const [user, setUser] = useState(null);
+  const [reservationAttempt, setreservationAttempt] = useState(0)
 
   
   const getCategoriesList = async () => {
@@ -37,15 +39,26 @@ const ContextProvider = ({ children }) => {
   };
   const getProductsByCategory = async (id) => {
     return await axios
-    .get(`http://localhost:8080/products/Category/${id}/`)
+    .get(`http://localhost:8080/products/category/${id}/`)
     .then((resp) => resp.data);
   };
 
   const getProductsByCity = async (id) => {
     return await axios
-    .get(`http://localhost:8080/products/City/${id}/`)
+    .get(`http://localhost:8080/products/city/${id}/`)
     .then((resp) => resp.data);
   };
+
+  const getProductReservations = async (id) => {
+    return await axios
+    .get(`http://localhost:8080/products/${id}/reservation`)
+    .then((resp) => resp.data);
+  };
+
+
+  const authFunctions ={registerFetch, logInFetch, captureToken}
+
+ 
 
   useEffect(() => {
     getCategoriesList();
@@ -54,11 +67,14 @@ const ContextProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
     value={{
+      ...authFunctions,
+      reservationAttempt,setreservationAttempt,
       CategoriesList,
       selectMenu,
       setSelectMenu,
       user,
       setUser,
+      getProductReservations,
       getProductsList,
       getProductById,
       getProductsByCategory,

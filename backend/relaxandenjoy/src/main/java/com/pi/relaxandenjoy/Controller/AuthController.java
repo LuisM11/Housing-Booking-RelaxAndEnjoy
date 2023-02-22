@@ -1,5 +1,6 @@
 package com.pi.relaxandenjoy.Controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.pi.relaxandenjoy.Dtos.LoginDTO;
 import com.pi.relaxandenjoy.Dtos.SignUpDTO;
 import com.pi.relaxandenjoy.Security.JWT.JwtTokenProvider;
@@ -29,21 +30,19 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }
-    @PostMapping("/login")
-    public ResponseEntity<?> login (@RequestBody LoginDTO loginDTO){
-        return new ResponseEntity<>("hola",HttpStatus.CREATED);
-    }
 
 
     @PostMapping("/signup")
-    public ResponseEntity<String> SignUp (@RequestBody @Valid SignUpDTO signUpDTO, BindingResult result){
-//        userService.create(signUpDTO);
+    @JsonView(SignUpDTO.withoutPassword.class)
+    public ResponseEntity<SignUpDTO> SignUp (@RequestBody @Valid SignUpDTO signUpDTO, BindingResult result){
+
 //        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signUpDTO.getEmail(), signUpDTO.getPassword()));
 //        System.out.println("a");
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
 //        String token = jwtTokenProvider.generateToken(authentication);
 //        System.out.println("aaa");
-            return new ResponseEntity<>("new JwtAuthResponseDTO(token)", HttpStatus.CREATED);
+        SignUpDTO r = userService.create(signUpDTO);
+            return new ResponseEntity<>(r, HttpStatus.CREATED);
     }
 
 }

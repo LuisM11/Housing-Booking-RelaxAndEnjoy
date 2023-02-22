@@ -10,7 +10,6 @@ function Gallery({ images }) {
         onClick={() => setToggleMenu(!toggleMenu)}
       >
         <img
-        key={images[0]?.id}
           src={images[0]?.url}
           className="w-full h-96 col-span-2 row-span-2 desktop:rounded-lg"
         />
@@ -28,7 +27,7 @@ function Gallery({ images }) {
       <div className="h-60 tablet:h-128 w-full desktop:hidden">
         <Carousel>
           {images?.map((image) => (
-            <img src={image?.url} alt="..." />
+            <img key={image.id} src={image?.url} alt="..." />
           ))}
         </Carousel>
       </div>
@@ -49,7 +48,7 @@ function Gallery({ images }) {
         <div className="h-[600px] w-3/4 p-10">
           <Carousel>
             {images?.map((image) => (
-              <img src={image?.url} alt="..." />
+              <img key={image.id} src={image?.url} alt="..." />
             ))}
           </Carousel>
         </div>

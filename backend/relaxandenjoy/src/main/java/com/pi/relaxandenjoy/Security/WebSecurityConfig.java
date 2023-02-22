@@ -47,8 +47,9 @@ public class WebSecurityConfig  {
                 and()
                 .exceptionHandling(e -> e.authenticationEntryPoint(entryPoint))
                 .authorizeHttpRequests((authz) -> authz
-                        .mvcMatchers(HttpMethod.GET,"/products","/cities","/categories").permitAll()
-                        .mvcMatchers(HttpMethod.POST,"/auth/signup").hasRole("ADMIN")
+                        .mvcMatchers(HttpMethod.GET,"/products/**","/cities/**","/categories/**").permitAll()
+                        .mvcMatchers(HttpMethod.POST,"/auth/signup").permitAll()
+                        .mvcMatchers("/reservations").hasAnyRole("ADMIN","SCHEDULER")
                         .anyRequest().authenticated()
                 )
 //                .userDetailsService(userDetails)
@@ -75,6 +76,7 @@ public class WebSecurityConfig  {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://127.0.0.1:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

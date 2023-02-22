@@ -1,6 +1,7 @@
 package com.pi.relaxandenjoy.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -9,33 +10,36 @@ import javax.validation.constraints.Size;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SignUpDTO {
+    public interface withoutPassword{}
+
+    @Min(1)
+    @JsonView(SignUpDTO.withoutPassword.class)
     private Long id;
     @NotBlank
     @Size(max = 50)
+    @JsonView(SignUpDTO.withoutPassword.class)
     private String name;
 
     @NotBlank
     @Size(max = 50)
+    @JsonView(SignUpDTO.withoutPassword.class)
     private String surname;
 
     @NotBlank
     @Email
+    @JsonView(SignUpDTO.withoutPassword.class)
     private String email;
     @NotBlank
     @Size(min = 6)
     private String password;
 
-    @Min(1)
-    private Long city;
+//    @Min(1)
+//    private Long city;
     public SignUpDTO() {
     }
 
-    public SignUpDTO(String name, String surname, String email, String password, Long city) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.city = city;
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -74,11 +78,12 @@ public class SignUpDTO {
         this.password = password;
     }
 
-    public Long getCity() {
-        return city;
-    }
+//    public Long getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(Long city) {
+//        this.city = city;
+//    }
 
-    public void setCity(Long city) {
-        this.city = city;
-    }
 }

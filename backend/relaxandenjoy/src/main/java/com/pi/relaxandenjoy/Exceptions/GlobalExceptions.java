@@ -18,4 +18,9 @@ public class GlobalExceptions {
         LOGGER.error("We have an error: " + rnfe.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
     }
+    @ExceptionHandler({NoContentException.class})
+    public ResponseEntity<String> noResourcesYet (NoContentException noContentException){
+        LOGGER.error("We have an error: " + noContentException.getMessage());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body((noContentException.getMessage()));
+    }
 }

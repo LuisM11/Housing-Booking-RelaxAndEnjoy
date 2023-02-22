@@ -11,7 +11,7 @@ import ProductDetail from "./routes/ProductDetail";
 import "./index.css";
 import ProductsContainer from "./routes/ProductsContainer";
 import CategorizedProducts from "./routes/CategorizedProducts";
-import SearchedProducts from "./components/SearchedProducts";
+import SearchedProducts from "./routes/SearchedProducts";
 import Reservation from "./routes/Reservation";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

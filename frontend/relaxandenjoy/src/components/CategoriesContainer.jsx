@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import CategoryCard from "./CategoryCard";
-
+import { useLocation } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 
 function CategoriesContainer() {
   const { CategoriesList } = useGlobalContext();
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const location = useLocation()
+  useEffect(() => {
+    if(location.pathname=="/Home"){
+      setSelectedCategory(0)
+    }
+  }, [location.pathname])
+  
 
   return (
     <section className="h-full w-full">

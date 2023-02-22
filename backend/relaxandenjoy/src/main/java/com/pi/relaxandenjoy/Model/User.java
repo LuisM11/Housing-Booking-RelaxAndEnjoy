@@ -3,43 +3,43 @@ package com.pi.relaxandenjoy.Model;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "subtype", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "users")
+//@JsonIgnoreProperties()
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     private Long id;
     private String name;
+
     private String surname;
     @Column(unique = true)
     private String email;
     private String password;
-    @ManyToOne
-    @JoinColumn(name = "id_cities", referencedColumnName = "id_cities")
-    private City city;
 
     @ManyToOne()
     @JoinColumn(name = "id_role",referencedColumnName = "id_role")
     private Role role ;
 
-    public User(String name, String surname, String email, String password, City city) {
+
+    public User(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.city = city;
     }
 
     public User() {
     }
 
-    public User(Long id, String name, String surname, String email, String password, City city) {
+    public User(Long id, String name, String surname, String email, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.city = city;
     }
 
     public Role getRole() {
@@ -90,11 +90,4 @@ public class User {
         this.password = password;
     }
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
 }

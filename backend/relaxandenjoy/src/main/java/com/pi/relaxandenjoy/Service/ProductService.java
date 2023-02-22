@@ -1,22 +1,18 @@
 package com.pi.relaxandenjoy.Service;
 
+import com.pi.relaxandenjoy.Dtos.ReservationDTO;
+import com.pi.relaxandenjoy.Exceptions.NoContentException;
 import com.pi.relaxandenjoy.Exceptions.ResourceNotFoundException;
-import com.pi.relaxandenjoy.Model.Category;
-import com.pi.relaxandenjoy.Model.City;
-import com.pi.relaxandenjoy.Model.Image;
-import com.pi.relaxandenjoy.Model.Product;
+import com.pi.relaxandenjoy.Model.*;
 import com.pi.relaxandenjoy.Repository.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -63,13 +59,23 @@ public class ProductService {
         }
     }
 
-    public List<Product> listAll() throws ResourceNotFoundException {
+    public List<Product> listAll() throws NoContentException {
         LOGGER.info("Starting Process: Searching all products...");
         List<Product> productList = productRepository.findAll();
         if (productList.size() > 0) {
             return productList;
         } else {
-            throw new ResourceNotFoundException("No products registered.");
+            throw new NoContentException("No products registered.");
+        }
+    }
+    public Set<ReservationDTO> listReservations (Long idProduct) throws NoContentException, ResourceNotFoundException {
+        LOGGER.info("Starting process: Searching reservations of product " + idProduct);
+        Set<Reservation> reservations = search(idProduct).get().getReservation();
+        Set<ReservationDTO >reservationsDto = reservations.stream().map(r -> new ReservationDTO(r.getId(), r.getInitDate(),r.getFinalDate(),r.getInitTime(),null,null,null)).collect(Collectors.toSet());
+        if (reservations.size() > 0) {
+            return reservationsDto;
+        } else {
+            throw new NoContentException("No products registered.");
         }
     }
 

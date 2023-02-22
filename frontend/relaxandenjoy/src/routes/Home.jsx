@@ -8,6 +8,7 @@ function Home() {
   const [hideCategories, setHideCategories] = useState(false);
   const [searchData, setSearchData] = useState({});
   const [cities, setCities] = useState([]);
+  window.scrollTo(0, 0)
 
   return (
     <>

@@ -4,6 +4,7 @@ import { DatePicker } from "antd";
 import moment from "moment";
 import { useGlobalContext } from "../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import Prueba from "./prueba.jsx"
 
 const { RangePicker } = DatePicker;
 
@@ -34,19 +35,20 @@ function Seeker({ setSearchData, cities, setCities }) {
   return (
     <section className="w-full h-64 bg-thirdColor grid">
       <article className="w-11/12 grid grid-cols-1 m-auto gap-1">
-        <h2 className="h-20 font-bold grid items-center text-fourthColor text-2xl tablet:text-3xl desktop:text-4xl text-center tablet:py-5 desktop:py-0 leading-9">
+        <h2 onClick={() => console.log(dates)} className="h-20 font-bold grid items-center text-fourthColor text-2xl tablet:text-3xl desktop:text-4xl text-center tablet:py-5 desktop:py-0 leading-9">
           Busca ofertas en hoteles, casas y mucho mas
         </h2>
+        {/* <Prueba/> */}
         <form
           className="grid grid-rows-1 tablet:grid-cols-3 gap-1 tablet:gap-5"
           onSubmit={handleSubmit(onSubmit)}
         >
           <select
-            required
+            
             name="destinos"
             id=""
             className="invalid:text-secundaryColor/50 text-secundaryColor  h-9 rounded shadow-2xl p-1"
-            {...register("city")}
+            {...register("city", {required:true})}
           >
             <option value={""} disabled>
               ¿A dónde vamos?
@@ -58,12 +60,18 @@ function Seeker({ setSearchData, cities, setCities }) {
             ))}
           </select>
           <RangePicker
+            placeholder={['Fecha de inicio', 'Fecha de fin']}
+            pickerPrefixCls="my-date-picker"
             onChange={(values) => {
-              setDates(
-                values.map((item) => {
-                  return moment(item.$d).format("DD-MM-YYYY");
-                })
-              );
+              if (values != null) {
+                setDates(
+                  values.map((item) => {
+                    return moment(item.$d).format("DD-MM-YYYY");
+                  })
+                );
+              } else {
+                setDates([])
+              }
             }}
           />
           <input

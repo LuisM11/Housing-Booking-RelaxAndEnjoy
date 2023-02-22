@@ -57,7 +57,7 @@ function ProductDetail() {
         <Features features={features} />
         
 
-        <Availability product={product} />
+        {product ? <Availability product={product} /> : undefined }
 
         <article className="w-full grid justify-center items-center px-3 tablet:px-6 desktop:px-10 py-8">
           <h2 className="text-2xl font-bold text-secundaryColor mb-5">
