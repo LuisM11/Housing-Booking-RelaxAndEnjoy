@@ -8,7 +8,8 @@ build prod:
    stage: build  
    only:    
       - main  
-   script:    
+   script:
+      - cd grupo-05/frontend/    
       - npm install      
       - npm run build  
    artifacts:    
