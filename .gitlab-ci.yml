@@ -1,5 +1,22 @@
 stages:
+   - build
    - deploy
+
+
+build prod:  
+   image: node:latest
+   stage: build  
+   only:    
+      - main  
+   script:    
+      - npm install      
+      - npm run build  
+   artifacts:    
+      paths:          
+         - dist/    
+      expire_in: 2 hour
+
+
 
 deploy ryd:
    image: python:latest
@@ -8,5 +25,4 @@ deploy ryd:
       - main
    script:
       - pip3 install awscli
-      - aws s3 sync dist/ s3://$FRONTEND_S3
-
+      - aws s3 sync ./build s3://$FRONTEND_S3
