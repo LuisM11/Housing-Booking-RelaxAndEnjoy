@@ -9,7 +9,7 @@ build prod:
    only:    
       - main  
    script:
-      - cd grupo-05/frontend/    
+      - "cd frontend/relaxandenjoy"  
       - npm install      
       - npm run build  
    artifacts:    
