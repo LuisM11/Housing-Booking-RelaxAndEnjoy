@@ -5,18 +5,18 @@ import Calendar from "react-calendar";
 import { DatePicker, TimePicker } from "antd";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { useEffect } from "react";
 import dayjs from 'dayjs'
 import axios from "axios";
 
+
+
 const { RangePicker } = DatePicker;
 
 function DataForm({ product }) {
-  const { getCitiesList, user,setUser } = useGlobalContext()
-  const [city, setcity] = useState([])
-  const [cityform, setcityForm] = useState(0)
+  
 
   /* const {
     register,
@@ -50,18 +50,23 @@ function DataForm({ product }) {
       }
     });
   }; */
+  const { getCitiesList, user,setUser ,getProductReservations} = useGlobalContext()
+  const [city, setcity] = useState([])
+  const [cityform, setcityForm] = useState(0)
   const navigate = useNavigate();
   const [arrival, setArrival] = useState("");
   const [dates, setDates] = useState([]);
+  const [currentReservations, setcurrentReservations] = useState([])
+  const param = useParams()
 
-  const [data, setdata] = useState({
-    initDate: null,
-    finalDate: null,
-    initTime: null,
-    product: null,
-    user: null,
-    city: " "
-  })
+  const reservationsFetch = async ()=>{
+    const reservations = await getProductReservations(param.id)
+    if(reservations.status == 200){
+
+      setcurrentReservations(reservations.data)
+    }
+    /* console.log(product,"reservations") */
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -127,8 +132,6 @@ function DataForm({ product }) {
         })
 
       })
-
-
   }
 
   useEffect(() => {
@@ -136,16 +139,28 @@ function DataForm({ product }) {
       navigate('/Home')
     }
     else {
+
       (async () => {
         const Cities = await getCitiesList()
         setcity(Cities)
       })()
+      reservationsFetch()
     }
   }, [])
 
 
-  function disabledDate(current) {
+  /* function disabledDate(current) {
     return current && current < moment().startOf('day');
+  } */
+  const disabledDate = (current) => {
+    let bool
+    /* console.log(current) */ 
+    currentReservations?.every( x => {
+      bool = current > moment( x.initDate) && (current < moment (x.finaltDate)  || ( moment(x.finaltDate).isSame(current,'month') && moment(x.finaltDate).isSame(current,'year')) ) 
+      return !bool
+    })
+    const daysBefore = current < new Date()  
+    return (daysBefore || bool)
   }
 
   return (
@@ -153,7 +168,7 @@ function DataForm({ product }) {
       className="w-full h-full grid bg-thirdColor bg-opacity-10"
       onSubmit={onSubmit}
     >
-      <h2 onClick={() => console.log(dates, arrival, cityform)} className="text-secundaryColor text-xl font-bold p-3">
+      <h2 onClick={() => console.log(currentReservations)} className="text-secundaryColor text-xl font-bold p-3">
         Completá tus datos
       </h2>
       <div className="grid grid-cols-1 desktop:grid-cols-3 desktop:row-span-3 gap-8 px-3 mb-8">

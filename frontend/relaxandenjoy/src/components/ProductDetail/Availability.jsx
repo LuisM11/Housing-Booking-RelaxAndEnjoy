@@ -1,15 +1,17 @@
 import React,{useEffect} from "react";
 import Calendar from "react-calendar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../../context/GlobalContext";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import moment from 'moment'
 
 function Availability({ product }) {
-  const {setreservationAttempt, getProductReservations} =useGlobalContext()
-  const {user} = useGlobalContext()
+  const {setreservationAttempt, getProductReservations,user} =useGlobalContext()
   const [currentReservations, setcurrentReservations] = useState([])
   const navigate = useNavigate()
+  const param = useParams()
+
   const redirectReservation = () =>{
     if(user == null){
       Swal.fire({
@@ -25,27 +27,29 @@ function Availability({ product }) {
     }
   }
   const reservationsFetch = async ()=>{
-    const reservations = await getProductReservations(2)
-    setcurrentReservations(reservations)
+    const reservations = await getProductReservations(param.id)
+    if(reservations.status == 200){
+
+      setcurrentReservations(reservations.data)
+    }
     /* console.log(product,"reservations") */
   }
 
   useEffect(() => {
     reservationsFetch()
-  }, [product])
+  }, [])
   
   const disableDates = ({ date }) => {
     let bool
-    currentReservations?.forEach( x => {
-      bool = date >= new Date( x.initDate) && date <= new Date (x.finaltDate)
-      console.log(date)
-      if (bool){
-        return bool
-      }
+    currentReservations?.every( x => {
+      console.log(date,new Date (x.finaltDate))
+      bool = date >= new Date( x.initDate) && (date < new Date (x.finaltDate) || date.getTime() === new Date (x.finaltDate).getTime())
+      return !bool
     })
-    return date < new Date()
+    const daysBefore = date < new Date()  
+    return daysBefore || bool
   }
-
+ 
 
   return (
     <section className="w-full bg-secundaryColor bg-opacity-10 px-3 tablet:px-6 desktop:px-10 py-4">

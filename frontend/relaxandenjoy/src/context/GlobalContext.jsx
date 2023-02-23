@@ -52,7 +52,7 @@ const ContextProvider = ({ children }) => {
   const getProductReservations = async (id) => {
     return await axios
     .get(`http://localhost:8080/products/${id}/reservation`)
-    .then((resp) => resp.data);
+    .then((resp) => resp);
   };
 
 
