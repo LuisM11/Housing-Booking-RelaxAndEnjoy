@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -35,15 +36,21 @@ public class ProductController {
     public ResponseEntity<List<Product>> searchByCity(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.searchByCity(id));
     }
-    @GetMapping("/category/{id}")
-    public ResponseEntity<List<Product>> searchByCategory(@PathVariable Long id) throws ResourceNotFoundException {
-        return ResponseEntity.ok(productService.searchByCategory(id));
-    }
     @JsonView(ReservationDTO.JustDateTime.class)
     @GetMapping("/{idProduct}/reservation")
     public ResponseEntity<Set<ReservationDTO>> listReservations(@PathVariable Long idProduct) throws ResourceNotFoundException, NoContentException {
         return ResponseEntity.ok(productService.listReservations(idProduct));
     }
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<Product>> searchByCategory(@PathVariable Long id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(productService.searchByCategory(id));
+    }
+//HOME FILTER'S ENDPOINTS NEED TO BE MIGRATED TO PATHPARAMS/QUERYPARAMS IN THE CONTROLLERS
+//    @GetMapping("/")
+//    public  ResponseEntity<Set<Product>> searchByDatesRange (LocalDate init, LocalDate end) throws NoContentException {
+//
+//        return ResponseEntity.ok(productService.listProductsByRange(init,end));
+//    }
 
     @GetMapping
     public ResponseEntity<List<Product>> listAll() throws NoContentException {

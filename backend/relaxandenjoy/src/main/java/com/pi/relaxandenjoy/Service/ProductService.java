@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -77,6 +79,26 @@ public class ProductService {
         } else {
             throw new NoContentException("No products registered.");
         }
+    }
+
+    public void listProductsByRange (LocalDate init,LocalDate end) throws NoContentException {
+        List<Product> allProducts = listAll();
+        List<Product> res = new ArrayList<>();
+        boolean bool = false;
+        allProducts.stream().filter(product ->{
+            Set<Reservation> reservations = product.getReservation();
+            boolean reservationBoolean = reservations.stream().anyMatch(reservation -> {
+                LocalDate initR = reservation.getInitDate();
+                LocalDate finalR = reservation.getFinalDate();
+                if((initR.isAfter(init) || initR.isEqual(init)) && (finalR.isAfter(end) || finalR.isEqual(end))) {
+                    return true;
+                }
+                return  false;
+            });
+            return !reservationBoolean;
+
+        });
+
     }
 
     public Product create(Product product) {
