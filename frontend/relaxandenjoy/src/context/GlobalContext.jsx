@@ -17,41 +17,41 @@ const ContextProvider = ({ children }) => {
   
   const getCategoriesList = async () => {
     return await axios
-    .get("http://localhost:8080/categories")
+    .get("http://3.145.6.239:8080/categories")
     .then((resp) => setCategoriesList(resp.data));
   };
   const getCitiesList = async () => {
     return await axios
-    .get("http://localhost:8080/cities")
+    .get("http://3.145.6.239:8080/cities")
     .then((resp) => resp.data);
   };
   
   const getProductsList = async () => {
     return await axios
-    .get("http://localhost:8080/products")
+    .get("http://3.145.6.239:8080/products")
     .then((resp) => resp.data);
   };
   
   const getProductById = async (id) => {
     return await axios
-    .get(`http://localhost:8080/products/${id}/`)
+    .get(`http://3.145.6.239:8080/products/${id}/`)
     .then((resp) => resp.data);
   };
   const getProductsByCategory = async (id) => {
     return await axios
-    .get(`http://localhost:8080/products/category/${id}/`)
+    .get(`http://3.145.6.239:8080/products/category/${id}/`)
     .then((resp) => resp.data);
   };
 
   const getProductsByCity = async (id) => {
     return await axios
-    .get(`http://localhost:8080/products/city/${id}/`)
+    .get(`http://3.145.6.239:8080/products/city/${id}/`)
     .then((resp) => resp.data);
   };
 
   const getProductReservations = async (id) => {
     return await axios
-    .get(`http://localhost:8080/products/${id}/reservation`)
+    .get(`http://3.145.6.239:8080/products/${id}/reservation`)
     .then((resp) => resp);
   };
 
