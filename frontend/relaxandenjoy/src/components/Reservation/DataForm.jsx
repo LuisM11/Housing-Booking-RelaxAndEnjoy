@@ -10,6 +10,7 @@ import { useGlobalContext } from "../../context/GlobalContext";
 import { useEffect } from "react";
 import dayjs from 'dayjs'
 import axios from "axios";
+import { Space } from "antd";
 
 
 
@@ -149,18 +150,51 @@ function DataForm({ product }) {
   }, [])
 
 
-  /* function disabledDate(current) {
-    return current && current < moment().startOf('day');
-  } */
-  const disabledDate = (current) => {
+  const disableCalendar = ({date}) => {
     let bool
-    /* console.log(current) */ 
+    let daysBefore = moment(date) <  moment( new Date()).subtract(1,'day')
     currentReservations?.every( x => {
-      bool = current > moment( x.initDate) && (current < moment (x.finaltDate)  || ( moment(x.finaltDate).isSame(current,'month') && moment(x.finaltDate).isSame(current,'year')) ) 
+      let startDate = new Date(x.initDate)
+      let endDate = new Date(x.finaltDate)
+
+      if(date && endDate && startDate){
+        bool =  moment(date) >= moment(startDate).add(1,'day').startOf('day') && moment(date) <= moment(endDate).add(1,'day').endOf('day')
+      } 
       return !bool
     })
-    const daysBefore = current < new Date()  
-    return (daysBefore || bool)
+    return ( daysBefore || bool)
+  }
+
+
+
+  const disabledDate = (current) => {
+    let bool
+    let daysBefore 
+    let today
+    currentReservations?.every( x => {
+      let init =  new Date(x.initDate)
+      init.setHours(0, 0, 0, 0)
+      let final =  new Date(x.finaltDate)
+      final.setUTCHours(0, 0, 0, 0)
+      let currentD = current.toDate();
+      currentD.setUTCHours(0, 0, 0, 0)
+      /* bool = final.getTime() == currentD.getTime() */
+      /* if(final.getTime() == currentD.getTime()){
+        console.log(x.finaltDate,current)
+      } */
+      bool = current > moment( x.initDate) && (current < moment (x.finaltDate)  || final.getTime() == currentD.getTime()) 
+      return !bool
+    })
+    //Disable days before today and disable timelapse not allowed to book for current day
+    let todayZero = new Date()
+      todayZero.setHours(0, 0, 0, 0)
+      daysBefore = current.toDate() < todayZero
+      let todayTwelve = new Date()
+      todayTwelve.setHours(23,58,0,0)
+      let todayLimit = new Date()
+      todayLimit.setHours(18,0,0,0)
+      today = todayLimit  < current.toDate() && current.toDate() < todayTwelve 
+    return (today || daysBefore || bool)
   }
 
   return (
@@ -183,16 +217,6 @@ function DataForm({ product }) {
               name="firstName"
               type="text"
               value={user?.fullname.split(" ")[0]}
-            /* className={
-              (errors.firstName ? "border-2  border-redWarning" : "") +
-              " h-10 shadow-sm rounded"
-            }
-            {...register("firstName", {
-              required: true,
-              maxLength: 20,
-              minLength: 2,
-              message: "",
-            })} */
             />
           </div>
 
@@ -206,16 +230,6 @@ function DataForm({ product }) {
               name="lastName"
               type="text"
               value={user?.fullname.split(" ")[1]}
-            /*  className={
-               (errors.lastName ? "border-2  border-redWarning" : "") +
-               " h-10 shadow-sm rounded"
-             } */
-            /* {...register("lastName", {
-              required: true,
-              maxLength: 20,
-              minLength: 2,
-              message: "",
-            })} */
             />
           </div>
 
@@ -230,19 +244,6 @@ function DataForm({ product }) {
               name="email"
               required={true}
               value={user?.email}
-            /* className={
-              (errors.email ? "border-2  border-redWarning" : "") +
-              " h-10 shadow-sm rounded"
-            } */
-            /* {...register("email", {
-              required: true,
-              pattern: {
-                value:
-                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message:
-                  "Por favor introduzca una dirección de correo electrónico válida",
-              },
-            })} */
             />
           </div>
 
@@ -257,9 +258,6 @@ function DataForm({ product }) {
               onChange={(e) => {
                 setcityForm(e.target.value)
               }}
-            /* {...register("city", {
-              required: true,
-            })} */
             >
               <option value={0} disabled={true} className="disabled:text-secundaryColor/70 text-xs">
                 ¿De dónde eres?
@@ -278,9 +276,9 @@ function DataForm({ product }) {
           <h2 className="text-secundaryColor text-lg font-bold mb-5">
             Disponibilidad para la reserva
           </h2>
-          <Calendar className="tablet:hidden w-full rounded-lg shadow-md border-none text-thirdColor bg-white brdrs p-10" />
+          <Calendar tileDisabled = {disableCalendar}className="tablet:hidden w-full rounded-lg shadow-md border-none text-thirdColor bg-white brdrs p-10" />
           <Calendar
-            tileDisabled={({ date }) => date < new Date()}
+            tileDisabled={disableCalendar}
             showDoubleView
             className=" hidden tablet:grid w-full rounded-lg shadow-md border-none text-thirdColor bg-white brdrs p-8"
           />
@@ -377,7 +375,29 @@ function DataForm({ product }) {
               </p>
             </div>
             <div className="grid px-8">
+            
+
+            <RangePicker
+              className=" tablet:hidden prueba"
+
+              placeholder={['Check in', 'Check out']}
+              disabledDate={disabledDate}
+              onChange={(values) => {
+                if (values != null) {
+                  setDates(
+                    values.map((item) => {
+                      return moment(item.$d).format("YYYY-MM-DD");
+                    })
+                    );
+                  } else {
+                    setDates([])
+                  }
+              }}
+              />
+              
               <RangePicker
+
+                className="hidden tablet:flex"
                 placeholder={['Check in', 'Check out']}
                 disabledDate={disabledDate}
                 onChange={(values) => {

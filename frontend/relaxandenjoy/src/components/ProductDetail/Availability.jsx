@@ -39,15 +39,20 @@ function Availability({ product }) {
     reservationsFetch()
   }, [])
   
-  const disableDates = ({ date }) => {
+  const disableCalendar = ({date}) => {
     let bool
+    let daysBefore = moment(date) <  moment( new Date()).subtract(1,'day')
     currentReservations?.every( x => {
-      console.log(date,new Date (x.finaltDate))
-      bool = date >= new Date( x.initDate) && (date < new Date (x.finaltDate) || date.getTime() === new Date (x.finaltDate).getTime())
+      let startDate = new Date(x.initDate)
+      let endDate = new Date(x.finaltDate)
+      
+
+      if(date && endDate && startDate){
+        bool =  moment(date) >= moment(startDate).add(1,'day').startOf('day') && moment(date) <= moment(endDate).add(1,'day').endOf('day')
+      } 
       return !bool
     })
-    const daysBefore = date < new Date()  
-    return daysBefore || bool
+    return ( daysBefore || bool)
   }
  
 
@@ -58,9 +63,9 @@ function Availability({ product }) {
           Fechas disponibles
         </h2>
         <div className="w-full flex flex-col desktop:flex-row desktop:items-center gap-5">
-          <Calendar className="w-full grid tablet:hidden tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor mx-auto" />
+          <Calendar tileDisabled={disableCalendar} className="w-full grid tablet:hidden tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor mx-auto" />
           <Calendar
-          tileDisabled={disableDates}
+          tileDisabled={disableCalendar}
             showDoubleView
             className="w-[420px] hidden tablet:grid tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor"
           />

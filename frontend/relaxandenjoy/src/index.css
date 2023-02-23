@@ -15,6 +15,12 @@
   background-color: #1890ff;
 }
 
+@media(max-width: 576px) { 
+  .ant-picker-panels { 
+    flex-direction: column;
+  } 
+}
+
 
 
 /* .brdrs {
