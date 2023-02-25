@@ -39,7 +39,7 @@ function SignUp() {
     })
     if(registerData.status === 201){
       const loginData = await logInFetch(data.email,data.password)
-      const user = {...loginData.data,...loginData.headers.authorization}
+      const user = {...loginData.data, Authorization:loginData.headers.authorization}
       loginData.status === 200 && setUser(user)
     }
 },[])

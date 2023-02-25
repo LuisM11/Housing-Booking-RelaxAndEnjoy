@@ -48,7 +48,6 @@ function LogIn() {
 
   useEffect(() => {
     if(reservationAttempt != 0 && user!= null){
-      console.log("oeee")
       navigate(`/Reservation/${reservationAttempt}`)
       setreservationAttempt(0)
     }
