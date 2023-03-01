@@ -22,6 +22,7 @@ build backend_ryd:
    image: maven:3-openjdk-17
    script:
       - echo "Building R&D api"
+      - "cd backend/relaxandenjoy"
       - "mvn clean install"
       - echo "The process has finished"
    artifacts:
