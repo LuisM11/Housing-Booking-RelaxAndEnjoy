@@ -1,54 +1,80 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { useGlobalContext } from "../context/GlobalContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Prueba from "./prueba.jsx"
+import Swal from "sweetalert2";
 
 const { RangePicker } = DatePicker;
 
+
 function Seeker({ setSearchData, cities, setCities }) {
   const { getCitiesList } = useGlobalContext();
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit, reset, control } = useForm({
     defaultValues: { city: "" },
   });
-  const [dates, setDates] = useState([]);
   const nav = useNavigate();
-
+  const loc = useLocation()
   const getCitiestoSelect = async () => {
     const Cities = await getCitiesList();
     setCities(Cities);
   };
 
   const onSubmit = (data) => {
-    console.log({ ...data, dateRange: dates });
-    setSearchData(data);
-    reset();
-    nav("/Home/Search");
+    if(data.city === "" && data.Rangepicker == undefined){
+      console.log(data)
+      Swal.fire({
+        icon: 'warning',
+        title: 'Escoge una ciudad de destino o un rango de fechas',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    }else{
+      setSearchData(data);
+      
+      nav("/Home/Search");
+    }
   };
 
   useEffect(() => {
+    if(loc.pathname == '/Home' /* || loc.pathname.includes('/Home/Categories') */){
+      reset()
+    }
     getCitiestoSelect();
-  }, []);
+  }, [loc]);
+
+  const disabledDate = (current) => {
+    //Disable days before today and disable timelapse not allowed to book for current day
+    let todayZero = new Date()
+      todayZero.setHours(0, 0, 0, 0)
+      let daysBefore = current.toDate() < todayZero
+      let todayTwelve = new Date()
+      todayTwelve.setHours(23,58,0,0)
+      let todayLimit = new Date()
+      todayLimit.setHours(18,0,0,0)
+      let today = todayLimit  < current.toDate() && current.toDate() < todayTwelve 
+    return (today || daysBefore)
+  }
 
   return (
     <section className="w-full h-64 bg-thirdColor grid">
       <article className="w-11/12 grid grid-cols-1 m-auto gap-1">
-        <h2 onClick={() => console.log(dates)} className="h-20 font-bold grid items-center text-fourthColor text-2xl tablet:text-3xl desktop:text-4xl text-center tablet:py-5 desktop:py-0 leading-9">
+        <h2 onClick={() => console.log(data)} className="h-20 font-bold grid items-center text-fourthColor text-2xl tablet:text-3xl desktop:text-4xl text-center tablet:py-5 desktop:py-0 leading-9">
           Busca ofertas en hoteles, casas y mucho mas
         </h2>
         {/* <Prueba/> */}
         <form
-          className="grid grid-rows-1 tablet:grid-cols-3 gap-1 tablet:gap-5"
+          className="tablet:h-9 desktop:h-10 grid grid-rows-1 tablet:grid-cols-[2fr_2fr_1fr] gap-2 tablet:gap-3 desktop:gap-4 desktop:w-5/6 tablet:mx-auto "
           onSubmit={handleSubmit(onSubmit)}
         >
           <select
-            
+
             name="destinos"
             id=""
-            className="invalid:text-secundaryColor/50 text-secundaryColor  h-9 rounded shadow-2xl p-1"
-            {...register("city", {required:true})}
+            className="text-secundaryColor text-sm tablet:text-base h-8 tablet:h-full rounded shadow-2xl p-1"
+            {...register("city", { required: false })}
           >
             <option value={""} disabled>
               ¿A dónde vamos?
@@ -59,24 +85,27 @@ function Seeker({ setSearchData, cities, setCities }) {
               </option>
             ))}
           </select>
-          <RangePicker
-            placeholder={['Fecha de inicio', 'Fecha de fin']}
-            pickerPrefixCls="my-date-picker"
-            onChange={(values) => {
-              if (values != null) {
-                setDates(
-                  values.map((item) => {
-                    return moment(item.$d).format("DD-MM-YYYY");
-                  })
-                );
-              } else {
-                setDates([])
-              }
-            }}
+          <Controller
+          
+            control={control}
+            name="Rangepicker"
+            
+            render={({ field: { onChange, value } }) => (
+              <RangePicker
+              className="rounded text-sm tablet:text-base h-8 tablet:h-full"
+              disabledDate={disabledDate}
+                placeholder={['Fecha de inicio', 'Fecha de fin']}
+                onChange={onChange}
+                value={value}             
+              />
+            )
+
+            }
           />
+
           <input
             type="submit"
-            className="h-9 bg-mainColor text-fourthColor tablet:text-lg rounded shadow-2xl hover:cursor-pointer"
+            className="text-base h-8 tablet:h-full bg-mainColor text-fourthColor tablet:text-lg rounded shadow-2xl hover:cursor-pointer"
             value={"Buscar"}
           />
         </form>

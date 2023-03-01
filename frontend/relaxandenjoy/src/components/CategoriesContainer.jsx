@@ -22,14 +22,6 @@ function CategoriesContainer() {
           <h2 className="text-xl text-secundaryColor font-bold">
             Buscar por tipo de alojamiento
           </h2>
-          <div className={selectedCategory !== 0 ? "flex" : "hidden"}>
-            <Link to="/Home">
-              <i
-                className="uil uil-times text-3xl text-mainColor mr-3"
-                onClick={() => setSelectedCategory(0)}
-              ></i>
-            </Link>
-          </div>
         </div>
         <div className="w-full grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 gap-5">
           {CategoriesList?.map((item) => {

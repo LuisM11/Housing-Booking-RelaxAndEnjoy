@@ -10,10 +10,11 @@
   font-family: 'Poppins', 'sans-serif';
 }
 
-  
+
 .my-time-picker-popup button {
   background-color: #1890ff;
 }
+
 
 @media(max-width: 576px) { 
   .ant-picker-panels { 
@@ -22,11 +23,23 @@
 }
 
 
-
-/* .brdrs {
-  border: 1px solid #DFE4EA;
-  border-radius: 8px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+/* .Cutom-skeleton{
+  background-color: #f2f2f2; 
+  animation: skeleton 1.5s ease-in-out infinite; 
+}
+@keyframes skeleton {
+  0% {
+    background-color: #f2f2f2;
+  }
+  50% {
+    background-color: #e6e6e6; 
+  }
+  100% {
+    background-color: #f2f2f2; 
+  }
+  
 } */
+
+
 
 

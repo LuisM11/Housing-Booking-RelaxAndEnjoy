@@ -10,7 +10,7 @@ import { useGlobalContext } from "../../context/GlobalContext";
 import { useEffect } from "react";
 import dayjs from 'dayjs'
 import axios from "axios";
-import { Space } from "antd";
+
 
 
 
@@ -18,39 +18,6 @@ const { RangePicker } = DatePicker;
 
 function DataForm({ product }) {
   
-
-  /* const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm(); */
-
-
-  /* const onSubmit = (data) => {
-    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "¡Si despues deseas cancelar la reserva, solo se devuelve el 90% del valor total!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#FBC02D",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Confirmar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log({ ...data, arrival: arrival, dateRange: dates });
-        Swal.fire({
-          title: "¡Muchas gracias!",
-          text: "Su reserva se ha realizado con éxito.",
-          icon: "success",
-          confirmButtonColor: "#FBC02D",
-          confirmButtonText: "Ok",
-        });
-        reset();
-        navigate("/Home");
-      }
-    });
-  }; */
   const { getCitiesList, user,setUser ,getProductReservations} = useGlobalContext()
   const [city, setcity] = useState([])
   const [cityform, setcityForm] = useState(0)
@@ -96,7 +63,7 @@ function DataForm({ product }) {
     }
     console.log(dataFetch)
     const response = await axios
-      .post('http://3.145.6.239:8080/reservations',
+      .post('http://localhost:8080/reservations', //'http://3.145.6.239:8080/reservations'
         dataFetch,
         {
           withCredentials: false,
@@ -136,17 +103,11 @@ function DataForm({ product }) {
   }
 
   useEffect(() => {
-    if (user == null) {
-      navigate('/Home')
-    }
-    else {
-
       (async () => {
         const Cities = await getCitiesList()
         setcity(Cities)
       })()
       reservationsFetch()
-    }
   }, [])
 
 
@@ -178,10 +139,6 @@ function DataForm({ product }) {
       final.setUTCHours(0, 0, 0, 0)
       let currentD = current.toDate();
       currentD.setUTCHours(0, 0, 0, 0)
-      /* bool = final.getTime() == currentD.getTime() */
-      /* if(final.getTime() == currentD.getTime()){
-        console.log(x.finaltDate,current)
-      } */
       bool = current > moment( x.initDate) && (current < moment (x.finaltDate)  || final.getTime() == currentD.getTime()) 
       return !bool
     })
