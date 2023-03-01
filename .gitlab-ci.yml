@@ -3,7 +3,7 @@ stages:
    - deploy
 
 
-build ryd:  
+build front_ryd:  
    image: node:latest
    stage: build  
    only:    
@@ -17,9 +17,23 @@ build ryd:
          - frontend/relaxandenjoy/dist/    
       expire_in: 2 hour
 
+build backend_ryd:
+   stage: build
+   image:  maven:latest
+   only:
+      - main
+   script:
+      - echo "Building R&D api"
+      - mvn clean install
+      - echo "The process has finished"
+   artifacts:
+      expire_in: 2 hour
+      paths:
+         - target/relaxandenjoy-0.0.1-SNAPSHOT.jar
 
 
-deploy ryd:
+    
+deploy front_ryd:
    image: python:latest
    stage: deploy
    only:
@@ -31,23 +45,11 @@ deploy ryd:
       - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
       - aws s3 sync frontend/relaxandenjoy/dist/ s3://$FRONTEND_S3
 
-build backend_ryd:
-   stage: build
-   image:  maven:latest
-   script:
-      - echo "Building R&D api"
-      - mvn clean install
-      - echo "The process has finished"
-   artifacts:
-      expire_in: 1 week
-      paths:
-         - target/relaxandenjoy-0.0.1-SNAPSHOT.jar
-   only:
-      - main
-
 deploy backend_ryd:
    stage: deploy
    image: alpine:3.11
+   only:
+      - main
    before_script:
       - apk update && apk add openssh-client bash
       - mkdir -p ~/.ssh
@@ -61,6 +63,5 @@ deploy backend_ryd:
       - ssh ubuntu@$SERVER_IPV4 "sudo systemctl stop ryd2.service"
       - scp ./target/relaxandenjoy-0.0.1-SNAPSHOT.jar ubuntu@$SERVER_IPV4:~/rydImage/ 
       - ssh ubuntu@$SERVER_IPV4 "sudo systemctl start ryd2.service"
-      - echo "The process of deploying R&D has finished"
-   only:
-      - main
+      - echo "The process has finished"
+   
