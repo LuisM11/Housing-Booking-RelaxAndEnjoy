@@ -1,5 +1,6 @@
 package com.pi.relaxandenjoy.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
@@ -50,10 +51,14 @@ public class Product {
     private Set<Feature> features;
 
 //    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "id_products")
     @NotNull
     private Set<Image> images;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private Set<Reservation> reservation;
 
     public Product(Long id, String title, String name, Float popularity, String crimg, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images) {
         this.id = id;
@@ -74,6 +79,14 @@ public class Product {
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Reservation> getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Set<Reservation> reservation) {
+        this.reservation = reservation;
     }
 
     public void setId(Long id) {

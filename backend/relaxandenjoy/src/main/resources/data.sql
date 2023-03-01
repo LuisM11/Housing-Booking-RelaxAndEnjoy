@@ -84,3 +84,6 @@ VALUES (1,2),(1,1),(1,19),(1,4),(1,5),(1,9),(1,14),(1,7),
        (7,7),(7,19),(7,4),(7,18),(7,8),(7,13),
        (8,5),(8,7),(8,19),(8,4),(8,18),(8,13),(8,8),(8,6)
        ;
+
+INSERT IGNORE INTO roles (name) VALUES ('ROLE_ADMIN'), ('ROLE_SCHEDULER');
+INSERT IGNORE INTO users (id_user,name,surname,email,password,id_role,id_cities,subtype) VALUES (1,'admin','prueba','prueba@prueba.com','$2a$10$3o5CUO8Qe803xNghCZzmEOXLWPMhfMpsOk1cuLGFLWBTTp0xsbrPy',1,3,'User');

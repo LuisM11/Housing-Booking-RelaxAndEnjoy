@@ -3,11 +3,43 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', 'sans-serif';
 }
+
+
+.my-time-picker-popup button {
+  background-color: #1890ff;
+}
+
+
+@media(max-width: 576px) { 
+  .ant-picker-panels { 
+    flex-direction: column;
+  } 
+}
+
+
+/* .Cutom-skeleton{
+  background-color: #f2f2f2; 
+  animation: skeleton 1.5s ease-in-out infinite; 
+}
+@keyframes skeleton {
+  0% {
+    background-color: #f2f2f2;
+  }
+  50% {
+    background-color: #e6e6e6; 
+  }
+  100% {
+    background-color: #f2f2f2; 
+  }
+  
+} */
+
+
+
+

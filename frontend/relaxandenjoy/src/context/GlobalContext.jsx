@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
+import {registerFetch,logInFetch,captureToken} from "./authUtils";
 
 export const GlobalContext = createContext();
 
@@ -11,11 +12,12 @@ const ContextProvider = ({ children }) => {
   const [CategoriesList, setCategoriesList] = useState([]);
   const [selectMenu, setSelectMenu] = useState(0);
   const [user, setUser] = useState(null);
+  const [reservationAttempt, setreservationAttempt] = useState(0)
 
   
   const getCategoriesList = async () => {
     return await axios
-    .get("http://localhost:8080/categories")
+    .get("http://localhost:8080/categories") //3.145.6.239
     .then((resp) => setCategoriesList(resp.data));
   };
   const getCitiesList = async () => {
@@ -37,15 +39,26 @@ const ContextProvider = ({ children }) => {
   };
   const getProductsByCategory = async (id) => {
     return await axios
-    .get(`http://localhost:8080/products/Category/${id}/`)
+    .get(`http://localhost:8080/products/category/${id}/`)
     .then((resp) => resp.data);
   };
 
-  const getProductsByCity = async (id) => {
+  const getProductsWithParams = async (params) => {
     return await axios
-    .get(`http://localhost:8080/products/City/${id}/`)
-    .then((resp) => resp.data);
+    .get(`http://localhost:8080/products/?${params}`)
+    .then((resp) => resp);
   };
+
+  const getProductReservations = async (id) => {
+    return await axios
+    .get(`http://localhost:8080/products/${id}/reservation`)
+    .then((resp) => resp);
+  };
+
+
+  const authFunctions ={registerFetch, logInFetch, captureToken}
+
+ 
 
   useEffect(() => {
     getCategoriesList();
@@ -54,15 +67,18 @@ const ContextProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
     value={{
+      ...authFunctions,
+      reservationAttempt,setreservationAttempt,
       CategoriesList,
       selectMenu,
       setSelectMenu,
       user,
       setUser,
+      getProductReservations,
       getProductsList,
       getProductById,
       getProductsByCategory,
-      getProductsByCity,
+      getProductsWithParams,
       getCitiesList
     }}
     >

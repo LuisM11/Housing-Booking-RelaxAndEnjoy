@@ -132,7 +132,7 @@ function Header() {
             <ProfileDesktop
               user={user}
               setUser={setUser}
-              setSelectMenu={selectMenu}
+              setSelectMenu={setSelectMenu}
             />
           ) : (
             <div className="flex gap-2">

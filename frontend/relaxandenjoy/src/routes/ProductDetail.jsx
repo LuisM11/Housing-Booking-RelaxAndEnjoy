@@ -10,6 +10,7 @@ import LocationAndScore from "../components/ProductDetail/LocationAndScore";
 import Gallery from "../components/ProductDetail/Gallery";
 import Features from "../components/ProductDetail/Features";
 import Availability from "../components/ProductDetail/Availability";
+import Policies from "../components/Policies";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -56,7 +57,7 @@ function ProductDetail() {
         <Features features={features} />
         
 
-        <Availability />
+        {product ? <Availability product={product} /> : undefined }
 
         <article className="w-full grid justify-center items-center px-3 tablet:px-6 desktop:px-10 py-8">
           <h2 className="text-2xl font-bold text-secundaryColor mb-5">
@@ -68,6 +69,7 @@ function ProductDetail() {
             className="tablet:w-full h-full rounded-lg"
           />
         </article>
+        <Policies />
       </section>
     </>
   );

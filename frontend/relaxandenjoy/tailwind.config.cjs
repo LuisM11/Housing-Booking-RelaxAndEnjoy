@@ -12,6 +12,7 @@ module.exports = {
       thirdColor: "#607D8B",
       fourthColor: "#FFFBE2",
       redWarning: "#df3614 ",
+      redBg :"#FFE1E1",
       grayColor: "#4F4F50",
       white: "#fff",
     },
