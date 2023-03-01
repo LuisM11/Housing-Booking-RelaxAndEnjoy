@@ -63,7 +63,7 @@ function DataForm({ product }) {
     }
     console.log(dataFetch)
     const response = await axios
-      .post('http://localhost:8080/reservations', //'http://3.145.6.239:8080/reservations'
+      .post('http://3.145.6.239:8080/reservations', //'http://3.145.6.239:8080/reservations'
         dataFetch,
         {
           withCredentials: false,
