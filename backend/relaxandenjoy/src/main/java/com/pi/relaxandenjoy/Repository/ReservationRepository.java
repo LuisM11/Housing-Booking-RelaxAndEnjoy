@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation,Long> {
     List<Reservation> findByProduct(Product product);
-//    List<Reservation> findByProductIdAndInitDate
+
 
 }
