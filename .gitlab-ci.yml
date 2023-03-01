@@ -62,7 +62,7 @@ deploy backend_ryd:
    script:
       - echo "Deploying R&D"
       - ssh ubuntu@$SERVER_IPV4 "sudo systemctl stop ryd2.service"
-      - scp ./target/relaxandenjoy-0.0.1-SNAPSHOT.jar ubuntu@$SERVER_IPV4:~/rydImage/ 
+      - scp backend/relaxandenjoy/target/relaxandenjoy-0.0.1-SNAPSHOT.jar ubuntu@$SERVER_IPV4:~/rydImage/ 
       - ssh ubuntu@$SERVER_IPV4 "sudo systemctl start ryd2.service"
       - echo "The process has finished"
    
