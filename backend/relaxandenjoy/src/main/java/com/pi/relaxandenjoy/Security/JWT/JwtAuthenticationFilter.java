@@ -68,6 +68,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
     private LoginResponseDTO userResponse(SecurityUser user){
-        return new LoginResponseDTO(user.getId(),user.getCompleteName(),user.getUsername());
+        return new LoginResponseDTO(user.getId(),user.getCompleteName(),user.getUsername(), user.getRole());
     }
 }

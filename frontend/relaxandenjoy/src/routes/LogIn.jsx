@@ -175,6 +175,7 @@ function LogIn() {
               </Link>
             </p>
           </div>
+          <input type="text" />
         </form>
       </article>
     </section>
