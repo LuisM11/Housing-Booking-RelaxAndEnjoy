@@ -24,7 +24,7 @@ build backend_ryd:
       - main
    script:
       - echo "Building R&D api"
-      - mvn clean install
+      - "mvn clean install"
       - echo "The process has finished"
    artifacts:
       expire_in: 2 hour
