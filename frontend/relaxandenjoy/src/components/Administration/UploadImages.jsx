@@ -2,35 +2,23 @@ import React from "react";
 
 function UploadImages({ images, setImages }) {
   const changeInput = (e) => {
-    //esto es el indice que se le dará a cada imagen, a partir del indice de la ultima foto
     let indexImg;
-
-    //aquí evaluamos si ya hay imagenes antes de este input, para saber en dónde debe empezar el index del proximo array
     if (images.length > 0) {
       indexImg = images[images.length - 1].index + 1;
     } else {
       indexImg = 0;
     }
-
     let newImgsToState = readmultifiles(e, indexImg);
     let newImgsState = [...images, ...newImgsToState];
     setImages(newImgsState);
-
-    console.log(newImgsState);
   };
 
   const readmultifiles = (e, indexInicial) => {
     const files = e.currentTarget.files;
-
-    //el array con las imagenes nuevas
     const arrayImages = [];
-
     Object.keys(files).forEach((i) => {
       const file = files[i];
-
       let url = URL.createObjectURL(file);
-
-      //console.log(file);
       arrayImages.push({
         id: crypto.randomUUID(),
         index: indexInicial,
@@ -38,20 +26,15 @@ function UploadImages({ images, setImages }) {
         url,
         file,
       });
-
       indexInicial++;
     });
-
-    //despues de haber concluido el ciclo retornamos las nuevas imagenes
     return arrayImages;
   };
 
   const deleteImg = (index) => {
-    //console.log("borrar img " + index);
     const newImgs = images.filter(function (element) {
       return element.index !== index;
     });
-    console.log(newImgs);
     setImages(newImgs);
   };
   return (

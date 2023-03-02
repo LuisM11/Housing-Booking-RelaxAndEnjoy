@@ -21,10 +21,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ContextProvider>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="Home" element={<Home />} >
-              <Route index element = {<ProductsContainer/>} />
-              <Route path="Categories/:id" element={<CategorizedProducts/>}/>
-              <Route path="Search" element={<SearchedProducts/>}/>
+            <Route path="Home" element={<Home />}>
+              <Route index element={<ProductsContainer />} />
+              <Route path="Categories/:id" element={<CategorizedProducts />} />
+              <Route path="Search" element={<SearchedProducts />} />
             </Route>
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Login" element={<LogIn />} />

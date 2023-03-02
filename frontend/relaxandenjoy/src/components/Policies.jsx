@@ -1,6 +1,6 @@
 import React from "react";
 
-import PoliciesData from "../data/Policies.json"
+import PoliciesData from "../data/Policies.json";
 
 function Policies() {
   return (

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Label, Select, TextInput } from "flowbite-react";
-import { useForm } from "react-hook-form";
 import Calendar from "react-calendar";
 import { DatePicker, TimePicker } from "antd";
 import moment from "moment";
@@ -62,18 +61,14 @@ function DataForm({ product }) {
     };
     console.log(dataFetch);
     const response = await axios
-      .post(
-        "http://localhost:8080/reservations", //'http://3.145.6.239:8080/reservations'
-        dataFetch,
-        {
-          withCredentials: false,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: user.Authorization,
-          },
-          mode: "cors",
-        }
-      )
+      .post("http://localhost:8080/reservations", dataFetch, {
+        withCredentials: false,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user.Authorization,
+        },
+        mode: "cors",
+      })
       .then((r) => {
         console.log(r);
         if (r.status === 201) {
@@ -143,7 +138,6 @@ function DataForm({ product }) {
           final.getTime() == currentD.getTime());
       return !bool;
     });
-    //Disable days before today and disable timelapse not allowed to book for current day
     let todayZero = new Date();
     todayZero.setHours(0, 0, 0, 0);
     daysBefore = current.toDate() < todayZero;
@@ -172,12 +166,13 @@ function DataForm({ product }) {
             <div className="mb-2 block">
               <Label htmlFor="firstName" value="Nombre" />
             </div>
-            <TextInput
+            <input
               disabled
               id="firstName"
               name="firstName"
               type="text"
               value={user?.fullname.split(" ")[0]}
+              className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden"
             />
           </div>
 
@@ -185,12 +180,13 @@ function DataForm({ product }) {
             <div className="mb-2 block">
               <Label htmlFor="lastName" color="gray" value="Apellido" />
             </div>
-            <TextInput
+            <input
               disabled
               id="lastName"
               name="lastName"
               type="text"
               value={user?.fullname.split(" ")[1]}
+              className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden"
             />
           </div>
 
@@ -198,13 +194,14 @@ function DataForm({ product }) {
             <div className="mb-2 block">
               <Label htmlFor="email" value="Correo electrónico" />
             </div>
-            <TextInput
+            <input
               disabled
               id="email"
               type="email"
               name="email"
               required={true}
               value={user?.email}
+              className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden"
             />
           </div>
 
@@ -212,13 +209,14 @@ function DataForm({ product }) {
             <div className="mb-2 block">
               <Label htmlFor="city" value="Ciudad" />
             </div>
-            <Select
+            <select
               required
               id="countries"
               value={cityform}
               onChange={(e) => {
                 setcityForm(e.target.value);
               }}
+              className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden"
             >
               <option
                 value={0}
@@ -232,7 +230,7 @@ function DataForm({ product }) {
                   {c.name}
                 </option>
               ))}
-            </Select>
+            </select>
           </div>
         </article>
 
@@ -377,13 +375,12 @@ function DataForm({ product }) {
               />
             </div>
             <div className="px-8">
-              <Button
+              <button
                 type="submit"
-                color=""
-                className="w-full h-10 bg-mainColor rounded-md text-xs text-fourthColor font-bold my-8 mx-auto"
+                className="w-full h-10 bg-mainColor rounded-md text-base text-fourthColor my-8 mx-auto"
               >
                 Confirmar reserva
-              </Button>
+              </button>
             </div>
           </div>
         </article>
