@@ -9,9 +9,9 @@ import { useGlobalContext } from "../context/GlobalContext";
 
 function Reservation() {
   const { id } = useParams();
-  const { getProductById,user } = useGlobalContext();
+  const { getProductById, user } = useGlobalContext();
   const [product, setProduct] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const getProduct = async (id) => {
     window.scrollTo(0, 68);
     const resp = await getProductById(id);
@@ -20,11 +20,12 @@ function Reservation() {
 
   useEffect(() => {
     if (user == null) {
-      navigate('/Home')
-    }else{
+      navigate("/Home");
+    } else {
       getProduct(id);
     }
   }, []);
+  
   return (
     <div>
       <Header product={product} />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 import FeatureCard from "../components/Administration/FeatureCard";
 import UploadImages from "../components/Administration/UploadImages";
@@ -54,6 +55,14 @@ function Administration() {
         safetyRules: data.healthAndSafety,
       },
     };
+
+    Swal.fire({
+      icon: "success",
+      title: "Reservacion realizada con éxito!",
+      showConfirmButton: false,
+      timer: 5000,
+    });
+
     console.log(newProduct);
     console.log(data);
     setFeatures([]);

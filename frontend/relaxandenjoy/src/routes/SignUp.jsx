@@ -1,13 +1,9 @@
-import { Button, Checkbox, Label } from "flowbite-react";
-import React from "react";
+import { Checkbox, Label } from "flowbite-react";
+import React, { useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 import { logInFetch } from "../context/authUtils";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function SignUp() {
