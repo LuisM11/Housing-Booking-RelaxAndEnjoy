@@ -2,9 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProfileDesktop = ({ user, setSelectMenu, setUser }) => {
-  
   return (
     <article className="flex justify-center items-center gap-5">
+      <div
+        className={
+          user?.role === 1 ? "h-10 flex justify-center items-center" : "hidden"
+        }
+      >
+        <Link
+          to="/Administracion"
+          className="text-base font-bold text-secundaryColor text-left"
+        >
+          Administración
+        </Link>
+      </div>
+
+      <div className="w-1 h-10 border border-mainColor bg-mainColor"></div>
+
       <button className="w-10 h-10 bg-secundaryColor rounded-full text-xl text-fourthColor font-bold">
         {user.fullname.split(" ")[0].charAt(0).toUpperCase()}
         {user.fullname.split(" ")[1].charAt(0).toUpperCase()}
@@ -12,8 +26,10 @@ const ProfileDesktop = ({ user, setSelectMenu, setUser }) => {
       <div className="">
         <p className="font-bold text-md text-right text-thirdColor">Hola,</p>
         <p className="font-bold text-md text-mainColor">
-          {user.fullname.split(" ")[0].charAt(0).toUpperCase() + user.fullname.split(" ")[0].slice(1)}{" "}
-          {user.fullname.split(" ")[1].charAt(0).toUpperCase() + user.fullname.split(" ")[1].slice(1)}
+          {user.fullname.split(" ")[0].charAt(0).toUpperCase() +
+            user.fullname.split(" ")[0].slice(1)}{" "}
+          {user.fullname.split(" ")[1].charAt(0).toUpperCase() +
+            user.fullname.split(" ")[1].slice(1)}
         </p>
       </div>
       <Link

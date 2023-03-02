@@ -1,61 +1,100 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
+import FeatureCard from "../components/Administration/FeatureCard";
+import UploadImages from "../components/Administration/UploadImages";
+
+import { useGlobalContext } from "../context/GlobalContext";
 
 function Administration() {
+  const { user } = useGlobalContext();
+  const navigate = useNavigate();
+
+  const [features, setFeatures] = useState([]);
   const [images, setImages] = useState([]);
 
-  const changeInput = (e) => {
-    //esto es el indice que se le dará a cada imagen, a partir del indice de la ultima foto
-    let indexImg;
+  const [name, setName] = useState("");
+  const [icon, setIcon] = useState("");
 
-    //aquí evaluamos si ya hay imagenes antes de este input, para saber en dónde debe empezar el index del proximo array
-    if (images.length > 0) {
-      indexImg = images[images.length - 1].index + 1;
-    } else {
-      indexImg = 0;
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    if (user === null) {
+      navigate("/Login");
     }
+  }, []);
 
-    let newImgsToState = readmultifiles(e, indexImg);
-    let newImgsState = [...images, ...newImgsToState];
-    setImages(newImgsState);
-
-    console.log(newImgsState);
+  const onSubmit = (data) => {
+    let newProduct = {
+      title: data.title,
+      name: data.name,
+      popularity: 0,
+      crimg: "",
+      location: data.address,
+      description: data.description,
+      categories: data.category,
+      city: data.city,
+      features: {
+        bathrooms: data.bathrooms,
+        rooms: data.rooms,
+        televisions: data.te,
+        ...features,
+      },
+      images: images,
+      policies: {
+        houseRules: data.houseRules,
+        healthAndSafety: data.healthAndSafety,
+        safetyRules: data.healthAndSafety,
+      },
+    };
+    console.log(newProduct);
+    console.log(data);
+    setFeatures([]);
+    setImages([]);
+    reset();
   };
 
-  const readmultifiles = (e, indexInicial) => {
-    const files = e.currentTarget.files;
+  function handleChangeNameFeatures(e) {
+    setName(e.target.value);
+  }
 
-    //el array con las imagenes nuevas
-    const arrayImages = [];
+  function handleChangeIconFeatures(e) {
+    setIcon(e.target.value);
+  }
 
-    Object.keys(files).forEach((i) => {
-      const file = files[i];
+  function handleSubmitFeatures(e) {
+    e.preventDefault();
+    const newToDo = {
+      id: crypto.randomUUID(),
+      name: name,
+      icon: icon,
+    };
+    setFeatures([...features, newToDo]);
+    setName("");
+    setIcon("");
+    setFeatures([...features, newToDo]);
+    console.log(features);
+  }
 
-      let url = URL.createObjectURL(file);
+  function handleUpdateFeatures(id, value) {
+    const temp = [...features];
+    const item = temp.find((item) => item.id === id);
+    item.name = value.name;
+    item.icon = value.icon;
+    setFeatures(temp);
+  }
 
-      //console.log(file);
-      arrayImages.push({
-        index: indexInicial,
-        name: file.name,
-        url,
-        file,
-      });
-
-      indexInicial++;
-    });
-
-    //despues de haber concluido el ciclo retornamos las nuevas imagenes
-    return arrayImages;
-  };
-
-  const deleteImg = (index) => {
-    //console.log("borrar img " + index);
-    const newImgs = images.filter(function (element) {
-      return element.index !== index;
-    });
-    console.log(newImgs);
-    setImages(newImgs);
-  };
+  function handleDeleteFeatures(id) {
+    const temp = features.filter((item) => item.id !== id);
+    setFeatures(temp);
+  }
 
   return (
     <div>
@@ -69,13 +108,15 @@ function Administration() {
           <i className="uil uil-angle-left-b text-5xl font-bold text-fourthColor"></i>
         </Link>
       </section>
+
       <section className="w-full bg-thirdColor bg-opacity-10 flex flex-col justify-center items-start">
-        <h2 className="text-xl font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-5 shadow-md tablet:shadow-none">
+        <h2 className="text-2xl font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-5 shadow-md tablet:shadow-none">
           Crear propiedad
         </h2>
         <form
           action=""
-          className="w-full bg-white pb-5 mb-5 tablet:w-11/12 tablet:mx-8 tablet:rounded-xl"
+          className="w-full bg-white pb-5 mb-5 tablet:w-[97%] tablet:mx-auto tablet:rounded-xl"
+          onSubmit={handleSubmit(onSubmit)}
         >
           <article className="w-full px-8 pt-5">
             <div className="grid grid-cols-1 tablet:grid-cols-2 tablet:gap-5">
@@ -92,6 +133,11 @@ function Administration() {
                   id="name"
                   placeholder="Nombre completo"
                   className="rounded-md shadow-md h-10"
+                  {...register("name", {
+                    required: true,
+                    maxLength: 100,
+                    minLength: 8,
+                  })}
                 />
               </div>
               <div className="grid gap-2 my-2">
@@ -102,14 +148,17 @@ function Administration() {
                   Categoría
                 </label>
                 <select
-                  name="categories"
-                  id="categories"
+                  name="category"
+                  id="category"
                   className="rounded-md shadow-md h-10"
+                  {...register("category", {
+                    required: true,
+                  })}
                 >
-                  <option value="">Hotel</option>
-                  <option value="">Camping</option>
-                  <option value="">Hostal</option>
-                  <option value="">Finca</option>
+                  <option value="Hotel">Hotel</option>
+                  <option value="Camping">Camping</option>
+                  <option value="Hostal">Hostal</option>
+                  <option value="Finca">Finca</option>
                 </select>
               </div>
             </div>
@@ -127,6 +176,11 @@ function Administration() {
                   id="address"
                   placeholder="Cl 00 # 00 - 00"
                   className="rounded-md shadow-md h-10"
+                  {...register("address", {
+                    required: true,
+                    maxLength: 50,
+                    minLength: 4,
+                  })}
                 />
               </div>
               <div className="grid gap-2 my-2">
@@ -137,16 +191,39 @@ function Administration() {
                   Ciudad
                 </label>
                 <select
-                  name="ciudad"
-                  id="ciudad"
+                  name="city"
+                  id="city"
                   className="rounded-md shadow-md h-10"
+                  {...register("city", {
+                    required: true,
+                  })}
                 >
-                  <option value="">Buenos Aires</option>
-                  <option value="">Medellin</option>
-                  <option value="">Etc</option>
-                  <option value="">Etc 2</option>
+                  <option value="Buenos Aires">Buenos Aires</option>
+                  <option value="Medellin">Medellin</option>
+                  <option value="Etc">Etc</option>
+                  <option value="Etc 2">Etc 2</option>
                 </select>
               </div>
+            </div>
+            <div className="grid gap-2 my-2">
+              <label
+                htmlFor=""
+                className="text-xs font-medium text-secundaryColor"
+              >
+                Titulo
+              </label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Lema, frase, etc."
+                className="rounded-md shadow-md h-10"
+                {...register("title", {
+                  required: true,
+                  maxLength: 150,
+                  minLength: 4,
+                })}
+              />
             </div>
             <div className="grid gap-2 my-2">
               <label
@@ -162,102 +239,106 @@ function Administration() {
                 rows="10"
                 placeholder="Escriba aqui"
                 className="rounded-md shadow-md h-52 resize-none"
+                {...register("description", {
+                  required: true,
+                  maxLength: 500,
+                  minLength: 10,
+                })}
               />
             </div>
           </article>
 
-          <article className="w-full grid gap-2 pt-5">
-            <h3 className="text-base font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-2">
+          <article className="w-full grid gap-2 pt-5 px-3 tablet:px-6 desktop:px-10">
+            <h3 className="text-xl font-bold text-secundaryColor py-2">
               Agregar atributos
             </h3>
-            <div className="w-full tablet:w-11/12 grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-4 mx-auto bg-secundaryColor bg-opacity-10 px-8 py-4 pb-6 rounded-xl">
+            <div className="w-full grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 gap-4 bg-secundaryColor bg-opacity-10 px-8 py-4 pb-6 rounded-xl">
               <div className="flex gap-3 justify-center items-center">
                 <div className="flex gap-1 justify-center items-center">
-                  <span className="text-xl font-bold text-secundaryColor">
-                    IC
+                  <i className="uil uil-bed-double text-xl font-bold text-secundaryColor"></i>
+                  <span className="text-base text-secundaryColor">
+                    Habitaciones
                   </span>
-                  <span className="text-base text-secundaryColor">Nombre</span>
                 </div>
-                <select name="" id="" className="w-20 rounded-md">
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
-                  <option value="">10+</option>
+                <select
+                  name="rooms"
+                  id="rooms"
+                  className="w-20 rounded-md"
+                  {...register("rooms", {
+                    required: true,
+                  })}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10+">10+</option>
                 </select>
               </div>
 
               <div className="flex gap-3 justify-center items-center">
                 <div className="flex gap-1 justify-center items-center">
-                  <span className="text-xl font-bold text-secundaryColor">
-                    IC
-                  </span>
-                  <span className="text-base text-secundaryColor">Nombre</span>
+                  <i className="uil uil-bath text-xl font-bold text-secundaryColor"></i>
+                  <span className="text-base text-secundaryColor">Baños</span>
                 </div>
-                <select name="" id="" className="w-20 rounded-md">
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
-                  <option value="">10+</option>
+                <select
+                  name="bathrooms"
+                  id="bathrooms"
+                  className="w-20 rounded-md"
+                  {...register("bathrooms", {
+                    required: true,
+                  })}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10+">10+</option>
                 </select>
               </div>
 
               <div className="flex gap-3 justify-center items-center">
                 <div className="flex gap-1 justify-center items-center">
-                  <span className="text-xl font-bold text-secundaryColor">
-                    IC
+                  <i className="uil uil-tv-retro text-xl font-bold text-secundaryColor"></i>
+                  <span className="text-base text-secundaryColor">
+                    Televisores
                   </span>
-                  <span className="text-base text-secundaryColor">Nombre</span>
                 </div>
-                <select name="" id="" className="w-20 rounded-md">
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
-                  <option value="">10+</option>
-                </select>
-              </div>
-
-              <div className="flex gap-3 justify-center items-center">
-                <div className="flex gap-1 justify-center items-center">
-                  <span className="text-xl font-bold text-secundaryColor">
-                    IC
-                  </span>
-                  <span className="text-base text-secundaryColor">Nombre</span>
-                </div>
-                <select name="" id="" className="w-20 rounded-md">
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
-                  <option value="">10+</option>
+                <select
+                  name="televisions"
+                  id="televisions"
+                  className="w-20 rounded-md"
+                  {...register("televisions", {
+                    required: true,
+                  })}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10+">10+</option>
                 </select>
               </div>
             </div>
-            <div className="w-full tablet:w-11/12 mx-auto bg-secundaryColor bg-opacity-10 px-8 py-4 pb-6 rounded-xl">
-              <div className="w-full flex justify-around items-center gap-5">
-                <div className="w-4/5 grid grid-cols-1 desktop:grid-cols-2 gap-5">
+
+            <div className="w-full flex flex-col justify-center items-center mx-auto bg-secundaryColor bg-opacity-10 px-4 pt-4 pb-6 rounded-xl gap-5">
+              <div className="w-full flex justify-around items-center gap-2 tablet:gap-10">
+                <div className="w-full grid grid-cols-1 desktop:grid-cols-2 gap-2 tablet:gap-5 ">
                   <div className="grid gap-2">
                     <label htmlFor="" className="text-secundaryColor text-sm">
                       Nombre
@@ -268,6 +349,8 @@ function Administration() {
                       id="name"
                       placeholder="Wifi"
                       className="rounded-md shadow-md h-10"
+                      onChange={handleChangeNameFeatures}
+                      value={name}
                     />
                   </div>
                   <div className="grid gap-2">
@@ -280,12 +363,30 @@ function Administration() {
                       id="name"
                       placeholder="fa-wifi"
                       className="rounded-md shadow-md h-10"
+                      onChange={handleChangeIconFeatures}
+                      value={icon}
                     />
                   </div>
                 </div>
-                <button className="w-10 h-10 flex justify-center items-center text-3xl font-bold rounded-md bg-mainColor text-fourthColor hover:bg-opacity-70 shadow-md">
-                  <i className="fa-solid fa-plus"></i>
-                </button>
+                <div className="w-20 h-20 flex justify-center items-center">
+                  <button
+                    type="submit"
+                    className="w-10 h-10 flex justify-center items-center text-3xl font-bold rounded-md bg-mainColor text-fourthColor hover:bg-opacity-70 shadow-md"
+                    onClick={handleSubmitFeatures}
+                  >
+                    <i className="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <div className="w-full grid gap-2">
+                {features.map((item) => (
+                  <FeatureCard
+                    key={item.id}
+                    item={item}
+                    onUpdate={handleUpdateFeatures}
+                    onDelete={handleDeleteFeatures}
+                  />
+                ))}
               </div>
             </div>
           </article>
@@ -310,6 +411,11 @@ function Administration() {
                     rows="10"
                     placeholder="Escriba aqui"
                     className="rounded-md shadow-md h-52 resize-none"
+                    {...register("houseRules", {
+                      required: true,
+                      maxLength: 500,
+                      minLength: 8,
+                    })}
                   />
                 </div>
               </div>
@@ -322,12 +428,17 @@ function Administration() {
                     Descripción
                   </label>
                   <textarea
-                    name=" healthAndSafety"
+                    name="healthAndSafety"
                     id="healthAndSafety"
                     cols="30"
                     rows="10"
                     placeholder="Escriba aqui"
                     className="rounded-md shadow-md h-52 resize-none"
+                    {...register("healthAndSafety", {
+                      required: true,
+                      maxLength: 500,
+                      minLength: 8,
+                    })}
                   />
                 </div>
               </div>
@@ -346,54 +457,24 @@ function Administration() {
                     rows="10"
                     placeholder="Escriba aqui"
                     className="rounded-md shadow-md h-52 resize-none"
+                    {...register("cancellationPolicy", {
+                      required: true,
+                      maxLength: 500,
+                      minLength: 8,
+                    })}
                   />
                 </div>
               </div>
             </div>
           </article>
 
-          <article className="w-full grid gap-2 pt-5">
-            <h3 className="text-base font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-2">
-              Cargar imágenes
-            </h3>
-            <div className="w-full grid gap-5 px-8">
-              <label className="flex justify-center items-center rounded-md bg-mainColor bg-opacity-40 w-full h-28 tablet:h-44 hover:bg-opacity-70 text-secundaryColor">
-                <i className="fa-solid fa-file-arrow-up text-6xl"></i>
-                <input
-                  type="file"
-                  name="images"
-                  id="images"
-                  className=""
-                  hidden
-                  multiple
-                  onChange={changeInput}
-                />
-              </label>
-
-              <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-2">
-                {images.map((image) => {
-                  return (
-                    <div className="w-full grid justify-center border-2 border-mainColor rounded-md gap-1 p-1 mx-auto">
-                      <img
-                        src={image.url}
-                        alt=""
-                        className="w-screen h-52 rounded-md"
-                      />
-                      <div
-                        className="bg-redWarning text-fourthColor text-xl font-bold hover:bg-opacity-70 rounded-md flex justify-center items-center h-7"
-                        onClick={deleteImg.bind(this, image.index)}
-                      >
-                        <i className="fa-solid fa-xmark"></i>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </article>
+          <UploadImages images={images} setImages={setImages} />
 
           <article className="w-ful px-8 pt-10 pb-5 flex justify-center items-center">
-            <button className="w-80 tablet:w-96 h-12 tablet:h-16 bg-thirdColor rounded-md text-2xl text-white font-medium hover:bg-opacity-90">
+            <button
+              type="submit"
+              className="w-80 tablet:w-96 h-12 tablet:h-16 bg-thirdColor rounded-md text-2xl text-white font-medium hover:bg-opacity-90"
+            >
               Crear
             </button>
           </article>
