@@ -1,5 +1,6 @@
 package com.pi.relaxandenjoy.Service;
 
+import com.pi.relaxandenjoy.Dtos.ProductDTO;
 import com.pi.relaxandenjoy.Dtos.ReservationDTO;
 import com.pi.relaxandenjoy.Exceptions.BadRequestException;
 import com.pi.relaxandenjoy.Exceptions.NoContentException;
@@ -22,6 +23,8 @@ public class ProductService {
     private ProductRepository productRepository;
     private CityService cityService;
     private CategoryService categoryService;
+
+    private FeatureService featureService;
 
 
     @Autowired
@@ -66,7 +69,6 @@ public class ProductService {
             return listAll();
         }
     }
-
 
     public Set<Product> listAll() throws NoContentException {
         LOGGER.info("Starting Process: Searching all products...");
@@ -113,9 +115,26 @@ public class ProductService {
         }
     }
 
-    public Product create(Product product) {
-        LOGGER.info("Starting new product registration process: " + product.getTitle());
-        return productRepository.save(product);
+    public Product create(ProductDTO productDTO) throws ResourceNotFoundException {
+        LOGGER.info("Starting new product registration process: " + productDTO.getName());
+        City city = cityService.search(productDTO.getCity()).get();
+        Category category = categoryService.search(productDTO.getCategory()).get();
+        Set<Feature> setFeatures = productDTO.getFeature().stream().map(idfeature-> {
+            Feature newFeature = null;
+            try {
+                newFeature = featureService.search(idfeature).get();
+            } catch (ResourceNotFoundException e) {
+                LOGGER.warn("error, feature does not exist");
+            }
+            return newFeature;
+        }).collect(Collectors.toSet());
+        Set<Feature> featureSet = new HashSet<>();
+        if (!productDTO.getNewFeature().isEmpty()){
+            featureSet = featureService.create(productDTO.getNewFeature()).stream().collect(Collectors.toSet());
+        }
+        return productRepository.save(new Product(productDTO.getTitle(),productDTO.getName(),productDTO.getPopularity(),
+                "",productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSecurity(),productDTO.getPolitics(),
+                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures.addAll(featureSet),new HashSet<>(),new HashSet<>()));
     }
 
     public void delete(Long id) throws ResourceNotFoundException {

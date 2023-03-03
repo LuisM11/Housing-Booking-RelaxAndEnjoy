@@ -82,6 +82,24 @@ public class Product {
         this.images = images;
     }
 
+    public Product(String title, String name, Float popularity, String crimg, String address, String rules, String healthAndSecurity, String politics, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images, Set<Reservation> reservation) {
+        this.title = title;
+        this.name = name;
+        this.popularity = popularity;
+        this.crimg = crimg;
+        this.address = address;
+        this.rules = rules;
+        this.healthAndSecurity = healthAndSecurity;
+        this.politics = politics;
+        this.location = location;
+        this.description = description;
+        this.categories = categories;
+        this.city = city;
+        this.features = features;
+        this.images = images;
+        this.reservation = reservation;
+    }
+
     public Product() {
     }
 

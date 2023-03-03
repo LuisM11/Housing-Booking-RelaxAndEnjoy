@@ -1,6 +1,7 @@
 package com.pi.relaxandenjoy.Controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.pi.relaxandenjoy.Dtos.ProductDTO;
 import com.pi.relaxandenjoy.Dtos.ReservationDTO;
 import com.pi.relaxandenjoy.Exceptions.BadRequestException;
 import com.pi.relaxandenjoy.Exceptions.NoContentException;
@@ -55,7 +56,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> register(@RequestBody Product product) {
+    public ResponseEntity<?> register(@RequestBody ProductDTO product) {
         return ResponseEntity.ok(productService.create(product));
     }
 

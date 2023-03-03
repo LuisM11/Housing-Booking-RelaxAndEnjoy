@@ -6,7 +6,6 @@ import java.util.List;
 
 
 public class ProductDTO {
-    //Hay que hacer cambios en la base de datos apenas se termine el DTO
 
     private Long id;
     private Long city;
