@@ -50,7 +50,7 @@ public class WebSecurityConfig  {
                         .mvcMatchers(HttpMethod.GET,"/products/**","/cities/**","/categories/**").permitAll()
                         .mvcMatchers(HttpMethod.POST,"/auth/signup").permitAll()
                         .mvcMatchers("/reservations").hasAnyRole("ADMIN","SCHEDULER")
-                        .antMatchers("/s3Imgs").permitAll()
+                        .antMatchers("/s3Imgs", "/features").permitAll()
                         .anyRequest().authenticated()
                 )
 //                .userDetailsService(userDetails)
