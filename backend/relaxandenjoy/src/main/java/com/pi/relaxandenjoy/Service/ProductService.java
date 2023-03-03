@@ -28,10 +28,11 @@ public class ProductService {
 
 
     @Autowired
-    public ProductService( ProductRepository productRepository, CityService cityService, CategoryService categoryService) {
+    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService) {
         this.productRepository = productRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
+        this.featureService = featureService;
     }
 
     public Optional<Product> search(Long id) throws ResourceNotFoundException {
@@ -129,12 +130,14 @@ public class ProductService {
             return newFeature;
         }).collect(Collectors.toSet());
         Set<Feature> featureSet = new HashSet<>();
-        if (!productDTO.getNewFeature().isEmpty()){
+        if (productDTO.getNewFeature() != null && !productDTO.getNewFeature().isEmpty()){
             featureSet = featureService.create(productDTO.getNewFeature()).stream().collect(Collectors.toSet());
+
         }
+        setFeatures.addAll(featureSet);
         return productRepository.save(new Product(productDTO.getTitle(),productDTO.getName(),productDTO.getPopularity(),
                 "",productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSecurity(),productDTO.getPolitics(),
-                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures.addAll(featureSet),new HashSet<>(),new HashSet<>()));
+                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,null,null));
     }
 
     public void delete(Long id) throws ResourceNotFoundException {

@@ -48,7 +48,7 @@ public class WebSecurityConfig  {
                 .exceptionHandling(e -> e.authenticationEntryPoint(entryPoint))
                 .authorizeHttpRequests((authz) -> authz
                         .mvcMatchers(HttpMethod.GET,"/products/**","/cities/**","/categories/**").permitAll()
-                        .mvcMatchers(HttpMethod.POST,"/auth/signup").permitAll()
+                        .mvcMatchers(HttpMethod.POST,"/auth/signup","/products").permitAll()
                         .mvcMatchers("/reservations").hasAnyRole("ADMIN","SCHEDULER")
                         .antMatchers("/s3Imgs", "/features").permitAll()
                         .anyRequest().authenticated()

@@ -56,7 +56,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<?> register(@RequestBody ProductDTO product) {
+    public ResponseEntity<Product> register(@RequestBody ProductDTO product) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.create(product));
     }
 
