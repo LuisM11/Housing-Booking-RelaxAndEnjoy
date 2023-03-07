@@ -1,7 +1,6 @@
 package com.pi.relaxandenjoy.Controller;
 
 import com.pi.relaxandenjoy.Exceptions.ResourceNotFoundException;
-import com.pi.relaxandenjoy.Model.City;
 import com.pi.relaxandenjoy.Model.Feature;
 import com.pi.relaxandenjoy.Service.FeatureService;
 import org.springframework.beans.factory.annotation.Autowired;

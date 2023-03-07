@@ -5267,3 +5267,15 @@
 [2023-03-02 21:47:30] [ INFO ] [ProductService:119] Starting new product registration process: tolukeño Hotel
 [2023-03-02 21:50:01] [ INFO ] [ProductService:120] Starting new product registration process: tolukeño Hotel
 [2023-03-02 21:52:07] [ INFO ] [ProductService:120] Starting new product registration process: tolukeño Hotel
+[2023-03-06 17:39:32] [ INFO ] [ProductService:75] Starting Process: Searching all products...
+[2023-03-06 17:43:59] [ INFO ] [ProductService:120] Starting new product registration process: Hotel Las vegas
+[2023-03-06 17:44:57] [ INFO ] [ProductService:75] Starting Process: Searching all products...
+[2023-03-06 17:50:31] [ INFO ] [ProductService:120] Starting new product registration process: Hotel Las vegas
+[2023-03-06 18:08:07] [ INFO ] [ProductService:75] Starting Process: Searching all products...
+[2023-03-06 18:08:21] [ ERROR] [GlobalExceptions:18] We have an error: The product with id: 13 not found.
+[2023-03-06 18:09:57] [ ERROR] [GlobalExceptions:18] We have an error: The product with id: 13 not found.
+[2023-03-06 18:11:07] [ ERROR] [GlobalExceptions:18] We have an error: The product with id: 13 not found.
+[2023-03-06 18:28:31] [ WARN ] [ProductService:157] Product with id: 12 has been update
+[2023-03-06 18:32:51] [ WARN ] [ProductService:157] Product with id: 12 has been update
+[2023-03-06 18:38:41] [ WARN ] [ProductService:157] Product with id: 12 has been update
+[2023-03-06 18:50:13] [ ERROR] [GlobalExceptions:18] We have an error: The product with id: 13 not found.

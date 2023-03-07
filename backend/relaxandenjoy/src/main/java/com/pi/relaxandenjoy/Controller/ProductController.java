@@ -6,9 +6,7 @@ import com.pi.relaxandenjoy.Dtos.ReservationDTO;
 import com.pi.relaxandenjoy.Exceptions.BadRequestException;
 import com.pi.relaxandenjoy.Exceptions.NoContentException;
 import com.pi.relaxandenjoy.Exceptions.ResourceNotFoundException;
-import com.pi.relaxandenjoy.Model.Image;
 import com.pi.relaxandenjoy.Model.Product;
-import com.pi.relaxandenjoy.Model.Reservation;
 import com.pi.relaxandenjoy.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -64,5 +63,17 @@ public class ProductController {
     public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
         productService.delete(id);
         return ResponseEntity.ok("Product with id: " + id + " was removed");
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateProduct(@RequestBody Product product) throws ResourceNotFoundException{
+        Optional<Product> productSearched = productService.search(product.getId());
+        if (productSearched.isPresent()){
+            productService.update(product);
+            return ResponseEntity.ok("The product with ID: " + product.getId() + "has been update");
+        }
+        else {
+            return ResponseEntity.badRequest().body("Product with id: " + product.getId() + " is not found");
+        }
     }
 }
