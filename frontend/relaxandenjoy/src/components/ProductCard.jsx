@@ -16,7 +16,7 @@ function ProductCard({ item }) {
         <div className="h-13 flex justify-between">
           <aside>
             <span className="text-xs text-secundaryColor opacity-50">
-              {item.category}{" "}
+              {item.categories.title}{" "}
             </span>
             <span
               className={
@@ -78,10 +78,10 @@ function ProductCard({ item }) {
           <div>
             <i className="uil uil-map-marker"></i>
             <span className="text-secundaryColor text-sm font-medium max-w-[48%] h-fit pl-1">
-              {item.location.split(",")[0]}
+              {item.city.name}
             </span>
           </div>
-          <a href="" className="text-mainColor text-sm">
+          <a href="" className="text-mainColor font-bold text-sm">
             MOSTRAR EN EL MAPA
           </a>
         </div>
@@ -96,7 +96,7 @@ function ProductCard({ item }) {
             );
           })}
         </div>
-        <div className="h-20 font-medium text-[13px] flex items-end pb-2">
+        <div className="h-20 font-normal text-[13px] flex items-end pb-2">
           <p>
             {item.description.slice(0, 80) + "... "}
             <Link className="text-mainColor" to={`/Product/${item.id}`}>
@@ -107,7 +107,7 @@ function ProductCard({ item }) {
         </div>
         <Link
           to={`/Product/${item.id}`}
-          className="min-h-10 bg-mainColor flex justify-center items-center text-fourthColor text-lg font-bold rounded-md mb-1"
+          className="min-h-10 bg-mainColor flex justify-center items-center text-fourthColor text-lg font-semibold rounded-md mb-1"
         >
           Ver más
         </Link>

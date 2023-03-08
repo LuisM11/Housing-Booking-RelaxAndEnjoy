@@ -14,6 +14,7 @@ const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [reservationAttempt, setreservationAttempt] = useState(0);
 
+
   const getCategoriesList = async () => {
     return await axios
       .get("http://localhost:8080/categories")
@@ -22,6 +23,11 @@ const ContextProvider = ({ children }) => {
   const getCitiesList = async () => {
     return await axios
       .get("http://localhost:8080/cities")
+      .then((resp) => resp.data);
+  };
+  const getFeaturesList = async () => {
+    return await axios
+      .get("http://localhost:8080/features")
       .then((resp) => resp.data);
   };
 
@@ -77,6 +83,7 @@ const ContextProvider = ({ children }) => {
         getProductsByCategory,
         getProductsWithParams,
         getCitiesList,
+        getFeaturesList
       }}
     >
       <div>{children}</div>

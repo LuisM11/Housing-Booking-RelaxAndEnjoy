@@ -25,7 +25,7 @@ function FeatureCard({ item, onUpdate, onDelete }) {
     }
 
     return (
-      <form
+      <div
         onClick={handleSubmit}
         className="w-full flex border border-grayColor border-opacity-50 rounded-md p-3 tablet:p-5 gap-0 tablet:gap-5"
       >
@@ -51,7 +51,7 @@ function FeatureCard({ item, onUpdate, onDelete }) {
             <i className="fa-solid fa-check text-xl"></i>
           </button>
         </div>
-      </form>
+      </div>
     );
   }
 
@@ -61,13 +61,13 @@ function FeatureCard({ item, onUpdate, onDelete }) {
         <div className="w-full flex tablet:grid tablet:grid-cols-2 flex-col justify-center items-start gap-2 tablet:gap-6">
           <span
             onClick={() => setIsEdit(true)}
-            className="text-xl font-normal text-secundaryColor bg-white bg-opacity-70 rounded-md shadow-md pl-4 h-10 flex justify-start items-center w-full"
+            className="text-base font-normal text-secundaryColor bg-white bg-opacity-70 rounded-md shadow-md pl-4 h-10 flex justify-start items-center w-full"
           >
             {item.name}
           </span>
           <span
             onClick={() => setIsEdit(true)}
-            className="text-lg text-secundaryColor bg-white bg-opacity-70 rounded-md shadow-md pl-4 h-10 flex justify-start items-center w-full"
+            className="text-base text-secundaryColor bg-white bg-opacity-70 rounded-md shadow-md pl-4 h-10 flex justify-start items-center w-full"
           >
             {item.icon}
           </span>

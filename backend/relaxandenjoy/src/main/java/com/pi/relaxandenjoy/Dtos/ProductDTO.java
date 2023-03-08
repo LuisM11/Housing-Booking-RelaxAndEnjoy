@@ -1,10 +1,11 @@
 package com.pi.relaxandenjoy.Dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pi.relaxandenjoy.Model.Feature;
 
 import java.util.List;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDTO {
 
     private Long id;
@@ -16,13 +17,13 @@ public class ProductDTO {
     private String title;
     private String name;
     private String rules;
-    private String healthAndSecurity;
+    private String healthAndSafety;
     private String politics;
     private Float popularity;
     private List<Long> feature;
     private List<Feature> newFeature;
 
-    public ProductDTO(Long city, Long category, String address, String description, String location, String title, String name, String rules, String healthAndSecurity, String politics, Float popularity, List<Long> feature, List<Feature> newFeature) {
+    public ProductDTO(Long city, Long category, String address, String description, String location, String title, String name, String rules, String healthAndSafety, String politics, Float popularity, List<Long> feature, List<Feature> newFeature) {
         this.city = city;
         this.category = category;
         this.address = address;
@@ -31,11 +32,14 @@ public class ProductDTO {
         this.title = title;
         this.name = name;
         this.rules = rules;
-        this.healthAndSecurity = healthAndSecurity;
+        this.healthAndSafety = healthAndSafety;
         this.politics = politics;
         this.popularity = popularity;
         this.feature = feature;
         this.newFeature = newFeature;
+    }
+
+    public ProductDTO() {
     }
 
     public Long getId() {
@@ -110,12 +114,12 @@ public class ProductDTO {
         this.rules = rules;
     }
 
-    public String getHealthAndSecurity() {
-        return healthAndSecurity;
+    public String getHealthAndSafety() {
+        return healthAndSafety;
     }
 
-    public void setHealthAndSecurity(String healthAndSecurity) {
-        this.healthAndSecurity = healthAndSecurity;
+    public void setHealthAndSafety(String healthAndSafety) {
+        this.healthAndSafety = healthAndSafety;
     }
 
     public String getPolitics() {
@@ -149,4 +153,25 @@ public class ProductDTO {
     public void setNewFeature(List<Feature> newFeature) {
         this.newFeature = newFeature;
     }
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "city=" + city +
+                ", category=" + category +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", rules='" + rules + '\'' +
+                ", healthAndSafety='" + healthAndSafety + '\'' +
+                ", politics='" + politics + '\'' +
+                ", popularity=" + popularity +
+                ", feature=" + feature +
+                ", newFeature=" + newFeature +
+                '}';
+    }
 }
+
+

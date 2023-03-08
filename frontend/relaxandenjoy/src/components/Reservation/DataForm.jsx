@@ -166,13 +166,13 @@ function DataForm({ product }) {
             <div className="mb-2 block">
               <Label htmlFor="firstName" value="Nombre" />
             </div>
-            <input
+            <TextInput
               disabled
               id="firstName"
               name="firstName"
               type="text"
               value={user?.fullname.split(" ")[0]}
-              className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden"
+              /* className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden" */
             />
           </div>
 
@@ -180,13 +180,13 @@ function DataForm({ product }) {
             <div className="mb-2 block">
               <Label htmlFor="lastName" color="gray" value="Apellido" />
             </div>
-            <input
+            <TextInput
               disabled
               id="lastName"
               name="lastName"
               type="text"
               value={user?.fullname.split(" ")[1]}
-              className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden"
+              /* className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden" */
             />
           </div>
 
@@ -194,14 +194,14 @@ function DataForm({ product }) {
             <div className="mb-2 block">
               <Label htmlFor="email" value="Correo electrónico" />
             </div>
-            <input
+            <TextInput
               disabled
               id="email"
               type="email"
               name="email"
               required={true}
               value={user?.email}
-              className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden"
+              /* className="h-10 text-sm text-secundaryColor/70 tablet:text-base shadow rounded p-2 w-full mb-1 border-hidden" */
             />
           </div>
 
@@ -211,7 +211,6 @@ function DataForm({ product }) {
             </div>
             <select
               required
-              id="countries"
               value={cityform}
               onChange={(e) => {
                 setcityForm(e.target.value);

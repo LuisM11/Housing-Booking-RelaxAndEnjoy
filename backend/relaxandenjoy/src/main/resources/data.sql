@@ -7,8 +7,8 @@ VALUES (1,'25.000','https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8
 INSERT IGNORE INTO cities (id_cities,name) VALUES (1,'Tunja'),(2,'Manizales'),(3,'Medellin'), (4,'Santa Marta'), (5,'Bogota'), (6,'Cali'), (7,'San Andres');
 
 INSERT IGNORE INTO features (id_features,name,icon,quantity)
-VALUES (1,'Cocina','uil uil-restaurant',1),
-       (2,'Televisor','uil uil-tv-retro',1),
+VALUES (1,'Cocina','uil uil-restaurant',null),
+       (2,'Televisor','uil uil-tv-retro',null),
        (3,'Aire acondicionado','uil uil-snowflake',null),
        (4,'Apto mascotas','fa-solid fa-paw',null),
        (5,'Estacionamiento','fa-solid fa-car',null),

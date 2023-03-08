@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Controller } from "react-hook-form";
 
-function UploadImages({ images, setImages }) {
+function UploadImages({ images, setImages, control,setValue }) {
+  const inputRef = useRef();
+
   const changeInput = (e) => {
     let indexImg;
     if (images.length > 0) {
@@ -35,11 +38,19 @@ function UploadImages({ images, setImages }) {
     const newImgs = images.filter(function (element) {
       return element.index !== index;
     });
+    //Setting value to input
+    const dataT = new DataTransfer() 
+    newImgs.forEach(x=> {
+      dataT.items.add(x.file)
+    })
+    let newfiles = dataT.files
+    inputRef.current.files = newfiles
+    setValue("images", newImgs ); //Setting value to library react hook state
     setImages(newImgs);
   };
   return (
     <article className="w-full grid gap-2 pt-5">
-      <h3 className="text-base font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-2">
+      <h3 onClick={() => { console.log(inputRef) }} className="text-base font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-2">
         Cargar imágenes
       </h3>
       <div className="w-full grid gap-5 px-8">
@@ -51,14 +62,25 @@ function UploadImages({ images, setImages }) {
           }
         >
           <i className="fa-solid fa-file-arrow-up text-6xl"></i>
-          <input
-            type="file"
+          <Controller
+            control={control}
             name="images"
-            id="images"
-            className=""
-            hidden
-            multiple
-            onChange={changeInput}
+            rules={{ required: true, validate: (files) => files.length >= 5 }}
+            render={({ field, fieldState: { invalid, error } }) => (
+              <input
+                type="file"
+                name="images"
+                id="images"
+                className=""
+                hidden
+                ref={inputRef}
+                multiple
+                onChange={(e)=>{
+                  field.onChange([...e.target.files])
+                  changeInput(e)
+                }}
+              />
+            )}
           />
         </label>
 

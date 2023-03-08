@@ -1,21 +1,28 @@
 package com.pi.relaxandenjoy.Controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pi.relaxandenjoy.Dtos.ProductDTO;
 import com.pi.relaxandenjoy.Dtos.ReservationDTO;
 import com.pi.relaxandenjoy.Exceptions.BadRequestException;
 import com.pi.relaxandenjoy.Exceptions.NoContentException;
 import com.pi.relaxandenjoy.Exceptions.ResourceNotFoundException;
-import com.pi.relaxandenjoy.Model.Image;
+
 import com.pi.relaxandenjoy.Model.Product;
-import com.pi.relaxandenjoy.Model.Reservation;
+
 import com.pi.relaxandenjoy.Service.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -56,8 +63,11 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> register(@RequestBody ProductDTO product) throws ResourceNotFoundException {
-        return ResponseEntity.ok(productService.create(product));
+    public ResponseEntity<Product> register( @RequestPart(value = "product") ProductDTO product,@RequestPart(value = "files")  MultipartFile[] files) throws ResourceNotFoundException, IOException {
+        System.out.println(product);
+        Arrays.stream(files).forEach(x -> System.out.println(x.getOriginalFilename()));
+
+        return new ResponseEntity<>(productService.create(product,files), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")

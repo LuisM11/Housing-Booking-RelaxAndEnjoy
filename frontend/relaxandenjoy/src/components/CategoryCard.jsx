@@ -6,12 +6,12 @@ function CategoryCard({ item, selectedCategory, setSelectedCategory }) {
     <div
       className={
         selectedCategory === item.id
-          ? "w-full h-72 flex relative flex-col justify-center items-center shadow-xl rounded-lg bg-mainColor"
-          : "w-full h-72 flex flex-col justify-center items-center shadow-xl rounded-lg"
+          ? "w-full max-w-[400px] h-72 flex relative flex-col justify-center items-center shadow-xl rounded-lg bg-mainColor"
+          : "w-full max-w-[400px] h-72 flex flex-col justify-center items-center shadow-xl rounded-lg"
       }
     >
       <Link
-        className="h-full"
+        className="h-full w-full"
         to={`/Home/Categories/${item.id}`}
         onClick={() => setSelectedCategory(item.id)}
       >

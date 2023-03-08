@@ -98,7 +98,7 @@ function Seeker({ setSearchData, cities, setCities }) {
 
           <input
             type="submit"
-            className="text-base h-8 tablet:h-full bg-mainColor text-fourthColor tablet:text-lg rounded shadow-2xl hover:cursor-pointer"
+            className="text-base h-8 tablet:h-full bg-mainColor text-fourthColor font-semibold tablet:text-lg rounded shadow-2xl hover:cursor-pointer"
             value={"Buscar"}
           />
         </form>

@@ -27,8 +27,8 @@ public class Product {
     private String address;
     @Column
     private String rules;
-    @Column(name = "health_and_security")
-    private String healthAndSecurity;
+    @Column(name = "health_and_safety")
+    private String healthAndSafety;
     @Column
     private String politics;
     @Column
@@ -64,7 +64,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private Set<Reservation> reservation;
 
-    public Product(Long id, String title, String name, Float popularity, String crimg, String address, String rules, String healthAndSecurity, String politics, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images) {
+    public Product(Long id, String title, String name, Float popularity, String crimg, String address, String rules, String healthAndSafety, String politics, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -72,7 +72,7 @@ public class Product {
         this.crimg = crimg;
         this.address = address;
         this.rules = rules;
-        this.healthAndSecurity = healthAndSecurity;
+        this.healthAndSafety = healthAndSafety;
         this.politics = politics;
         this.location = location;
         this.description = description;
@@ -82,14 +82,14 @@ public class Product {
         this.images = images;
     }
 
-    public Product(String title, String name, Float popularity, String crimg, String address, String rules, String healthAndSecurity, String politics, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images, Set<Reservation> reservation) {
+    public Product(String title, String name, Float popularity, String crimg, String address, String rules, String healthAndSafety, String politics, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images, Set<Reservation> reservation) {
         this.title = title;
         this.name = name;
         this.popularity = popularity;
         this.crimg = crimg;
         this.address = address;
         this.rules = rules;
-        this.healthAndSecurity = healthAndSecurity;
+        this.healthAndSafety = healthAndSafety;
         this.politics = politics;
         this.location = location;
         this.description = description;
@@ -217,12 +217,12 @@ public class Product {
         this.rules = rules;
     }
 
-    public String getHealthAndSecurity() {
-        return healthAndSecurity;
+    public String getHealthAndSafety() {
+        return healthAndSafety;
     }
 
-    public void setHealthAndSecurity(String healthAndSecurity) {
-        this.healthAndSecurity = healthAndSecurity;
+    public void setHealthAndSafety(String healthAndSafety) {
+        this.healthAndSafety = healthAndSafety;
     }
 
     public String getPolitics() {

@@ -17,10 +17,9 @@ public class AWSImagesController {
     }
 
     @PostMapping
-    public ResponseEntity<String> uploadImages(@RequestPart(value = "file")MultipartFile file) throws IOException {
-        awsService.uploadImage(file);
-        return ResponseEntity.ok("yei" + file.getOriginalFilename());
-
+    public ResponseEntity<String> uploadImages(@RequestPart(value = "files")  MultipartFile [] files) throws IOException {
+        awsService.uploadImages(files);
+        return ResponseEntity.ok("yei" );
     }
 
 }

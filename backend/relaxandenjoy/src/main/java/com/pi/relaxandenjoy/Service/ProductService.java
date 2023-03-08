@@ -10,8 +10,11 @@ import com.pi.relaxandenjoy.Repository.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,14 +28,16 @@ public class ProductService {
     private CategoryService categoryService;
 
     private FeatureService featureService;
+    private AWSService awsService;
 
 
     @Autowired
-    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService) {
+    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService, AWSService awsService) {
         this.productRepository = productRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
         this.featureService = featureService;
+        this.awsService = awsService;
     }
 
     public Optional<Product> search(Long id) throws ResourceNotFoundException {
@@ -116,7 +121,8 @@ public class ProductService {
         }
     }
 
-    public Product create(ProductDTO productDTO) throws ResourceNotFoundException {
+    @Transactional
+    public Product create(ProductDTO productDTO, MultipartFile [] files) throws ResourceNotFoundException, IOException {
         LOGGER.info("Starting new product registration process: " + productDTO.getName());
         City city = cityService.search(productDTO.getCity()).get();
         Category category = categoryService.search(productDTO.getCategory()).get();
@@ -135,9 +141,12 @@ public class ProductService {
 
         }
         setFeatures.addAll(featureSet);
-        return productRepository.save(new Product(productDTO.getTitle(),productDTO.getName(),productDTO.getPopularity(),
-                "",productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSecurity(),productDTO.getPolitics(),
-                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,null,null));
+        List<Image> images = awsService.uploadImages(files);
+        Product responseProduct = productRepository.save(new Product(productDTO.getTitle(),productDTO.getName(),productDTO.getPopularity(),
+                images.get(0).getUrl(),productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSafety(),productDTO.getPolitics(),
+                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,new HashSet<>(images),null));
+
+        return  responseProduct;
     }
 
     public void delete(Long id) throws ResourceNotFoundException {

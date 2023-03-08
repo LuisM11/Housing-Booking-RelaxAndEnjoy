@@ -25,7 +25,7 @@ function Header() {
             title="Relájese y Disfrute"
             className="w-14"
           />
-          <span className="ml-2 text-sm text-secundaryColor italic font-thin hidden desktop:grid">
+          <span className="ml-2 text-sm text-secundaryColor  font-extralight hidden desktop:grid">
             El lugar para tu descanso y vacaciones
           </span>
         </Link>
@@ -66,13 +66,13 @@ function Header() {
           </div>
 
           <div className="grow flex flex-col justify-between">
-            <div className={user ? "hidden" : "flex flex-col gap-10 p-5"}>
+            <div className={user ? "hidden" : "flex flex-col gap-10 p-5 "}>
               <Link
                 to="/SignUp"
                 className={
                   selectMenu == 1
                     ? "hidden"
-                    : "text-base text-secundaryColor text-right"
+                    : "text-base text-secundaryColor text-right "
                 }
                 onClick={() => {
                   setSelectMenu(1);

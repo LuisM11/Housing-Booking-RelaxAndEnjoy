@@ -6,7 +6,7 @@ import { useGlobalContext } from "../context/GlobalContext";
 import Swal from "sweetalert2";
 
 function LogIn() {
-  window.scrollTo(0, 70);
+ 
   const {
     setSelectMenu,
     setUser,
