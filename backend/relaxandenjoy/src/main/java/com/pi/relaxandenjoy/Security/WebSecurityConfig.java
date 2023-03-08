@@ -49,6 +49,7 @@ public class WebSecurityConfig  {
                 .authorizeHttpRequests((authz) -> authz
                         .mvcMatchers(HttpMethod.GET,"/products/**","/cities/**","/categories/**").permitAll()
                         .mvcMatchers(HttpMethod.POST,"/auth/signup","/products").permitAll()
+                        .mvcMatchers(HttpMethod.PUT,"/products/update").permitAll()
                         .mvcMatchers("/reservations").hasAnyRole("ADMIN","SCHEDULER")
                         .antMatchers("/s3Imgs", "/features").permitAll()
                         .anyRequest().authenticated()

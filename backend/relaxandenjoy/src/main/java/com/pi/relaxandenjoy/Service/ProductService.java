@@ -159,6 +159,10 @@ public class ProductService {
         }
     }
 
+    public void update(Product product){
+        productRepository.save(product);
+    }
+
 //    @Transactional
 //    public Product saveParentAndChildren(Product parent) {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
