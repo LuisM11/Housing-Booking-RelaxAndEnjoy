@@ -61,7 +61,7 @@ function Seeker({ setSearchData, cities, setCities }) {
           
           className="h-20 font-bold grid items-center text-fourthColor text-2xl tablet:text-3xl desktop:text-4xl text-center tablet:py-5 desktop:py-0 leading-9"
         >
-          Busca ofertas en hoteles, casas y mucho mas
+          Busca ofertas en hoteles, casas y mucho más
         </h2>
         <form
           className="tablet:h-9 desktop:h-10 grid grid-rows-1 tablet:grid-cols-[2fr_2fr_1fr] gap-2 tablet:gap-3 desktop:gap-4 desktop:w-5/6 tablet:mx-auto "

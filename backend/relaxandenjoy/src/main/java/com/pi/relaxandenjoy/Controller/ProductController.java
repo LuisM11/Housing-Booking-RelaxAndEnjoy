@@ -47,6 +47,14 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProducts(init, end, cityId));
     }
 
+    @PostMapping
+    public ResponseEntity<Product> register( @RequestPart(value = "product") ProductDTO product,@RequestPart(value = "files")  MultipartFile[] files) throws ResourceNotFoundException, IOException {
+        System.out.println(product);
+        Arrays.stream(files).forEach(x -> System.out.println(x.getOriginalFilename()));
+
+        return new ResponseEntity<>(productService.create(product,files), HttpStatus.CREATED);
+    }
+
 
     @JsonView(ReservationDTO.JustDateTime.class)
     @GetMapping("/{idProduct}/reservation")
@@ -57,14 +65,6 @@ public class ProductController {
     @GetMapping("/category/{id}")
     public ResponseEntity<List<Product>> searchByCategory(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.searchByCategory(id));
-    }
-
-    @PostMapping
-    public ResponseEntity<Product> register( @RequestPart(value = "product") ProductDTO product,@RequestPart(value = "files")  MultipartFile[] files) throws ResourceNotFoundException, IOException {
-        System.out.println(product);
-        Arrays.stream(files).forEach(x -> System.out.println(x.getOriginalFilename()));
-
-        return new ResponseEntity<>(productService.create(product,files), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
