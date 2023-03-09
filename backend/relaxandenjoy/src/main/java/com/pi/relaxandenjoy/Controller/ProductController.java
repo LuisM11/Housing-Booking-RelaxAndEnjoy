@@ -67,7 +67,7 @@ public class ProductController {
         return new ResponseEntity<>(productService.create(product,files), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
         productService.delete(id);
         return ResponseEntity.ok("Product with id: " + id + " was removed");

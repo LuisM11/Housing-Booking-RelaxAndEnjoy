@@ -20,7 +20,7 @@ public class GlobalExceptions {
     }
     @ExceptionHandler({NoContentException.class})
     public ResponseEntity<String> NoResourcesYetTreatment  (NoContentException noContentException){
-        LOGGER.error("We have an error: " + noContentException.getMessage());
+        LOGGER.warn("Warning: " + noContentException.getMessage());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body((noContentException.getMessage()));
     }@ExceptionHandler({BadRequestException.class})
     public ResponseEntity<String> BadRequestTreatment (BadRequestException badRequestException){

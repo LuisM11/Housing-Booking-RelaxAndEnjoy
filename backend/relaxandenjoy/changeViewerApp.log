@@ -5854,3 +5854,6 @@
 [2023-03-09 08:40:58] [ INFO ] [ProductService:114] Starting process: Searching reservations of product 18
 [2023-03-09 08:40:58] [ ERROR] [GlobalExceptions:23] We have an error: No reservations registered for product with id18
 [2023-03-09 08:40:58] [ ERROR] [GlobalExceptions:23] We have an error: No reservations registered for product with id18
+[2023-03-09 09:08:26] [ INFO ] [ProductService:114] Starting process: Searching reservations of product 2
+[2023-03-09 09:08:33] [ INFO ] [ProductService:114] Starting process: Searching reservations of product 18
+[2023-03-09 09:08:34] [ WARN ] [GlobalExceptions:23] Warning: No reservations registered for product with id18
