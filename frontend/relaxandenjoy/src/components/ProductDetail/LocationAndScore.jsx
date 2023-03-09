@@ -5,7 +5,9 @@ function LocationAndScore({ product }) {
     <article className="w-full bg-secundaryColor bg-opacity-10 flex justify-between items-center px-3 tablet:px-6 desktop:px-10 py-3">
       <aside className="flex items-center gap-1">
         <i className="uil uil-map-marker text-2xl text-thirdColor"></i>{" "}
-        <span className="text-base text-secundaryColor">{product?.location}</span>
+        <span className="text-base text-secundaryColor">
+          {product?.location}
+        </span>
       </aside>
       <aside className="flex justify-center items-center gap-3">
         <div className="text-right">

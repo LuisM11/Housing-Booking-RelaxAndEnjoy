@@ -11,11 +11,18 @@ public class LoginResponseDTO{
     @JsonProperty("email")
     private String email;
 
-    public LoginResponseDTO(Long id, String fullname, String email) {
+    @JsonProperty("role")
+    private Long role;
+
+    public LoginResponseDTO(Long id, String fullname, String email, Long role) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
+        this.role = role;
+    }
 
+    public void setRole(Long role) {
+        this.role = role;
     }
 
     public void setId(Long id) {

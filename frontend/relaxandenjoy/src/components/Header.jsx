@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo2 from '../assets/ryd2.png'
-import Logo from "../assets/ryd.png";
+import Logo2 from "../assets/ryd2.png";
 
 import ProfileMenu from "./ProfileMenu";
 import ProfileDesktop from "./ProfileDesktop";
@@ -20,12 +19,17 @@ function Header() {
           className="flex gap-1 items-end"
           onClick={() => setSelectMenu(0)}
         >
-          <img src={Logo2} alt="Relájese y Disfrute" title="Relájese y Disfrute" className="w-14" />
-          {/* <img src={Lema} alt="" className="hidden h-4 desktop:grid" /> */}
-          <span className="ml-2 text-sm text-secundaryColor italic font-thin hidden desktop:grid" >El lugar para tu descanso y vacaciones</span>
-
+          <img
+            src={Logo2}
+            alt="Relájese y Disfrute"
+            title="Relájese y Disfrute"
+            className="w-14"
+          />
+          <span className="ml-2 text-sm text-secundaryColor  font-extralight hidden desktop:grid">
+            El lugar para tu descanso y vacaciones
+          </span>
         </Link>
-        
+
         <aside
           className={
             toggleMenu
@@ -34,8 +38,10 @@ function Header() {
           }
         >
           <div className="h-52 bg-mainColor flex flex-col justify-between px-5 pt-5 pb-2">
-            <i className="uil uil-times text-2xl text-fourthColor"
-              onClick={() => setToggleMenu(!toggleMenu)}></i>
+            <i
+              className="uil uil-times text-2xl text-fourthColor"
+              onClick={() => setToggleMenu(!toggleMenu)}
+            ></i>
             {user === null ? (
               <h2 className="text-fourthColor text-right font-bold text-xl">
                 MENÚ
@@ -45,14 +51,28 @@ function Header() {
             )}
           </div>
 
+          <div
+            className={
+              user?.role === 1 ? "flex justify-end px-5 py-8" : "hidden"
+            }
+          >
+            <Link
+              to="/Administracion"
+              className="text-base font-bold text-secundaryColor"
+              onClick={() => setToggleMenu(!toggleMenu)}
+            >
+              Administración
+            </Link>
+          </div>
+
           <div className="grow flex flex-col justify-between">
-            <div className={user ? "hidden" : "flex flex-col gap-10 p-5"}>
+            <div className={user ? "hidden" : "flex flex-col gap-10 p-5 "}>
               <Link
                 to="/SignUp"
                 className={
                   selectMenu == 1
                     ? "hidden"
-                    : "text-base text-secundaryColor text-right"
+                    : "text-base text-secundaryColor text-right "
                 }
                 onClick={() => {
                   setSelectMenu(1);
@@ -61,7 +81,7 @@ function Header() {
               >
                 Crear cuenta
               </Link>
-              
+
               <Link
                 to="/Login"
                 className={

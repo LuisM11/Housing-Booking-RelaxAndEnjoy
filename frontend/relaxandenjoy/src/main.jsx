@@ -13,6 +13,7 @@ import ProductsContainer from "./routes/ProductsContainer";
 import CategorizedProducts from "./routes/CategorizedProducts";
 import SearchedProducts from "./routes/SearchedProducts";
 import Reservation from "./routes/Reservation";
+import Administration from "./routes/Administration";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -20,15 +21,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ContextProvider>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="Home" element={<Home />} >
-              <Route index element = {<ProductsContainer/>} />
-              <Route path="Categories/:id" element={<CategorizedProducts/>}/>
-              <Route path="Search" element={<SearchedProducts/>}/>
+            <Route path="Home" element={<Home />}>
+              <Route index element={<ProductsContainer />} />
+              <Route path="Categories/:id" element={<CategorizedProducts />} />
+              <Route path="Search" element={<SearchedProducts />} />
             </Route>
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Login" element={<LogIn />} />
             <Route path="/Product/:id" element={<ProductDetail />} />
             <Route path="/Reservation/:id" element={<Reservation />} />
+            <Route path="/Administracion" element={<Administration />} />
           </Route>
         </Routes>
       </ContextProvider>

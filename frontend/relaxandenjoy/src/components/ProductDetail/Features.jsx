@@ -1,7 +1,6 @@
 import React from "react";
 
 function Features({ features }) {
-  
   return (
     <article className="w-full py-4">
       <div className="px-3 tablet:px-6 desktop:px-10 pb-4">
@@ -16,11 +15,12 @@ function Features({ features }) {
             <div key={index} className="w-[180px] h-10 flex gap-2 items-center">
               <i className={`${ft.icon} text-2xl text-thirdColor`}></i>
               <span className="text-sm text-grayColor">{ft.name}</span>
-              <span className={`${ft.quantity === 0 ? "hidden": "grid"}`}>{ft.quantity}</span>
+              <span className={`${ft.quantity === 0 ? "hidden" : "grid"}`}>
+                {ft.quantity}
+              </span>
             </div>
           );
         })}
-
       </div>
     </article>
   );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,39 +7,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', 'sans-serif';
+  /* font-family:'Poppins'; */
 }
-
 
 .my-time-picker-popup button {
   background-color: #1890ff;
 }
 
-
-@media(max-width: 576px) { 
-  .ant-picker-panels { 
+@media (max-width: 576px) {
+  .ant-picker-panels {
     flex-direction: column;
-  } 
+  }
 }
-
-
-/* .Cutom-skeleton{
-  background-color: #f2f2f2; 
-  animation: skeleton 1.5s ease-in-out infinite; 
-}
-@keyframes skeleton {
-  0% {
-    background-color: #f2f2f2;
-  }
-  50% {
-    background-color: #e6e6e6; 
-  }
-  100% {
-    background-color: #f2f2f2; 
-  }
-  
-} */
-
-
-
-

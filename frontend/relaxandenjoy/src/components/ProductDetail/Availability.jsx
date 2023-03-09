@@ -1,60 +1,58 @@
-import React,{useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGlobalContext } from "../../context/GlobalContext";
 import Swal from "sweetalert2";
-import { useState } from "react";
-import moment from 'moment'
+import moment from "moment";
 
 function Availability({ product }) {
-  const {setreservationAttempt, getProductReservations,user} =useGlobalContext()
-  const [currentReservations, setcurrentReservations] = useState([])
-  const navigate = useNavigate()
-  const param = useParams()
+  const { setreservationAttempt, getProductReservations, user } =
+    useGlobalContext();
+  const [currentReservations, setcurrentReservations] = useState([]);
+  const navigate = useNavigate();
+  const param = useParams();
 
-  const redirectReservation = () =>{
-    if(user == null){
+  const redirectReservation = () => {
+    if (user == null) {
       Swal.fire({
-        icon: 'warning',
-        title: '¡Recuerda loguearte!',
+        icon: "warning",
+        title: "¡Recuerda loguearte!",
         showConfirmButton: false,
-        timer: 3000
-      })
-      navigate('/Login')
-      setreservationAttempt(product?.id)
-    }else{
-      navigate(`/Reservation/${product.id}`)
+        timer: 3000,
+      });
+      navigate("/Login");
+      setreservationAttempt(product?.id);
+    } else {
+      navigate(`/Reservation/${product.id}`);
     }
-  }
-  const reservationsFetch = async ()=>{
-    const reservations = await getProductReservations(param.id)
-    if(reservations.status == 200){
-
-      setcurrentReservations(reservations.data)
+  };
+  const reservationsFetch = async () => {
+    const reservations = await getProductReservations(param.id);
+    if (reservations.status == 200) {
+      setcurrentReservations(reservations.data);
     }
-    /* console.log(product,"reservations") */
-  }
+  };
 
   useEffect(() => {
-    reservationsFetch()
-  }, [])
-  
-  const disableCalendar = ({date}) => {
-    let bool
-    let daysBefore = moment(date) <  moment( new Date()).subtract(1,'day')
-    currentReservations?.every( x => {
-      let startDate = new Date(x.initDate)
-      let endDate = new Date(x.finaltDate)
-      
+    reservationsFetch();
+  }, []);
 
-      if(date && endDate && startDate){
-        bool =  moment(date) >= moment(startDate).add(1,'day').startOf('day') && moment(date) <= moment(endDate).add(1,'day').endOf('day')
-      } 
-      return !bool
-    })
-    return ( daysBefore || bool)
-  }
- 
+  const disableCalendar = ({ date }) => {
+    let bool;
+    let daysBefore = moment(date) < moment(new Date()).subtract(1, "day");
+    currentReservations?.every((x) => {
+      let startDate = new Date(x.initDate);
+      let endDate = new Date(x.finaltDate);
+
+      if (date && endDate && startDate) {
+        bool =
+          moment(date) >= moment(startDate).add(1, "day").startOf("day") &&
+          moment(date) <= moment(endDate).add(1, "day").endOf("day");
+      }
+      return !bool;
+    });
+    return daysBefore || bool;
+  };
 
   return (
     <section className="w-full bg-secundaryColor bg-opacity-10 px-3 tablet:px-6 desktop:px-10 py-4">
@@ -63,9 +61,12 @@ function Availability({ product }) {
           Fechas disponibles
         </h2>
         <div className="w-full flex flex-col desktop:flex-row desktop:items-center gap-5">
-          <Calendar tileDisabled={disableCalendar} className="w-full grid tablet:hidden tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor mx-auto" />
           <Calendar
-          tileDisabled={disableCalendar}
+            tileDisabled={disableCalendar}
+            className="w-full grid tablet:hidden tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor mx-auto"
+          />
+          <Calendar
+            tileDisabled={disableCalendar}
             showDoubleView
             className="w-[420px] hidden tablet:grid tablet:w-full desktop:w-[65%] rounded-b-lg desktop:rounded-lg shadow-md p-5 border-none text-thirdColor"
           />

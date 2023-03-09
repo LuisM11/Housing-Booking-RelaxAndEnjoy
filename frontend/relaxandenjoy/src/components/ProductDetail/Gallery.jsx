@@ -25,7 +25,7 @@ function Gallery({ images }) {
       </article>
 
       <div className=" h-60 tablet:h-128 w-full desktop:hidden">
-        <Carousel >
+        <Carousel>
           {images?.map((image) => (
             <img key={image.id} src={image?.url} alt="..." />
           ))}
@@ -46,9 +46,9 @@ function Gallery({ images }) {
           ></i>
         </div>
         <div className="h-[600px] w-3/4 p-10">
-          <Carousel >
+          <Carousel>
             {images?.map((image) => (
-              <img  key={image.id} src={image?.url} alt="..." />
+              <img key={image.id} src={image?.url} alt="..." />
             ))}
           </Carousel>
         </div>

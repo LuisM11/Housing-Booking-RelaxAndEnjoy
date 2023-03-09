@@ -1,13 +1,9 @@
 package com.pi.relaxandenjoy.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 
 //@JsonIgnoreProperties({"productxfeature"})
@@ -27,6 +23,14 @@ public class Product {
     private Float popularity;
     @Column
     private String crimg;
+    @Column
+    private String address;
+    @Column
+    private String rules;
+    @Column(name = "health_and_safety")
+    private String healthAndSafety;
+    @Column
+    private String politics;
     @Column
     private String location;
     @Column
@@ -60,12 +64,16 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private Set<Reservation> reservation;
 
-    public Product(Long id, String title, String name, Float popularity, String crimg, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images) {
+    public Product(Long id, String title, String name, Float popularity, String crimg, String address, String rules, String healthAndSafety, String politics, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images) {
         this.id = id;
         this.title = title;
         this.name = name;
         this.popularity = popularity;
         this.crimg = crimg;
+        this.address = address;
+        this.rules = rules;
+        this.healthAndSafety = healthAndSafety;
+        this.politics = politics;
         this.location = location;
         this.description = description;
         this.categories = categories;
@@ -74,8 +82,28 @@ public class Product {
         this.images = images;
     }
 
+    public Product(String title, String name, Float popularity, String crimg, String address, String rules, String healthAndSafety, String politics, String location, String description, Category categories, City city, Set<Feature> features, Set<Image> images, Set<Reservation> reservation) {
+        this.title = title;
+        this.name = name;
+        this.popularity = popularity;
+        this.crimg = crimg;
+        this.address = address;
+        this.rules = rules;
+        this.healthAndSafety = healthAndSafety;
+        this.politics = politics;
+        this.location = location;
+        this.description = description;
+        this.categories = categories;
+        this.city = city;
+        this.features = features;
+        this.images = images;
+        this.reservation = reservation;
+    }
+
     public Product() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -171,6 +199,38 @@ public class Product {
 
     public void setImages(Set<Image> images) {
         this.images = images;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
+    }
+
+    public String getHealthAndSafety() {
+        return healthAndSafety;
+    }
+
+    public void setHealthAndSafety(String healthAndSafety) {
+        this.healthAndSafety = healthAndSafety;
+    }
+
+    public String getPolitics() {
+        return politics;
+    }
+
+    public void setPolitics(String politics) {
+        this.politics = politics;
     }
 
     @Override

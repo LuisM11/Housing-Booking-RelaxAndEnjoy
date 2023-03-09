@@ -2,8 +2,6 @@ package com.pi.relaxandenjoy.Controller;
 
 import com.pi.relaxandenjoy.Dtos.ReservationDTO;
 import com.pi.relaxandenjoy.Exceptions.ResourceNotFoundException;
-import com.pi.relaxandenjoy.Model.Category;
-import com.pi.relaxandenjoy.Model.Reservation;
 import com.pi.relaxandenjoy.Service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -20,7 +20,7 @@ function ProductDetail() {
   const [images, setImages] = useState([]);
 
   const getProduct = async (id) => {
-    window.scrollTo(0, 68)
+    window.scrollTo(0, 68);
     const resp = await getProductById(id);
     setProduct(resp);
     setImages(resp.images);
@@ -30,6 +30,7 @@ function ProductDetail() {
   useEffect(() => {
     getProduct(id);
   }, []);
+  
   return (
     <>
       <section className="w-full h-full">
@@ -43,7 +44,7 @@ function ProductDetail() {
               <i className="uil uil-heart text-2xl desktop:text-3xl text-thirdColor"></i>
             </div>
 
-            <Gallery images={images}/>
+            <Gallery images={images} />
 
             <article className="w-full px-3 tablet:px-6 desktop:px-10 py-5">
               <h2 className="text-2xl font-bold text-secundaryColor mb-5">
@@ -55,9 +56,8 @@ function ProductDetail() {
         </section>
 
         <Features features={features} />
-        
 
-        {product ? <Availability product={product} /> : undefined }
+        {product ? <Availability product={product} /> : undefined}
 
         <article className="w-full grid justify-center items-center px-3 tablet:px-6 desktop:px-10 py-8">
           <h2 className="text-2xl font-bold text-secundaryColor mb-5">
@@ -69,7 +69,7 @@ function ProductDetail() {
             className="tablet:w-full h-full rounded-lg"
           />
         </article>
-        <Policies />
+        <Policies product = {product} />
       </section>
     </>
   );

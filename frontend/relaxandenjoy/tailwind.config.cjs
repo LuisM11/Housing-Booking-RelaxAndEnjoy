@@ -17,7 +17,7 @@ module.exports = {
       white: "#fff",
     },
     fontFamily: {
-      poppins: ["Poppins", "sans-serif"],
+      poppins: ['Poppins']
     },
     screens: {
       tablet: "768px",
@@ -30,6 +30,9 @@ module.exports = {
       spacing: {
         128: "31rem",
       },
+      boxShadow:{
+        'customI': '0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 2px 6px 2px rgba(60, 64, 67, 0.15)'
+      }
     },
   },
   plugins: [require("flowbite/plugin")],

@@ -56,7 +56,7 @@ public class SecurityUser implements UserDetails {
     public Long getId(){
         return user.getId();
     }
-//    public String getCity(){
-//        return user.getCity().getName();
-//    }
+
+    public Long getRole(){return user.getRole().getId();}
+
 }

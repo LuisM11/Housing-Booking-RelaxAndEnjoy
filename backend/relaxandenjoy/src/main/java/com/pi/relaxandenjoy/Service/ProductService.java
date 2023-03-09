@@ -1,5 +1,6 @@
 package com.pi.relaxandenjoy.Service;
 
+import com.pi.relaxandenjoy.Dtos.ProductDTO;
 import com.pi.relaxandenjoy.Dtos.ReservationDTO;
 import com.pi.relaxandenjoy.Exceptions.BadRequestException;
 import com.pi.relaxandenjoy.Exceptions.NoContentException;
@@ -9,10 +10,12 @@ import com.pi.relaxandenjoy.Repository.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.threeten.extra.LocalDateRange;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import javax.transaction.Transactional;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,12 +27,17 @@ public class ProductService {
     private CityService cityService;
     private CategoryService categoryService;
 
+    private FeatureService featureService;
+    private AWSService awsService;
+
 
     @Autowired
-    public ProductService( ProductRepository productRepository, CityService cityService, CategoryService categoryService) {
+    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService, AWSService awsService) {
         this.productRepository = productRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
+        this.featureService = featureService;
+        this.awsService = awsService;
     }
 
     public Optional<Product> search(Long id) throws ResourceNotFoundException {
@@ -67,7 +75,6 @@ public class ProductService {
             return listAll();
         }
     }
-
 
     public Set<Product> listAll() throws NoContentException {
         LOGGER.info("Starting Process: Searching all products...");
@@ -114,9 +121,32 @@ public class ProductService {
         }
     }
 
-    public Product create(Product product) {
-        LOGGER.info("Starting new product registration process: " + product.getTitle());
-        return productRepository.save(product);
+    @Transactional
+    public Product create(ProductDTO productDTO, MultipartFile [] files) throws ResourceNotFoundException, IOException {
+        LOGGER.info("Starting new product registration process: " + productDTO.getName());
+        City city = cityService.search(productDTO.getCity()).get();
+        Category category = categoryService.search(productDTO.getCategory()).get();
+        Set<Feature> setFeatures = productDTO.getFeature().stream().map(idfeature-> {
+            Feature newFeature = null;
+            try {
+                newFeature = featureService.search(idfeature).get();
+            } catch (ResourceNotFoundException e) {
+                LOGGER.warn("error, feature does not exist");
+            }
+            return newFeature;
+        }).collect(Collectors.toSet());
+        Set<Feature> featureSet = new HashSet<>();
+        if (productDTO.getNewFeature() != null && !productDTO.getNewFeature().isEmpty()){
+            featureSet = featureService.create(productDTO.getNewFeature()).stream().collect(Collectors.toSet());
+
+        }
+        setFeatures.addAll(featureSet);
+        List<Image> images = awsService.uploadImages(files);
+        Product responseProduct = productRepository.save(new Product(productDTO.getTitle(),productDTO.getName(),productDTO.getPopularity(),
+                images.get(0).getUrl(),productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSafety(),productDTO.getPolitics(),
+                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,new HashSet<>(images),null));
+
+        return  responseProduct;
     }
 
     public void delete(Long id) throws ResourceNotFoundException {
@@ -127,6 +157,10 @@ public class ProductService {
         } else {
             throw new ResourceNotFoundException("Product with id: " + id + " not found.");
         }
+    }
+
+    public void update(Product product){
+        productRepository.save(product);
     }
 
 //    @Transactional
