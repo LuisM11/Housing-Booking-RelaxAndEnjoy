@@ -23,7 +23,7 @@ function UploadImages({ images, setImages, control,setValue }) {
       const file = files[i];
       let url = URL.createObjectURL(file);
       arrayImages.push({
-        id: crypto.randomUUID(),
+        /* id: crypto.randomUUID(), */
         index: indexInicial,
         name: file.name,
         url,
