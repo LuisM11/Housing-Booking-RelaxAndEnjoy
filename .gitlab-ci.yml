@@ -1,7 +1,68 @@
-deploy frd:
-  stage: deploy
-  when: manual
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  script: 
-    -aws configure set region us-east-2
-    -aws s3 cp frontend/relaxandenjoy/ s3://$FRONTEND_S3
+stages:
+   - build
+   - deploy
+
+
+build front_ryd:  
+   image: node:latest
+   stage: build  
+   only:    
+      - main  
+   script:
+      - "cd frontend/relaxandenjoy"  
+      - npm install      
+      - npm run build  
+   artifacts:    
+      paths:          
+         - frontend/relaxandenjoy/dist/    
+      expire_in: 2 hour
+
+build backend_ryd:
+   stage: build
+   image: maven:3-openjdk-17
+   script:
+      - echo "Building R&D api"
+      - "cd backend/relaxandenjoy"
+      - "mvn clean install"
+      - echo "The process has finished"
+   artifacts:
+      expire_in: 2 hour
+      paths:
+         - ./backend/relaxandenjoy/target/relaxandenjoy-0.0.1-SNAPSHOT.jar
+   only:
+      - main   
+
+
+    
+deploy front_ryd:
+   image: python:latest
+   stage: deploy
+   only:
+      - main
+   script:
+      - pip install --upgrade pip
+      - pip install awscli
+      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - aws s3 sync frontend/relaxandenjoy/dist/ s3://$FRONTEND_S3
+
+deploy backend_ryd:
+   stage: deploy
+   image: alpine:3.11
+   only:
+      - main
+   before_script:
+      - apk update && apk add openssh-client bash
+      - mkdir -p ~/.ssh
+      - eval $(ssh-agent -s)
+      - echo "$BACKEND_KEY" | tr -d '\r' | ssh-add - > /dev/null
+      - touch ~/.ssh/config
+      - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+      - ssh-keyscan -H $SERVER_IPV4 >> ~/.ssh/known_hosts
+   script:
+      - echo "Deploying R&D"
+      - ssh ubuntu@$SERVER_IPV4 "sudo systemctl stop ryd2.service"
+      - scp backend/relaxandenjoy/target/relaxandenjoy-0.0.1-SNAPSHOT.jar ubuntu@$SERVER_IPV4:~/rydImage/ 
+      - ssh ubuntu@$SERVER_IPV4 "sudo systemctl start ryd2.service"
+      - echo "The process has finished"
+   
