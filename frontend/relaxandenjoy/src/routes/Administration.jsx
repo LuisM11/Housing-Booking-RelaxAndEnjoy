@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import Swal from "sweetalert2";
 import FeatureCard from "../components/Administration/FeatureCard";
 import UploadImages from "../components/Administration/UploadImages";
 import axios from "axios";
 import { useGlobalContext } from "../context/GlobalContext";
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+
+const antIcon = (
+  <LoadingOutlined
+    style={{
+      fontSize: 24,
+    }}
+    spin
+  />)
 
 function Administration() {
+
+  const nav = useNavigate()
+  const  [isFetching, setisFetching] = useState(false)
   const { user, CategoriesList, getCitiesList, getFeaturesList } = useGlobalContext();
   const navigate = useNavigate();
 
@@ -33,7 +46,7 @@ function Administration() {
   } = useForm();
 
   useEffect(() => {
-    if (user === null) {
+    if (user === null || user.role != 1) {
       navigate("/Login");
     } else {
       (async () => {
@@ -50,13 +63,16 @@ function Administration() {
     const featuresList = []
     const newFeaturesList = []
     for (let feature of uniquefetchFeatures) {
-      if (["Habitacion", "Baño"].includes(feature.name)) { // Specific cases for rooms and baths since they're not checkbox
-        if (fetchFeatures.some(f => f.quantity == data[feature.name] && f.name == feature.name)) { //check if there is an existent entry with that quantity
+      if (["Habitacion", "Baño"].includes(feature.name)) {
+        if (data[feature.name] === null || data[feature.name] == 0) {// Specific cases for rooms and baths since they're not checkbox
+          //baths or rooms with zero cant create any new feature or be assigned to some exisent feature
+        }
+        else if (fetchFeatures.some(f => f.quantity == data[feature.name] && f.name == feature.name)) { //check if there is an existent entry with that quantity
           featuresList.push(feature.id)
         } else {
           const clonedFeature = structuredClone(feature)  //'feature' object serves as basis to create new object which will be send in the request
           delete clonedFeature.id           //id will be setted in the backend 
-          clonedFeature.quantity = data[feature.name] == 0 ? null: data[feature.name]   //setting quantity specified in the form
+          clonedFeature.quantity = data[feature.name] == 0 ? null : data[feature.name]   //setting quantity specified in the form
           newFeaturesList.push(clonedFeature)
         }
       }
@@ -69,48 +85,66 @@ function Administration() {
     console.log(newFeaturesList);
     console.log(features) */
 
-    data = {...data, feature:featuresList,newFeature:[...newFeaturesList,...features]} //Adapting data object to DTO: union of newfeatures and  features as both of them have new entries
+    data = { ...data, feature: featuresList, newFeature: [...newFeaturesList, ...features] } //Adapting data object to DTO: union of newfeatures and  features as both of them have new entries
     const imagesList = structuredClone(data.images)
     delete data.images
 
     data.category = parseInt(data.category)
     data.city = parseInt(data.city)
     data.popularity = parseFloat(data.popularity)
-    
 
-    requestNewProduct(data,imagesList)
+
+    requestNewProduct(data, imagesList)
 
     setFeatures([]);
     setImages([]);
     /* reset(); */
   };
 
-  const requestNewProduct = (productDTO,imagesList) => {
+  const requestNewProduct = (productDTO, imagesList) => {
+    setisFetching(true)
     let formData = new FormData();
-    formData.append('product', new Blob ([JSON.stringify(productDTO)],{type: 'application/json'}))
+    formData.append('product', new Blob([JSON.stringify(productDTO)], { type: 'application/json' }))
     imagesList.forEach(i => {
-      formData.append('files',i)
+      formData.append('files', i)
     })
     console.log(formData.getAll('files'))
     console.log(formData.get('product'))
     axios
-            .post('http://localhost:8080/products', //3.145.6.239
-              formData
-              , {
-                withCredentials: false,
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                  Authorization: user.Authorization
-                  
-                },
-                mode: 'cors'
-              }
-            ).then(res => {
-              console.log(res)
-              return res
-            }).catch(e => {
-              console.log(e)
-            })
+      .post('http://localhost:8080/products', //3.145.6.239
+        formData
+        , {
+          withCredentials: false,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: user.Authorization
+
+          },
+          mode: 'cors'
+        }
+      ).then(res => {
+        console.log(res)
+        if (res.status === 201) {
+          setisFetching(false)
+          Swal.fire({
+            icon: "success",
+            title: `Producto ${res.data.name} creado con éxito !`,
+            showConfirmButton: false,
+            timer: 5000,
+          });
+          nav(`/Product/${res.data.id}`)
+        }
+      }).catch(e => {
+        console.log(e)
+        Swal.fire({
+          icon: "error",
+          title: "Oh no...",
+          text: "Lamentablemente el producto no ha podido crearse. Por favor, intente más tarde",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setisFetching(false)
+      })
 
   }
 
@@ -124,14 +158,14 @@ function Administration() {
       return false
 
     })
-    let reubication = uniques.splice(-3, 1)
-    uniques.unshift(reubication[0]) // bath to second place
-    reubication = uniques.splice(-3, 1)
-    uniques.unshift(reubication[0]) // rooms to first place
-
-
+    //Reubication of bath and room features to first places 
+    const baths = uniques.splice(uniques.findIndex(x => x.name === "Baño"), 1)[0]
+    uniques.unshift(baths)
+    const rooms = uniques.splice(uniques.findIndex(x => x.name === "Habitacion"), 1)[0]
+    uniques.unshift(rooms)
     return uniques
   }
+
 
   function handleChangeNameFeatures(e) {
     setName(e.target.value);
@@ -387,11 +421,11 @@ function Administration() {
             <h3 className="text-xl font-bold text-secundaryColor py-2">
               Agregar atributos
             </h3>
-            <div className="w-full grid grid-cols-1 tablet:grid-cols-3 desktop:grid-cols-4 gap-3 bg-secundaryColor bg-opacity-10 px-8 py-4 pb-6 rounded-xl">
+            <div className="w-full grid grid-cols-1 tablet:grid-cols-3 desktop:grid-cols-4 gap-4 bg-secundaryColor bg-opacity-10 px-8 py-4 pb-6 rounded-xl">
               {uniquefetchFeatures.map(feature => {
                 if (feature["name"] == "Habitacion" || feature["name"] == "Baño") {
                   return (
-                    <div key={feature.id} className="flex gap-3 justify-between tablet:justify-start items-center h-9 tablet:pl-[30%]">
+                    <div key={feature.id} className="flex gap-3 justify-between tablet:justify-start items-center h-9 ">
                       <div className="flex gap-1 justify-center items-center tablet:order-1">
                         <i className={"text-xl font-bold text-secundaryColor " + feature.icon}></i>
                         <span className="text-base text-secundaryColor">
@@ -413,7 +447,7 @@ function Administration() {
                   )
                 } else {
                   return (
-                    <div key={feature.id} className="flex gap-3 justify-between tablet:justify-start items-center h-9 tablet:pl-[30%]">
+                    <div key={feature.id} className="flex gap-3 justify-between tablet:justify-start items-center h-9 ">
                       <div className="flex gap-1 justify-center items-center tablet:order-1">
                         <i className={"text-xl font-bold text-secundaryColor " + feature.icon}></i>
                         <label htmlFor={feature.name} className="text-base text-secundaryColor">
@@ -437,8 +471,8 @@ function Administration() {
             </div>
 
             <div className="w-full flex flex-col justify-center items-center mx-auto bg-secundaryColor bg-opacity-10 px-4 pt-4 pb-6 rounded-xl gap-5">
-              <div className="w-full flex justify-around items-center gap-2 tablet:gap-10">
-                <div className="w-full grid grid-cols-1 desktop:grid-cols-2 gap-2 tablet:gap-5 ">
+              <div className="relative w-full flex justify-around items-center gap-2 tablet:gap-10">
+                <div className=" w-full grid grid-cols-1 desktop:grid-cols-2 gap-2 tablet:gap-5 ">
                   <div className="grid gap-2">
                     <label htmlFor="" className="text-secundaryColor text-sm">
                       Nombre
@@ -448,7 +482,7 @@ function Administration() {
                       name="name"
                       id="name"
                       placeholder=" Wifi"
-                      className="rounded-md shadow border-none h-10"
+                      className="rounded-md shadow border-none h-10 min-w-0"
                       onChange={handleChangeNameFeatures}
                       value={name}
                     />
@@ -462,13 +496,13 @@ function Administration() {
                       name="name"
                       id="name"
                       placeholder="fa-wifi"
-                      className="rounded-md shadow border-none h-10"
+                      className="rounded-md shadow border-none h-10 min-w-0"
                       onChange={handleChangeIconFeatures}
                       value={icon}
                     />
                   </div>
                 </div>
-                <div className="w-20 h-20 flex justify-center items-center">
+                <div className="relative right-0 tablet:right-3 flex justify-center items-center">
                   <button
                     type="submit"
                     className="w-10 h-10 flex justify-center items-center text-3xl font-bold rounded-md bg-mainColor text-fourthColor hover:bg-opacity-70 shadow-md"
@@ -575,13 +609,13 @@ function Administration() {
           <article onClick={() => console.log(errors)} className="w-ful px-8 pt-10 pb-5 flex justify-center items-center">
             <button
               type="submit"
-              className="w-80 tablet:w-96 h-12 tablet:h-16 bg-thirdColor rounded-md text-2xl text-white font-medium hover:bg-opacity-90"
+              className= {(isFetching ? "bg-opacity-70 " : "") + "w-80 tablet:w-96 h-12 tablet:h-14 bg-thirdColor rounded-md text-2xl text-white font-medium hover:bg-opacity-90"}
             >
-              Crear
+              {isFetching ? <Spin indicator={antIcon} /> : "Crear"}
             </button>
           </article>
         </form>
-        <button onClick={() => {
+        {/* <button onClick={() => {
           let formData = new FormData();
           const files = images.map(x => x.file)
           formData.append('files', files[0])
@@ -603,7 +637,7 @@ function Administration() {
             }).catch(e => {
               console.log(e)
             })
-        }}>a</button>
+        }}>a</button> */}
       </section>
     </div>
   );

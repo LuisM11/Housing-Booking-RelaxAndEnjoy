@@ -69,7 +69,7 @@ function ProductDetail() {
             className="tablet:w-full h-full rounded-lg"
           />
         </article>
-        <Policies />
+        <Policies product = {product} />
       </section>
     </>
   );

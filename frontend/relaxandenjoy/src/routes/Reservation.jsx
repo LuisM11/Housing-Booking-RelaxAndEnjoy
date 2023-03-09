@@ -30,7 +30,7 @@ function Reservation() {
     <div>
       <Header product={product} />
       <DataForm product={product} />
-      <Policies />
+      <Policies product = {product}/>
     </div>
   );
 }

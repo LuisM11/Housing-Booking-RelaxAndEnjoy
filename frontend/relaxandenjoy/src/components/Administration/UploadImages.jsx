@@ -45,12 +45,13 @@ function UploadImages({ images, setImages, control,setValue }) {
     })
     let newfiles = dataT.files
     inputRef.current.files = newfiles
-    setValue("images", newImgs ); //Setting value to library react hook state
+    /* console.log(newImgs.map(x=> x.file),newfiles) */
+    setValue("images", newImgs.map(x=> x.file) ); //Sending input value to library react hook state
     setImages(newImgs);
   };
   return (
     <article className="w-full grid gap-2 pt-5">
-      <h3 onClick={() => { console.log(inputRef) }} className="text-base font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-2">
+      <h3 onClick={() => { console.log(inputRef,images) }} className="text-base font-bold text-secundaryColor px-3 tablet:px-6 desktop:px-10 py-2">
         Cargar imágenes
       </h3>
       <div className="w-full grid gap-5 px-8">
