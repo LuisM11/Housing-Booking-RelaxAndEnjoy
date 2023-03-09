@@ -100,6 +100,7 @@ function Administration() {
                 withCredentials: false,
                 headers: {
                   'Content-Type': 'multipart/form-data',
+                  Authorization: user.Authorization
                   
                 },
                 mode: 'cors'

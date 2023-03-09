@@ -73,7 +73,7 @@ public class ProductController {
         return ResponseEntity.ok("Product with id: " + id + " was removed");
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     public ResponseEntity<String> updateProduct(@RequestBody Product product) throws ResourceNotFoundException{
         Optional<Product> productSearched = productService.search(product.getId());
         if (productSearched.isPresent()){
