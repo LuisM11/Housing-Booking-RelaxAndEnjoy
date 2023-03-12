@@ -64,6 +64,11 @@ Creation of vpc in AWS using the following services
 
 For continuous integration and continuous CI/CD deployment, pipelines were built using scripts for the frontend and backend in 2 stages: Build and Deploy in Gitlab.
 
+### Admin Credentials:
+To acces products creation page it's neccessary to login as an admin, you can use the below credentials for that.
+- Mail: prueba@prueba.com
+- Password: admin1
 
+***
 To visit R&D please check the follow link [Go](http://frontend-r-y-d.s3-website.us-east-2.amazonaws.com/home)
 
