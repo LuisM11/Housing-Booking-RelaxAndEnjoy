@@ -37,6 +37,9 @@ It is responsible for managing user requests and responses using an api that con
 
 In addition to the Frontend and Backend, it is necessary to use two other areas in the project: Testing and Infrastructure. The first ensures the quality of the product and that it complies with the standards that are requested, and the second allows the project to be deployed for access. Let's see how they conform
 
+### Entity Relationship Diagram
+![erd](resources/erd.jpg)
+
 ## Testing:
 
 Needs various tests to ensure that our product meets the objectives of the product backlog
@@ -63,6 +66,9 @@ Creation of vpc in AWS using the following services
 + **VPC** for the route tables, subnets and gateway.
 
 For continuous integration and continuous CI/CD deployment, pipelines were built using scripts for the frontend and backend in 2 stages: Build and Deploy in Gitlab.
+
+### Diagram
+![infraestructure diagram](resources/infra-diagram.jpg)
 
 ### Admin Credentials:
 To acces products creation page it's neccessary to login as an admin, you can use the below credentials for that.
