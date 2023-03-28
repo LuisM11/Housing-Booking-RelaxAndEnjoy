@@ -1,15 +1,16 @@
+To visit R&D please check the follow link [Go](http://relaxandenjoy-booking.s3-website.us-east-2.amazonaws.com/Home)
+
+### Admin Credentials:
+To acces products creation page it's neccessary to login as an admin, you can use the below credentials for that.
+- Mail: prueba@prueba.com
+- Password: admin1
+
+***
+
 # What is R&D? 
 
 Relájese y disfrute is a web application to book your rest and vacations. In our application you can choose between: Hotels, Cabins, Apartments and Glampings.
 
-# How is the team integrated?
-
-### Juan José Marín
-### Nathalia Serna
-### Santiago Duque
-### Daniela Muñoz
-### Luis Felipe Marín
-### Sebastián Arredondo
 
 # How is it built?
 
@@ -36,6 +37,9 @@ It is responsible for managing user requests and responses using an api that con
 - Mysql Workbench
 
 In addition to the Frontend and Backend, it is necessary to use two other areas in the project: Testing and Infrastructure. The first ensures the quality of the product and that it complies with the standards that are requested, and the second allows the project to be deployed for access. Let's see how they conform
+
+### Entity Relationship Diagram
+![erd](resources/erd.jpg)
 
 ## Testing:
 
@@ -64,6 +68,11 @@ Creation of vpc in AWS using the following services
 
 For continuous integration and continuous CI/CD deployment, pipelines were built using scripts for the frontend and backend in 2 stages: Build and Deploy in Gitlab.
 
+### Diagram
+![infraestructure diagram](resources/infra-diagram.jpg)
 
-To visit R&D please check the follow link [Go](http://frontend-r-y-d.s3-website.us-east-2.amazonaws.com/home)
+
+
+***
+
 
