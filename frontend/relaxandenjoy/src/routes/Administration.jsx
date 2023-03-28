@@ -111,7 +111,7 @@ function Administration() {
     console.log(formData.getAll('files'))
     console.log(formData.get('product'))
     axios
-      .post('http://3.145.6.239:8080/products', //3.145.6.239
+      .post('http://18.188.13.141:8080/products', //18.188.13.141
         formData
         , {
           withCredentials: false,
@@ -622,7 +622,7 @@ function Administration() {
           formData.append('files', files[1])
           console.log(formData.getAll('files'), files)
           axios
-            .post('http://3.145.6.239:8080/s3Imgs', //3.145.6.239
+            .post('http://18.188.13.141:8080/s3Imgs', //18.188.13.141
               formData
               , {
                 withCredentials: false,
