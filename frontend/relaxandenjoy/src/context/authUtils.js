@@ -9,7 +9,7 @@ export const  registerFetch = async (formData)=>{
           city: parseInt( formData.city)      
         }
         return await axios 
-        .post('http://18.188.13.141:8080/auth/signup', //18.188.13.141
+        .post('http://3.139.250.124:8080/auth/signup', //18.188.13.141
           dataFetch
         ,{
           withCredentials: false,
@@ -29,7 +29,7 @@ export const  registerFetch = async (formData)=>{
 export const logInFetch = async (email,password) =>{
 
   return await axios.
-  post('http://18.188.13.141:8080/auth/login', //18.188.13.141
+  post('http://3.139.250.124:8080/auth/login', //18.188.13.141
   {
     email,
     password
