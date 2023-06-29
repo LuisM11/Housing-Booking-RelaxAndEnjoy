@@ -28,16 +28,17 @@ public class ProductService {
     private CategoryService categoryService;
 
     private FeatureService featureService;
-    private AWSService awsService;
+    private S3Service s3Service;
+
 
 
     @Autowired
-    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService, AWSService awsService) {
+    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService, S3Service s3Service) {
         this.productRepository = productRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
         this.featureService = featureService;
-        this.awsService = awsService;
+        this.s3Service = s3Service;
     }
 
     public Optional<Product> search(Long id) throws ResourceNotFoundException {
@@ -141,10 +142,10 @@ public class ProductService {
 
         }
         setFeatures.addAll(featureSet);
-        List<Image> images = awsService.uploadImages(files);
+//        List<Image> images = awsService.uploadImages(files);
         Product responseProduct = productRepository.save(new Product(productDTO.getTitle(),productDTO.getName(),productDTO.getPopularity(),
-                images.get(0).getUrl(),productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSafety(),productDTO.getPolitics(),
-                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,new HashSet<>(images),null));
+               " images.get(0).getUrl()",productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSafety(),productDTO.getPolitics(),
+                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,new HashSet<>(),null));
 
         return  responseProduct;
     }

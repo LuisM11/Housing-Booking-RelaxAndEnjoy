@@ -1,6 +1,7 @@
 package com.pi.relaxandenjoy.Controller;
 
-import com.pi.relaxandenjoy.Service.AWSService;
+
+import com.pi.relaxandenjoy.Service.S3Service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,16 +11,16 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/s3Imgs")
 public class AWSImagesController {
-    private AWSService awsService;
+    private S3Service s3Service;
 
-    public AWSImagesController(AWSService awsService) {
-        this.awsService = awsService;
+    public AWSImagesController(S3Service s3Service) {
+        this.s3Service = s3Service;
     }
 
-    @PostMapping
-    public ResponseEntity<String> uploadImages(@RequestPart(value = "files")  MultipartFile [] files) throws IOException {
-        awsService.uploadImages(files);
-        return ResponseEntity.ok("yei" );
-    }
+//    @PostMapping
+//    public ResponseEntity<String> uploadImages(@RequestPart(value = "files")  MultipartFile [] files) throws IOException {
+//        awsService.uploadImages(files);
+//        return ResponseEntity.ok("yei" );
+//    }
 
 }
