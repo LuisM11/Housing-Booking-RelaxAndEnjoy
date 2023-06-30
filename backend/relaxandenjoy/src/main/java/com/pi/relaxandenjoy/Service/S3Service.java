@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.model.GetObjectResponse;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
+import java.net.URL;
 
 @Service
 public class S3Service {
@@ -43,5 +42,16 @@ public class S3Service {
         }
 
     }
+
+    public String getURL( String bucketName, String keyName ) {
+        GetUrlRequest request = GetUrlRequest.builder()
+                    .bucket(bucketName)
+                    .key(keyName)
+                    .build();
+        URL url = s3Client.utilities().getUrl(request);
+        return  url.toString();
+    }
+
+
 
 }

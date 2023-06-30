@@ -1,5 +1,6 @@
 package com.pi.relaxandenjoy.Service;
 
+import com.pi.relaxandenjoy.AWSConfig.S3Buckets;
 import com.pi.relaxandenjoy.Dtos.ProductDTO;
 import com.pi.relaxandenjoy.Dtos.ReservationDTO;
 import com.pi.relaxandenjoy.Exceptions.BadRequestException;
@@ -29,16 +30,17 @@ public class ProductService {
 
     private FeatureService featureService;
     private S3Service s3Service;
-
+    private S3Buckets s3Buckets;
 
 
     @Autowired
-    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService, S3Service s3Service) {
+    public ProductService(ProductRepository productRepository, CityService cityService, CategoryService categoryService, FeatureService featureService, S3Service s3Service, S3Buckets s3Buckets) {
         this.productRepository = productRepository;
         this.cityService = cityService;
         this.categoryService = categoryService;
         this.featureService = featureService;
         this.s3Service = s3Service;
+        this.s3Buckets = s3Buckets;
     }
 
     public Optional<Product> search(Long id) throws ResourceNotFoundException {
@@ -142,27 +144,26 @@ public class ProductService {
 
         }
         setFeatures.addAll(featureSet);
-//        List<Image> images = awsService.uploadImages(files);
+        List<Image> images = new ArrayList<>();
+        Arrays.stream(files).forEach(x-> {
+            try {
+                String key = "products/%s".formatted(x.getOriginalFilename() +  UUID.randomUUID().toString() );
+                s3Service.putObject(s3Buckets.getProducts(),key ,x.getBytes());
+                Image currentImage = new Image(x.getOriginalFilename(),s3Service.getURL(s3Buckets.getProducts(), key));
+                images.add(currentImage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         Product responseProduct = productRepository.save(new Product(productDTO.getTitle(),productDTO.getName(),productDTO.getPopularity(),
-               " images.get(0).getUrl()",productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSafety(),productDTO.getPolitics(),
-                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,new HashSet<>(),null));
+                images.get(0).getUrl(),productDTO.getAddress(),productDTO.getRules(),productDTO.getHealthAndSafety(),productDTO.getPolitics(),
+                productDTO.getLocation(),productDTO.getDescription(),category, city,setFeatures,new HashSet<>(images),null));
 
         return  responseProduct;
     }
 
-    public void delete(Long id) throws ResourceNotFoundException {
-        Optional<Product> productSearch = productRepository.findById(id);
-        if (productSearch.isPresent()) {
-            productRepository.deleteById(id);
-            LOGGER.warn("Product with id: " + id + " has been removed");
-        } else {
-            throw new ResourceNotFoundException("Product with id: " + id + " not found.");
-        }
-    }
 
-    public void update(Product product){
-        productRepository.save(product);
-    }
 
 //    @Transactional
 //    public Product saveParentAndChildren(Product parent) {

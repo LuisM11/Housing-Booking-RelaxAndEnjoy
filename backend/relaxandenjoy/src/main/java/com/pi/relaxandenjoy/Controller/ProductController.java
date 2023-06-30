@@ -47,7 +47,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProducts(init, end, cityId));
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Product> register( @RequestPart(value = "product") ProductDTO product,@RequestPart(value = "files")  MultipartFile[] files) throws ResourceNotFoundException, IOException {
         System.out.println(product);
         Arrays.stream(files).forEach(x -> System.out.println(x.getOriginalFilename()));
@@ -67,21 +67,4 @@ public class ProductController {
         return ResponseEntity.ok(productService.searchByCategory(id));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) throws ResourceNotFoundException {
-        productService.delete(id);
-        return ResponseEntity.ok("Product with id: " + id + " was removed");
-    }
-
-    @PutMapping()
-    public ResponseEntity<String> updateProduct(@RequestBody Product product) throws ResourceNotFoundException{
-        Optional<Product> productSearched = productService.search(product.getId());
-        if (productSearched.isPresent()){
-            productService.update(product);
-            return ResponseEntity.ok("The product with ID: " + product.getId() + "has been update");
-        }
-        else {
-            return ResponseEntity.badRequest().body("Product with id: " + product.getId() + " is not found");
-        }
-    }
 }

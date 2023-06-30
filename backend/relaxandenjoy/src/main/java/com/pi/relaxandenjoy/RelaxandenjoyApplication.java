@@ -9,18 +9,17 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class RelaxandenjoyApplication {
-	@Bean
-	CommandLineRunner runner (S3Service s3Service, S3Buckets s3Buckets){
-		return args -> {
-			s3Service.putObject(s3Buckets.getProducts() , "foo/hola","Hello World!!!".getBytes());
-			byte[] obj = s3Service.getObject(s3Buckets.getProducts() ,"foo/hola");
-			System.out.println("siiiiu" + new String(obj));
-		};
-	}
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(RelaxandenjoyApplication.class, args);
 	}
 
 }
+
+//	@Bean
+//	CommandLineRunner runner (S3Service s3Service, S3Buckets s3Buckets){
+//		return args -> {
+//			s3Service.putObject(s3Buckets.getProducts() , "foo/hola","Hello World!!!".getBytes());
+//			byte[] obj = s3Service.getObject(s3Buckets.getProducts() ,"foo/hola");
+//			System.out.println("siiiiu" + new String(obj));
+//		};
+//	}
